@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page-dashboard">
+
+	<div class="sidebar">
+		<div class="sidebar-logo">
+			<!-- <a href="#"><img src="images/db-logo.png" alt=""></a> -->
+		</div>
+		<div class="sidebar-user">
+			<div class="sidebar-user-pic"></div>
+			<div class="sidebar-user-name">
+				<span>Gene Manlimos</span>
+				<span>Safety Officer</span>
+			</div>
+		</div>
+		<div class="sidebar-nav">
+			<ul>
+				<li><a href="index.html">Dashboard</a></li>
+				<li><a href="equipment.html">Equipment</a></li>
+				<li class="current"><a href="inventory.html">Inventory</a></li>
+				<li><a href="personnel.html">Personnel</a></li>
+				<li><a href="#">Issuance</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="main">
+		<nav class="navbar navbar-top">
+			 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			 	<ul class="nav navbar-nav navbar-right">
+			 		<li class="dropdown">
+			 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Manlimos <span class="caret"></span></a>
+			 			<ul class="dropdown-menu">
+			 				<li><a href="manage-account.html">Account</a></li>
+			 				<li><a href="#">Log Out</a></li>
+			 			</ul>
+			 		</li>
+			 	</ul>
+			 </div>
+		</nav>
+
+		<div class="content">
+			<div class="container-fluid">
+
+				<section class="section">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="page-heading page">
+								<h2 class="page-heading__title">Update Personal Protective Equipment Inventory</h2>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-md-3">
+											<h5>Transaction No: 003</h5>
+										</div>
+										<div class="col-md-3">
+											<h5>Prepared By: G. Manlimos</h5>
+										</div>
+										<div class="col-md-3">
+											<h5>Transaction Date: March 20, 2017</h5>
+										</div>
+										<div class="col-md-3">
+											<button type="button" aria-label="Print" data-toggle="tooltip" data-placement="top" title="Print List" class="btn btn-default pull-right"><i class="glyphicon glyphicon-print" aria-hidden="true"></i></button>
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th>No.</th>
+												<th>Particulars</th>
+												<th>Current Stock</th>
+												<th>Added Stock</th>
+												<th>Subtracted Stock</th>
+												<th>Total Stock</th>
+												<th>Reorder Point</th>
+												<th>Expiration Date</th>
+												<th>Remarks</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row">1</th>
+												<td>Hard Hat (Yellow)</td>
+												<td>49 pcs</td>
+												<td>30 pcs</td>
+												<td>0 pcs</td>
+												<td>79 pcs</td>
+												<td>10</td>
+												<td>01-01-2018</td>
+												<td>Lorem ipsum dolor sit amet.</td>
+												<td>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Update</span></a>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Remove this item"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">2</th>
+												<td>Protective Eyewear</td>
+												<td>15 pcs</td>
+												<td>30 pcs</td>
+												<td>0 pcs</td>
+												<td>45 pcs</td>
+												<td>10</td>
+												<td>01-01-2018</td>
+												<td></td>
+												<td>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Update</span></a>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Remove this item"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row">3</th>
+												<td>Face Shield</td>
+												<td>0 pcs</td>
+												<td>30 pcs</td>
+												<td>0 pcs</td>
+												<td>30 pcs</td>
+												<td>10</td>
+												<td>01-01-2018</td>
+												<td>Lorem ipsum dolor sit amet.</td>
+												<td>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Update</span></a>
+													<a href="#" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" title="Remove this item"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="panel-footer">
+									<div class="row">
+										<div class="col-md-12">
+											<a href="#" class="btn btn-primary">Save Changes</a>
+											<a href="update-inventory.html" class="btn btn-default">Cancel</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>Hard Hat (Yellow)</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="">Add Stock</label>
+								<input type="number" class="form-control" placeholder="0">
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="">Substract Stock</label>
+								<input type="number" class="form-control" placeholder="0">
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="">Unit</label>
+								<select class="form-control">
+									<option>pcs</option>
+									<option>pairs</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="">Reordering Point</label>
+								<input type="number" class="form-control" placeholder="0">
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div class="form-group">
+								<label for="">Expiration Date</label>
+								<input type="date" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="">Remarks (optional)</label>
+							<textarea class="form-control"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
+</body>
+</html>
