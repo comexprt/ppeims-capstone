@@ -54,64 +54,9 @@
 
 		<div class="content">
 			<div class="container-fluid">
-
-				<section class="section">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="info-box info-box--centered info-box--blue">
-								<div class="info-box-head">
-									<h4>TOTAL PPE</h4>
-								</div>
-								<div class="info-box-body">
-									<span class="info-box-body__count">100</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="info-box info-box--centered info-box--green">
-								<div class="info-box-head">
-									<h4>TOTAL PERSONNEL</h4>
-								</div>
-								<div class="info-box-body">
-									<span class="info-box-body__count">99</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4>Overview of Low Supply Personal Protective Equipment <small>as of <?php echo date('F d , Y');?></small></h4>
-								</div>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>No.</th>
-											<th>Particulars</th>
-											<th>On Stock</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th scope="row">1</th>
-											<td>Face Shield</td>
-											<td>0 pcs</td>
-										</tr>
-										<tr>
-											<th scope="row">2</th>
-											<td>Safety Shoes</td>
-											<td>0 pcs</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>	
-				</section>
-
 			</div>
 		</div>
+		
 	</div>
 
 	<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>

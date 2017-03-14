@@ -79,74 +79,57 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="page-heading page">
-								<h2 class="page-heading__title">Personal Protective Equipment</h2>
+							<div class="page-header">
+								<h2>Personal Protective Equipment</h2>
 							</div>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12">
-							<div class="margin-bottom-20">
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Equipment</button>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-md-4">
-											<div class="form-group pull-left">
-												<label for="search-item" class="sr-only">Search Item</label>
-												<div class="input-group">
-													<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
-													<span class="input-group-btn">
-														<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
-													</span>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-8">
-											<button type="button" aria-label="Print" data-toggle="tooltip" data-placement="top" title="Print List" class="btn btn-default pull-right"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> <span class="sr-only">Print</span></button>
-										</div>
-									</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="search-item" class="sr-only">Search Item</label>
+								<div class="input-group">
+									<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
+									</span>
 								</div>
-								<table class="table table-bordered">
-									<thead>
-										<tr>
-											<th>No.</th>
-											<th>Particulars</th>
-											<th>Description</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php $i=1; foreach ($getEquipment as $row){ ?>
-										<tr>
-											<th scope="row"><? echo $i++;?></th>
-											<td><?php echo $row->Particulars;?></td>
-											<td><?php echo $row->Description;?></td>
-											<td>
-												<a data-toggle="modal" data-target="#<?php echo $row->EI_No;?>update" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
-												<a data-toggle="modal" data-target="#<?php echo $row->EI_No;?>delete" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></a>
-											</td>
-										</tr>
-										<?php }?>
-									</tbody>
-								</table>
-								<!--div class="panel-footer">
-									<div class="table-pagination">
-										<ul class="pagination">
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-										</ul>
-									</div>
-								</div-->
 							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="text-right margin-bottom-20">
+								<a href="#" role="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add Equipment</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-bordered">
+								<thead>
+									<tr class="active">
+										<th>No.</th>
+										<th>Particulars</th>
+										<th>Description</th>
+										<th>Edit</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php $i=1; foreach ($getEquipment as $row){ ?>
+									<tr>
+										<th scope="row"><?php echo $i++;?></th>
+										<td><?php echo $row->Particulars;?></td>
+										<td><?php echo $row->Description;?></td>
+										<td>
+											<a role="button" data-toggle="modal" data-target="#<?php echo $row->EI_No;?>update" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
+										</td>
+										<td>
+											<a role="button" data-toggle="modal" data-target="#<?php echo $row->EI_No;?>delete" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></a>
+										</td>
+									</tr>
+									<?php }?>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</section>
@@ -161,7 +144,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Add Equipment Form</h4>
+					<h4 class="modal-title" id="myModalLabel">Edit Personal Protective Equipment</h4>
 				</div>
 				<?php echo form_open("ppeims/update_equipment");?>
 				<div class="modal-body">
@@ -174,18 +157,18 @@
 						<input type="hidden" class="form-control" value="<?php echo $row->Unit;?>" name="Unit">
 						<input type="hidden" class="form-control" value="<?php echo $row->Remarks;?>" name="Remarks">
 						
-						<label for="ename">Equipment Name</label>
+						<label for="ename">Name</label>
 						<input type="text" class="form-control" value="<?php echo $row->Particulars;?>" name="Particulars">
 					</div>
 					<div class="form-group">
-						<label for="edescription">Equipment Description</label>
-						<textarea name="Description" cols="30" rows="5" class="form-control"><?php echo $row->Description;?></textarea>
+						<label for="edescription">Description</label>
+						<textarea name="Description" cols="30" rows="4" class="form-control"><?php echo $row->Description;?></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<?php 
-							echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
+							echo form_submit("loginSubmit","Save Changes"," class='btn btn-success'");
 							echo form_close();
 						?>
 				</div>
@@ -200,7 +183,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+					<h4 class="modal-title" id="myModalLabel">Delete Personal Protective Equipment</h4>
 				</div>
 				<?php echo form_open("ppeims/delete_equipment");?>	
 				<div class="modal-body">
@@ -208,8 +191,7 @@
 						<input type="hidden" value="<?php echo $row->EI_No;?>" name="EI_No">
 						<input type="hidden" value="add-equipment" name="access">
 						<input type="hidden" class="form-control" value="<?php echo $row->Particulars;?>" name="Particulars">
-						<p>Are you sure to delete Particulars : 
-						<code style="background-color:#FFFFFF;font-size:12px;font-weight:bold;"><?php echo $row->Particulars;?></code> ?<p>
+						<p>Are you sure to delete <strong><?php echo $row->Particulars;?></strong>?<p>
 						
 					</div>
 				
@@ -218,7 +200,7 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<?php //registration button
 								
-									echo form_submit("loginSubmit","OK"," class='btn btn-danger'");
+									echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
 									echo form_close();
 							?>
 					</div>
@@ -232,7 +214,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Add Equipment Form</h4>
+					<h4 class="modal-title" id="myModalLabel">Add Personel Protective Equipment</h4>
 				</div>
 				<?php echo form_open("ppeims/new_equipment");?>
 				<div class="modal-body">
@@ -243,18 +225,18 @@
 						<input type="hidden" class="form-control" value="0" name="Issued">
 						<input type="hidden" class="form-control" value="" name="Remarks">
 						
-						<label for="ename">Equipment Name</label>
+						<label for="ename">Name</label>
 						<input type="text" class="form-control" name="Particulars">
 					</div>
 					<div class="form-group">
-						<label for="edescription">Equipment Description</label>
-						<textarea name="Description" cols="30" rows="5" class="form-control"></textarea>
+						<label for="edescription">Description</label>
+						<textarea name="Description" cols="30" rows="4" class="form-control"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<?php 
-							echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
+							echo form_submit("loginSubmit","Submit"," class='btn btn-primary'");
 							echo form_close();
 						?>
 				</div>
