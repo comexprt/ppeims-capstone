@@ -124,7 +124,7 @@
 									<tbody>
 										<?php $i=1; foreach ($getEquipment as $row){ ?>
 										<tr>
-											<th scope="row"><? echo $i++;?></th>
+											<th scope="row"><?php echo $i++;?></th>
 											<td><?php echo $row->Particulars;?></td>
 											<td><?php echo $row->Description;?></td>
 											<td>
@@ -135,17 +135,6 @@
 										<?php }?>
 									</tbody>
 								</table>
-								<!--div class="panel-footer">
-									<div class="table-pagination">
-										<ul class="pagination">
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-										</ul>
-									</div>
-								</div-->
 							</div>
 						</div>
 					</div>
