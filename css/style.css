@@ -1,4 +1,266 @@
-@import 'general.css';
-@import 'login.css';
-@import 'sidebar.css';
-@import 'content.css';
+.page-dashboard {
+	padding-left: 230px;
+}
+
+.page-login {
+	background-color: #ECF0F1;
+}
+.login-form {
+	padding-top: 100px;
+}
+.login-form-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.login-form-header h1 {
+	font-size: 30px;
+}
+
+.sidebar {
+	background-color: #0469A5;
+	width: 230px;
+	height: 100%;
+	overflow-x: hidden;
+	position: fixed;
+	left: 0;
+}
+.sidebar-logo {
+	padding: 5px;
+}
+.sidebar-user {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.sidebar-user-pic {
+	width: 100px;
+	height: 100px;
+	background-color: #ececec;
+	border-radius: 50%;
+	background-image: url(../images/user.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border-width: 4px;
+	border-color: #FFF;
+	border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+.sidebar-user-name {
+	text-align: center;
+}
+.sidebar-user-name span {
+	display: block;
+	color: #6EB9E5;
+	font-size: 12px;
+}
+.sidebar-user-name span:nth-child(1) {
+	font-size: 16px;
+	color: #FFF;
+}
+.sidebar-nav ul {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+.sidebar-nav ul li a {
+	display: block;
+	width: 100%;
+	height: 50px;
+	color: #FFF;
+	line-height: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li a:focus,
+.sidebar-nav ul li.current a {
+	text-decoration: none;
+	background-color: #0578BC;
+}
+
+.navbar-top {
+	background-color: #007DC7;
+}
+.navbar {
+	border-radius: 0;
+	border: 0;
+}
+.navbar-nav>li>a {
+	color: #FFF;
+}
+.nav .open>a, 
+.nav .open>a:focus, 
+.nav .open>a:hover,
+.nav>li>a:focus, 
+.nav>li>a:hover,
+.navbar-nav>li>.dropdown-menu {
+	background-color: #0578BC;
+}
+.dropdown-menu {
+	border-radius: 0;
+	border: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.dropdown-menu>li>a {
+	color: #FFF;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #0469A5;
+}
+
+.dropdown-menu>li>a:focus, 
+.dropdown-menu>li>a:hover {
+	color: #FFF;
+	background-color: #0469A5;
+}
+
+/* Well */
+.content .well {
+	border: 0;
+	border-radius: 0;
+}
+.content .well--white {
+	background-color: #FFF;
+}
+
+
+/* Panel */
+.panel--dashboard {
+	border-radius: 0;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+	border-bottom: 2px solid #0469A5;
+}
+.panel--no-border {
+	border: 0;
+}
+
+.panel-heading--red {
+	background-color: #ea4335;
+	border-radius: 0;
+}
+.panel-heading--orange {
+	background-color: #ff581e;
+	border-radius: 0;
+}
+.panel-heading--blue {
+	background-color: #007DC7;
+	border-radius: 0;
+}
+.panel-heading--white {
+	border-radius: 0;
+	background-color: #FFF;
+	border-bottom: 1px solid #ececec;
+}
+.panel-heading--white p,
+.panel-heading--white a,
+.panel-heading--white h4 {
+	color: #333;
+}
+.panel-heading--blue p,
+.panel-heading--blue a,
+.panel-heading--red p,
+.panel-heading--red a,
+.panel-heading--orange p,
+.panel-heading--orange a {
+	color: #FFF;
+}
+.content .panel-heading p {
+	margin-bottom: 0;
+}
+.content .panel-heading .form-group {
+	margin-bottom: 0;
+}
+.content .panel .table--no-pagination {
+	margin-bottom: 0;
+}
+
+/* Pagination */
+/*.panel .table-pagination {
+	text-align: center;
+	border-top: 1px solid #ececec;
+	padding-top: 20px;
+}
+.panel .table-pagination .pagination {
+	margin-bottom: 0;
+	margin-top: 0;
+}*/
+
+/* Page */
+/*.content .page-heading {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.content .page-heading .page-heading__title {
+	margin-top: 0;
+	margin-bottom: 25px;
+	font-size: 25px;
+}
+.content .page-heading .page-heading__title--float-left {
+	float: left;
+}
+.content .page-heading .page-heading__print {
+	float: right;
+	color: #555;
+}*/
+
+/* Info Box */
+.info-box {
+	background-color: #fff;
+	border-radius: 4px;
+	margin-bottom: 20px;
+}
+.info-box--centered {
+	text-align: center;
+}
+.info-box-head {
+	padding: 10px;
+	border-bottom: 1px solid #ececec;
+}
+.info-box-head h4,
+.info-box-head p {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+.info-box-body {
+	padding: 5px 10px;
+}
+.info-box-body__count {
+	font-size: 50px;
+}
+
+/* Info Box (Blue) */
+.info-box--blue {
+	background-color: #a4d2ee;
+}
+.info-box--blue h4,
+.info-box--blue p,
+.info-box--blue span {
+	color: #1D628B;
+}
+.info-box--blue .info-box-head {
+	border-bottom-color: #4589B0;
+}
+
+/* Info Box (Green) */
+.info-box--green {
+	background-color: #9fe0d3;
+}
+.info-box--green h4,
+.info-box--green p,
+.info-box--green span {
+	color: #0B8389;
+}
+.info-box--green .info-box-head {
+	border-bottom-color: #0B8389;
+}
+
+.margin-bottom-20 {
+	margin-bottom: 20px;
+}
