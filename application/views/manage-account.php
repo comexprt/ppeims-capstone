@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-	
-	<link rel="stylesheet" href="<?=base_url();?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?=base_url();?>css/style.css">
-</head>
-<body class="page-dashboard">
-
-	<div class="sidebar">
-		<div class="sidebar-logo">
-			<!-- <a href="#"><img src="images/db-logo.png" alt=""></a> -->
-		</div>
-		<div class="sidebar-user">
-			<div class="sidebar-user-pic"></div>
-			<div class="sidebar-user-name">
-				<span><?=$Fname." ".$Lname;?></span>
-				<span><?=$Position;?></span>
-			</div>
-		</div>
-		<div class="sidebar-nav">
-			<ul>
-				<li class="current"><a href="<?=base_url();?>">Dashboard</a></li>
-				<li><a href="<?=base_url();?>ppeims/equipment">Equipment</a></li>
-				<li><a href="<?=base_url();?>ppeims/inventory">Inventory</a></li>
-				<li><a href="<?=base_url();?>ppeims/personnel">Personnel</a></li>
-				<li><a href="<?=base_url();?>ppeims/issuance">Issuance</a></li>
-			</ul>
-		</div>
-	</div>
+<?php
+require_once 'include/header.php';
+include 'include/sidebar.php'; ?>
 
 	<div class="main">
 		<nav class="navbar navbar-top">
@@ -204,8 +173,4 @@
 		</div>
 	</div>
 
-	<script src="<?=base_url();?>js/jquery-3.1.1.min.js"></script>
-	<script src="<?=base_url();?>js/bootstrap.min.js"></script>
-	<script src="<?=base_url();?>js/script.js"></script>
-</body>
-</html>
+<?php require_once 'include/footer.php';

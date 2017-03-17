@@ -1,37 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-	
-	<link rel="stylesheet" href="<?=base_url();?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?=base_url();?>css/style.css">
-</head>
-<body class="page-dashboard">
-
-	<div class="sidebar">
-		<div class="sidebar-logo">
-			<!-- <a href="#"><img src="images/db-logo.png" alt=""></a> -->
-		</div>
-		<div class="sidebar-user">
-			<div class="sidebar-user-pic"></div>
-			<div class="sidebar-user-name">
-				<span><?=$Fname." ".$Lname;?></span>
-				<span><?=$Position;?></span>
-			</div>
-		</div>
-		<div class="sidebar-nav">
-			<ul>
-				<li><a href="<?=base_url();?>">Dashboard</a></li>
-				<li><a href="<?=base_url();?>ppeims/equipment">Equipment</a></li>
-				<li><a href="<?=base_url();?>ppeims/inventory">Inventory</a></li>
-				<li class="current"><a href="<?=base_url();?>ppeims/personnel">Personnel</a></li>
-				<li><a href="<?=base_url();?>ppeims/issuance">Issuance</a></li>
-			</ul>
-		</div>
-	</div>
+<?php
+require_once 'include/header.php';
+include 'include/sidebar.php'; ?>
 
 	<div class="main">
 		<nav class="navbar navbar-top">
@@ -93,14 +62,19 @@
 								<div class="input-group">
 									<input type="search" id="search-item" class="form-control" placeholder="Search personnel...">
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
+										<button class="btn btn-default" type="button">
+											<i class="glyphicon glyphicon-search"></i>
+											<span class="sr-only">Search</span>
+										</button>
 									</span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-8">
 							<div class="margin-bottom-20 text-right">
-								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Personnel</button>
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+									<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add Personnel
+								</button>
 								<a href="<?=base_url();?>ppeims/personnel_group" class="btn btn-primary">Personnel Group</a>
 							</div>
 						</div>
@@ -257,8 +231,4 @@
 		</div>
 	</div>
 
-	<script src="<?=base_url();?>js/jquery-3.1.1.min.js"></script>
-	<script src="<?=base_url();?>js/bootstrap.min.js"></script>
-	<script src="<?=base_url();?>js/script.js"></script>
-</body>
-</html>
+<?php require_once 'include/footer.php';
