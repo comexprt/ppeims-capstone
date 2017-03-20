@@ -59,7 +59,7 @@ class ppeims extends CI_Controller {
 		
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
-			$this->load->view('create-issuance',$data);
+			$this->load->view('issuance',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function inventory(){
@@ -306,6 +306,49 @@ class ppeims extends CI_Controller {
 	
 	//Equipment Function End --		
 			
-	
+	public function select_plant_personnel() {
+		if ($this->session->userdata('logged_so')) {
+			$session_data = $this->session->userdata('logged_so');
+			$Fname = $session_data['Fname'];
+			$Lname = $session_data['Lname'];
+			$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";
+			$data['Lname'] = "$Lname";
+			$data['Position'] = "$Position";
+			$this->load->view('select-plant-personnel',$data);
+		} else {
+			redirect('ppeims/InvalidURL');
+		}
+	}
+
+	public function print_plant_personnel_draft() {
+		if ($this->session->userdata('logged_so')) {
+			$session_data = $this->session->userdata('logged_so');
+			$Fname = $session_data['Fname'];
+			$Lname = $session_data['Lname'];
+			$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";
+			$data['Lname'] = "$Lname";
+			$data['Position'] = "$Position";
+			$this->load->view('print-plant-personnel-draft',$data);
+		} else {
+			redirect('ppeims/InvalidURL');
+		}
+	}
+
+	public function add_personal_protective_equipment_issuance() {
+		if ($this->session->userdata('logged_so')) {
+			$session_data = $this->session->userdata('logged_so');
+			$Fname = $session_data['Fname'];
+			$Lname = $session_data['Lname'];
+			$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";
+			$data['Lname'] = "$Lname";
+			$data['Position'] = "$Position";
+			$this->load->view('add-personal-protective-equipment-issuance',$data);
+		} else {
+			redirect('ppeims/InvalidURL');
+		}
+	}
 }
 
