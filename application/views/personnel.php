@@ -210,9 +210,7 @@ include 'include/navbar-top.php'; ?>
 						echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
 						echo form_close();
 					?>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+					
 				</div>
 			</div>
 		</div>

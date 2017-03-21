@@ -72,6 +72,20 @@ class ppeims extends CI_Controller {
 	//Initial page w/o Function End --
 	
 	
+	public function Equipment_Batch(){
+		if($this->session->userdata('logged_so')){
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			if ($action =="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
+			
+			$data['getEquipment'] = $this->Model_query->getEquipment();			
+			$data['getEquipmentList'] = $this->Model_query->getEquipmentList();			
+			$this->load->view('personal_protective_equipment_batch',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+	
+	
 	
 	//Manage_account Function
 		public function manage_account(){
@@ -250,7 +264,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-ui"){
 				$Particulars = $this->input->post('Particulars');
 				$EI_No = $this->input->post('EI_No');
-				$newRow=array( "Particulars" => $Particulars,"Added_S" => 0,"Subtracted_S" => 0,
+				$newRow=array( "Particulars" => $Particulars,"Added_S" => 0,"Subtracted_S" => 0,"unit" => "",
 				"Total_S" => 0,"Re_OrderPt" => 3,"Expiration_Date" => "0000-00-00","Remarks" => "","Tr_No" => 0,"EI_No" => $EI_No);
 				$this->Model_query->addUI($newRow);
 				$message="Equipment : $Particulars has been added to the list .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
@@ -264,8 +278,12 @@ class ppeims extends CI_Controller {
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
 			if ($action=="add-iel") {$data['message']= $message;$LastSId=$LastSId1;}else{$data['message'] = "";$LastSId =$this->input->post('LastSId');}
+			
+			$data['getupdated_transactionDate'] = $this->Model_query->getupdated_transactionDate($LastSId);
+			$data['getupdated_transactionAdmin'] = $this->Model_query->getupdated_transactionAdmin();
 			$data['getUpdated_TransactionData'] = $this->Model_query->getUpdated_TransactionData($LastSId);
 			$data['getUpdated_Transaction'] = $this->Model_query->getUpdated_Transaction($LastSId);
+			//print_r ($data);
 			$this->load->view('inventory-equipment-list',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 	
@@ -297,12 +315,45 @@ class ppeims extends CI_Controller {
 		if($this->session->userdata('logged_so')){
 			if ($this->input->post('access') == "add-ui"){
 				$Tr_No = $this->input->post('Tr_No');
-				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
+				$newRow=array( "Tr" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
 				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('Unit'),"Remarks" => $this->input->post('Remarks'));
-				$this->Model_query->updateEquipment($EI_No,$newRow);
-				$message="Saved Changes.."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
-				redirect('ppeims/update_inventory');
+				$this->Model_query->updateUI($Tr_No,$newRow);
+				$message="Batch No: $Tr_No has been Successfully Updated"; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/Equipment_Batch');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+	
+	public function update_tr_complete(){
+		if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$Tr_No = $this->input->post('Tr_No');
+				$newRow=array( "Tr_No" => $Tr_No,"Tr_Date" => $this->input->post('Tr_Date'),"Pb" => $this->input->post('Pb'),"Status" => 1);
+				$this->Model_query->updateUI($Tr_No,$newRow);
+				$message="Batch No: $Tr_No - Marked as Completed .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/Equipment_Batch');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+	
+	public function update_tr_Draft(){
+		if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$Tr_No = $this->input->post('Tr_No');
+				$newRow=array( "Tr_No" => $Tr_No,"Tr_Date" => $this->input->post('Tr_Date'),"Pb" => $this->input->post('Pb'),"Status" => 2);
+				$this->Model_query->updateUI($Tr_No,$newRow);
+				$message="Batch No: $Tr_No - Saved as Draft .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/Equipment_Batch');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+	
+	public function delete_tr(){
+		if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$Tr_No = $this->input->post('Tr_No');
+				$this->Model_query->deleteUI($Tr_No);
+				$message="Batch No: $Tr_No Has been Deleted.."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/Equipment_Batch');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+	
+	
+	
+	
 	
 	//Equipment Function End --		
 			

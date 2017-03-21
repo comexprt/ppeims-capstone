@@ -1,53 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Document</title>
-	
-	<link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
-	<link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
-</head>
-<body class="page-dashboard">
-
-	<div class="sidebar">
-		<div class="sidebar-logo">
-			<!-- <a href="#"><img src="images/db-logo.png" alt=""></a> -->
-		</div>
-		<div class="sidebar-user">
-			<div class="sidebar-user-pic"></div>
-			<div class="sidebar-user-name">
-				<span><?php echo $Fname." ".$Lname;?></span>
-				<span><?php echo $Position;?></span>
-			</div>
-		</div>
-		<div class="sidebar-nav">
-			<ul>
-				<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
-				<li><a href="<?php echo base_url();?>ppeims/equipment">Equipment</a></li>
-				<li class="current"><a href="<?php echo base_url();?>ppeims/inventory">Inventory</a></li>
-				<li><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
-				<li><a href="<?php echo base_url();?>ppeims/issuance">Issuance</a></li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="main">
-		<nav class="navbar navbar-top">
-			 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			 	<ul class="nav navbar-nav navbar-right">
-			 		<li class="dropdown">
-			 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <span class="caret"></span></a>
-			 			<ul class="dropdown-menu">
-			 				<li><a href="<?php echo base_url();?>ppeims/manage_account">Account</a></li>
-			 				<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
-			 			</ul>
-			 		</li>
-			 	</ul>
-			 </div>
-		</nav>
-		
+<?php 
+require_once 'include/header.php';
+include 'include/sidebar.php';
+include 'include/navbar-top.php'; ?>
 		<div class="content">
 			<div class="container-fluid">
 
@@ -73,16 +27,16 @@
 					<div class="row">
 						<div class="col-md-12">
 							<ol class="breadcrumb">
-								<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
-								<li><a href="<?php echo base_url();?>ppeims/inventory">Inventory</a></li>
-								<li class="active">Add/Select Equipment</li>
+								<li><a href="index.html">Dashboard</a></li>
+								<li><a href="personal-protective-equipment-batch.html">Personal Protective Equipment Batch</a></li>
+								<li class="active">Select Personal Protective Equipment</li>
 							</ol>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="page-heading page">
-								<h2 class="page-heading__title">Add/Select Personal Protective Equipment to Update</h2>
+							<div class="page-header">
+								<h2>Select Personal Protective Equipment</h2>
 							</div>
 						</div>
 					</div>
@@ -103,21 +57,21 @@
 											</div>
 										</div>
 										<div class="col-md-8">
-									
-											<?php foreach ($getLastTransaction as $lt){if ($lt->Status == 1){
-												echo form_open("ppeims/inventory_equipmen_list");?>
-												<input type="hidden" value="add-iel" name="access">
-												<input type="hidden" class="form-control" value="<?php echo $LastSId;?>" name="LastSId">
-												<?php $data = array('class' => "btn btn-primary pull-right",'title' => 'Add to List','type' => 'submit');
-												echo form_button($data, '<i	data-toggle="tooltip" data-placement="top" title="View equipment list">Equipment List <span class="badge">
-												'.count($getLastTransactionData).'</span></i>');
-												echo form_close();
-											
-											}else{?>
-												<a class="btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="View equipment list">Equipment List <span class="badge">0
-											</span></a>
-											<?php }}?>
-											
+											<div class="margin-bottom-20 text-right">	
+												<?php foreach ($getLastTransaction as $lt){if ($lt->Status == 0){
+													echo form_open("ppeims/inventory_equipmen_list");?>
+													<input type="hidden" value="add-iel" name="access">
+													<input type="hidden" class="form-control" value="<?php echo $LastSId;?>" name="LastSId">
+													<?php $data = array('class' => "btn btn-primary pull-right",'title' => 'Add to List','type' => 'submit');
+													echo form_button($data, '<i	data-toggle="tooltip" data-placement="top" title="View equipment list">Equipment List <span class="badge">
+													'.count($getLastTransactionData).'</span></i>');
+													echo form_close();
+												
+												}else{?>
+													<a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="View equipment list">Equipment List <span class="badge">0
+												</span></a>
+												<?php }}?>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -134,7 +88,7 @@
 										</thead>
 										<tbody>
 											<?php foreach ($getLastTransaction as $lt){ }
-												if ($lt->Status == 1){?>
+												if ($lt->Status == 0){?>
 												<?php $i=1; foreach ($getEquipment as $row){ ?>
 												<tr>
 													<th scope="row"><?php echo $i++;?></th>
@@ -176,6 +130,7 @@
 														<input type="hidden" value="add-ui" name="access">
 														<input type="hidden" class="form-control" value="<?php echo $row->Particulars;?>" name="Particulars">
 														<input type="hidden" class="form-control" value="<?php echo $row->EI_No;?>" name="EI_No">
+													
 														<?php $data = array('class' => "btn btn-default btn-xs",'type' => 'submit');
 														echo form_button($data, '<i class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="top" title="Add to List" aria-hidden="true"></i> <span class="sr-only">Add</span>');
 														echo form_close();
@@ -189,17 +144,7 @@
 										</tbody>
 									</table>
 								</div>
-								<!--div class="panel-footer">
-									<div class="table-pagination">
-										<ul class="pagination">
-											<li class="active"><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li>
-										</ul>
-									</div>
-								</div-->
+								
 							</div>
 						</div>
 					</div>
@@ -208,8 +153,4 @@
 		</div>
 	</div>
 
-	<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
-	<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
-	<script src="<?php echo base_url();?>js/script.js"></script>
-</body>
-</html>
+<?php require_once 'include/footer.php';

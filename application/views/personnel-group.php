@@ -25,10 +25,10 @@
 		<div class="sidebar-nav">
 			<ul>
 				<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
-				<li><a href="<?php echo base_url();?>ppeims/equipment">Equipment</a></li>
+				<li><a href="<?php echo base_url();?>ppeims/equipment">Equipment Batch</a></li>
 				<li><a href="<?php echo base_url();?>ppeims/inventory">Inventory</a></li>
 				<li class="current"><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
-				<li><a href="<?php echo base_url();?>ppeims/issuance">Issuance</a></li>
+				<li><a href="<?php echo base_url();?>ppeims/issuance">Equipement Issuance</a></li>
 			</ul>
 		</div>
 	</div>

@@ -14,9 +14,9 @@
 		<ul>
 			<li><a href="<?php echo base_url();?>">Dashboard</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/equipment">Equipment</a></li>
-			<li><a href="<?php echo base_url();?>ppeims/inventory">Inventory</a></li>
+			<li><a href="<?php echo base_url();?>ppeims/Equipment_Batch">Equipment Batch</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
-			<li><a href="<?php echo base_url();?>ppeims/issuance">Issuance</a></li>
+			<li><a href="<?php echo base_url();?>ppeims/issuance">Equipment Issuance</a></li>
 		</ul>
 	</div>
 </div>
