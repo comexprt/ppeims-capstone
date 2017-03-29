@@ -124,7 +124,7 @@ include 'include/navbar-top.php'; ?>
 						<input type="hidden" class="form-control" value="<?php echo $row->Remarks;?>" name="Remarks">
 						
 						<label for="ename">Name</label>
-						<input type="text" class="form-control" value="<?=$row->Particulars;?>" name="Particulars">
+						<input type="text" class="form-control" value="<?=$row->Particulars;?>" name="Particulars" required/>
 					</div>
 					<div class="form-group">
 						<label for="edescription">Description</label>
@@ -191,7 +191,7 @@ include 'include/navbar-top.php'; ?>
 						<input type="hidden" class="form-control" value="" name="Remarks">
 						
 						<label for="ename">Name</label>
-						<input type="text" class="form-control" name="Particulars">
+						<input type="text" class="form-control" name="Particulars" required/>
 					</div>
 					<div class="form-group">
 						<label for="edescription">Description</label>

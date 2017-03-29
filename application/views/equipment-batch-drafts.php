@@ -32,13 +32,7 @@ include 'include/navbar-top.php'; ?>
 							</ol>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="page-header">
-								<h2>Personal Protective Equipment Batch</h2>
-							</div>
-						</div>
-					</div>
+				
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
@@ -46,33 +40,7 @@ include 'include/navbar-top.php'; ?>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="margin-bottom-20">
-								<?php foreach ($gettransaction_last as $lt): if ($lt->Status == 0){ ?>
-								<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo "new_entry"?>" class="btn btn-primary">Continue</a>
-								
-								<?php }else{
-									echo form_open("ppeims/addbatch");?>
-														<input type="hidden" value="add-ui" name="access">
-														<input type="hidden" class="form-control" value="<?php echo $Fname[0].". ".$Lname;?>" name="Pb">
-														<?php $data = array('class' => "btn btn-primary pull-left",'title' => 'Add Equipment Batch','type' => 'submit');
-														echo form_button($data, 'Add Equipment Batch');
-														echo form_close();
-									
-								}
-								endforeach;
-								?>
-								
-								<a href="<?php echo base_url();?>ppeims/equipment_batch_drafts" class="btn btn-primary">View Equipment Batch Drafts <span class="badge">
-								<?php foreach($getEquipmentListDraftCount as $row):
-									echo $row->draftcount;
-									
-									endforeach; ?>
-								</span></a>
-							</div>
-						</div>
-					</div>
+					
 					
 					<div class="row">
 						<div class="col-md-12">
@@ -82,26 +50,25 @@ include 'include/navbar-top.php'; ?>
 										<tr class="active">
 											<th>No.</th>
 											<th>Batch No.</th>
-											<th>Date Completed</th>
+											<th>Date Saved</th>
 											<th>Prepared By</th>
 										
-											<th>Adjust</th>
+											<th>Edit</th>
 											<th>View</th>
 										</tr>
 									</thead>
 									<tbody>
 									<?php $i=1;
-									foreach ($getEquipmentList as $row){?>
+									foreach ($getEquipmentListDraft as $row){?>
 										<tr>
 											<th scope="row"><?= $i++;?></th>
 											<td><?= $row->Tr_No;?></td>
 											<td><?= date('F d , Y',strtotime($row->Tr_Date));?></td>
 											<td><?= $row->Pb;?></td>
 											<td class="col-md-1">
-													<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo $row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
-												</td>
+													<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo $row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>												</td>
 												<td class="col-md-1">
-													<a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-zoom-in"></i> <span class="sr-only">View</span></a>
+													<a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-trash"></i> <span class="sr-only">View</span></a>
 												</td>
 										</tr>
 									<?php }?>

@@ -101,7 +101,7 @@
 									<thead>
 										<tr>
 											<th>No.</th>
-											<th>Personnel Group</th>
+											<th>Work Center</th>
 											<th>Description</th>
 											<th>Action</th>
 										</tr>

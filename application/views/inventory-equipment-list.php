@@ -44,27 +44,73 @@ include 'include/navbar-top.php'; ?>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-									<div class="row">
-									<?php foreach ($getupdated_transactionDate as $row){ ?>
-										<div class="col-md-3">
-											<h5>Transaction No:<?php echo $row->Tr_No;?></h5>
-										</div>
-										<div class="col-md-3">
-											<?php foreach ($getupdated_transactionAdmin as $row1){ ?>
-											<h5>Prepared By: <?php echo $row1->Fname[0].". ".$row1->Lname;?></h5>
-											<?php } ?>
-											
-										</div>
-										<div class="col-md-3">
-											<h5>Transaction Date: <?php echo date('F d , Y',strtotime($row->Tr_Date));?></h5>
-										</div>
-										<div class="col-md-3">
-											<button type="button" aria-label="Print" data-toggle="tooltip" data-placement="top" title="Print List" class="btn btn-default pull-right"><i class="glyphicon glyphicon-print" aria-hidden="true"></i></button>
-										</div>
-										<?php }?>
+								<div class="row margin-bottom-20">
+								<?php foreach($getupdated_transactionDate as $row):?>
+									<div class="col-md-3">
+										<strong>Batch:</strong><?php 
+										 $uri=$row->Tr_No; 
+										 $stat=$row->Status; 
+										echo $uri; 
+										 ?>
 									</div>
+									<div class="col-md-3">
+										<strong>Date Added:</strong> <?php echo date('F d , Y',strtotime($row->Tr_Date));?>
+									</div>
+									<div class="col-md-3">
+										<strong>Prepared by:</strong> <?php if (empty($row->Pb)){
+																				echo "-- -- --";
+																			}else{
+																				echo $row->Pb;
+																				}	 ?>
+									</div>
+									<div class="col-md-3">
+										<strong>Total Items:</strong> <?php echo count($getLastTransactionData);?>
+									</div>
+									<?php endforeach; ?>
+								</div>
+
 								<div class="row">
 									<div class="col-md-12">
+									<div class="panel-heading">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="text-right">
+											<?php 
+											if ($stat == 1) { 
+												
+												foreach ($getUpdated_Transaction as $row){
+														echo form_open("ppeims/update_tr_complete");?>
+														<input type="hidden" value="add-ui" name="access">
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_Date;?>" name="Tr_Date">
+														<?php foreach($getupdated_transactionAdmin as $row1){?>
+														<input type="hidden" class="form-control" value="<?php echo $row1->Fname[0].". ".$Lname;?>" name="Pb">
+														<?php } ?>
+														<?php $data = array('class' => "btn btn-success pull-right",'type' => 'submit','role' => 'button','style' => 'margin-left:1%');
+														echo form_button($data, '<i class="glyphicon glyphicon-check" > </i> Save Changes');
+														echo form_close();
+													}
+												
+												
+												}else{
+											foreach ($getUpdated_Transaction as $row){
+														echo form_open("ppeims/update_tr_complete");?>
+														<input type="hidden" value="add-ui" name="access">
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_Date;?>" name="Tr_Date">
+														<?php foreach($getupdated_transactionAdmin as $row1){?>
+														<input type="hidden" class="form-control" value="<?php echo $row1->Fname[0].". ".$Lname;?>" name="Pb">
+														<?php } ?>
+														<?php $data = array('class' => "btn btn-primary pull-right",'type' => 'submit','role' => 'button','style' => 'margin-left:1%');
+														echo form_button($data, '<i class="glyphicon glyphicon-check" > </i> Mark as Complete');
+														echo form_close();
+													}
+													}?>
+													
+											</div>
+										</div>
+									</div>
+								</div>
 										<div class="table-responsive">
 											<table class="table table-bordered">
 												<thead>
@@ -73,28 +119,36 @@ include 'include/navbar-top.php'; ?>
 														<th>Particulars</th>
 														<th>Current Stock</th>
 														<th>Added Stock</th>
-														<th>Subtracted Stock</th>
 														<th>Total Stock</th>
 														<th>Reorder Point</th>
 														<th>Expiration Date</th>
 														<th>Remarks</th>
-														<th>Action</th>
+														<th>Update</th>
+														<th>Remove</th>
 													</tr>
 												</thead>
 												<tbody>
-												<?php $i=1; foreach ($getUpdated_TransactionData as $row){ ?>
+												<?php $i=1; foreach ($getUpdated_TransactionData as $row){ 
+													if($row->Total_S == 0){
+														$current_stock = $row->Stock;
+													
+													}else{
+														$current_stock = $row->Total_S - $row->Added_S;
+													
+													}
+												?>
 													<tr>
 														<th scope="row"><?php echo $i++;?></th>
 														<td><?php echo $row->Particulars;?></td>
-														<td><?php echo $row->Stock." ".$row->Unit;?></td>
+														<td><?php echo $current_stock." ".$row->Unit;?></td>
 														<td><?php echo $row->Added_S." ".$row->Unit;?></td>
-														<td><?php echo $row->Subtracted_S." ".$row->Unit;?></td>
 														<td><?php echo $row->Total_S." ".$row->Unit;?></td>
 														<td><?php echo $row->Re_OrderPt;?></td>
 														<td><?php echo $row->Expiration_Date;?></td>
 														<td><?php echo $row->Remarks;?></td>
 														<td>
 															<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#<?php echo $row->Tr_D_No;?>update"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Update</span></a>
+														</td><td>	
 															<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#<?php echo $row->Tr_D_No;?>delete" data-placement="top" title="Remove this item"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
 															
 														</td>
@@ -107,7 +161,7 @@ include 'include/navbar-top.php'; ?>
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<a href="<?php echo base_url();?>ppeims/update_inventory" role="button" class="btn btn-default">Back</a>
+										<a href="<?php echo base_url();?>ppeims/update_inventory/<?= $uri;?>" role="button" class="btn btn-default">Back</a>
 									</div>
 									<div class="col-md-6">
 										<div class="">
@@ -117,23 +171,14 @@ include 'include/navbar-top.php'; ?>
 														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
 														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Pb">
 														<?php $data = array('class' => "btn btn-danger pull-right",'type' => 'submit','style' => 'margin-left:1%');
-														echo form_button($data, 'Delete Batch');
+														echo form_button($data, 'Delete');
 														echo form_close();
 													}?>
 												
-													<?php foreach ($getUpdated_Transaction as $row){
-														echo form_open("ppeims/update_tr_complete");?>
-														<input type="hidden" value="add-ui" name="access">
-														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
-														<input type="hidden" class="form-control" value="<?php echo $row->Tr_Date;?>" name="Tr_Date">
-														<?php foreach($getupdated_transactionAdmin as $row1){?>
-														<input type="hidden" class="form-control" value="<?php echo $row1->Fname[0].". ".$Lname;?>" name="Pb">
-														<?php } ?>
-														<?php $data = array('class' => "btn btn-success pull-right",'type' => 'submit','role' => 'button','style' => 'margin-left:1%');
-														echo form_button($data, 'Mark as Complete');
-														echo form_close();
-													}?>
-													<?php foreach ($getUpdated_Transaction as $row){
+													
+													<?php 
+													if ($stat == 0) { 
+													foreach ($getUpdated_Transaction as $row){
 														echo form_open("ppeims/update_tr_draft");?>
 														<input type="hidden" value="add-ui" name="access">
 														<?php foreach($getupdated_transactionAdmin as $row1){?>
@@ -141,10 +186,23 @@ include 'include/navbar-top.php'; ?>
 														<?php } ?>
 														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
 														<input type="hidden" class="form-control" value="<?php echo $row->Tr_Date;?>" name="Tr_Date">
-														<?php $data = array('class' => "btn btn-primary pull-right",'type' => 'submit','role' => 'button');
-														echo form_button($data, 'Save Draft');
+														<?php $data = array('class' => "btn btn-success pull-right",'type' => 'submit','role' => 'button');
+														echo form_button($data, 'Save as Draft');
 														echo form_close();
-													}?>
+													} }else if ($stat == 2) {
+													
+													foreach ($getUpdated_Transaction as $row){
+														echo form_open("ppeims/update_tr_draft");?>
+														<input type="hidden" value="add-ui" name="access">
+														<?php foreach($getupdated_transactionAdmin as $row1){?>
+														<input type="hidden" class="form-control" value="<?php echo $row1->Fname[0].". ".$Lname;?>" name="Pb">
+														<?php } ?>
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_No;?>" name="Tr_No">
+														<input type="hidden" class="form-control" value="<?php echo $row->Tr_Date;?>" name="Tr_Date">
+														<?php $data = array('class' => "btn btn-success pull-right",'type' => 'submit','role' => 'button');
+														echo form_button($data, 'Save Changes');
+														echo form_close();
+													 }}else{} ?>
 												
 										</div>
 									</div>
@@ -202,22 +260,18 @@ include 'include/navbar-top.php'; ?>
 						<input type="hidden" value="<?php echo $row->Stock;?>" name="Stock">
 						<input type="hidden" value="<?php echo $row->Tr_D_No;?>" name="Tr_D_No">
 						<input type="hidden" value="<?php echo $row->Tr_No;?>" name="Tr_No">
+						<input type="hidden" value="<?php echo $row->Added_S;?>" name="old_Added_S">
 						<input type="hidden" value="<?php echo $row->EI_No;?>" name="EI_No">
 						<input type="hidden" value="<?php echo $row->Particulars;?>" name="Particulars">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="form-group">
-								<label for="">Add Stock</label>
+								<label for="">Stock Quantity</label>
 								<input type="number" class="form-control" placeholder="0" name="Added_S" value="<?php echo $row->Added_S;?>">
 							</div>
 						</div>
-						<div class="col-sm-4">
-							<div class="form-group">
-								<label for="">Substract Stock</label>
-								<input type="number" class="form-control" placeholder="0" name="Subtracted_S" value="<?php echo $row->Subtracted_S;?>">
-							</div>
-						</div>
+
 						<div class="col-sm-4">
 							<div class="form-group">
 								<label for="">Unit</label>

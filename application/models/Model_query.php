@@ -22,7 +22,9 @@ class Model_query extends CI_Model
 					return false;
 				}
 		}
-		public function getEquipmentList(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 ORDER BY Tr_No DESC");$result = $query->result();return $result;}
+		public function getEquipmentList(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=1 ");$result = $query->result();return $result;}
+		public function getEquipmentListDraft(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=2 ");$result = $query->result();return $result;}
+		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
 		
 		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where Username ='admin'");$result = $query->result();return $result;}
 		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY G_No");$result = $query->result();return $result;}
@@ -31,6 +33,11 @@ class Model_query extends CI_Model
 		
 		public function getLastTransaction(){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No ORDER BY updated_transaction.Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;}
+			
+		
+		public function getLastTransactionS($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No='".$data."' LIMIT 1");
 			$result = $query->result();return $result;}
 			
 		public function getLastTransactionData($data){
@@ -48,6 +55,17 @@ class Model_query extends CI_Model
 		public function getupdated_transactionAdmin(){
 			$query = $this->db->query("SELECT * FROM `administrator` WHERE 1 limit 1");
 			$result = $query->result();return $result;}
+		
+		public function gettransaction_last(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE 1 ORDER BY Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
+		public function gettransaction_lastS($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No='".$data."' LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
 		
 		public function getupdated_transaction($data){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE updated_transaction.Tr_No='".$data."'");
@@ -70,6 +88,7 @@ class Model_query extends CI_Model
 		
 		public function updateAccount($data1,$data2){$this->db->where('A_No', $data1);$this->db->update('Administrator', $data2);}
 		public function addUI($data){$this->db->insert("updated_transaction_Details",$data);}
+		public function addbatch($data){$this->db->insert("updated_transaction",$data);}
 
 		public function updateUpdateTransactionDetails($data1,$data2){$this->db->where('Tr_D_No', $data1);$this->db->update('updated_transaction_Details', $data2);}
 		public function deleteUpdateTransactionDetails($data){$this->db->where('Tr_D_No', $data);$this->db->delete('updated_transaction_Details');}

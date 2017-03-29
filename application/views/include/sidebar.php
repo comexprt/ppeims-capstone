@@ -1,10 +1,10 @@
 <div class="sidebar">
 	<div class="sidebar-logo">
 		<!-- <a href="#"><img src="images/db-logo.png" alt=""></a> -->
-		<!--style="background-image: url(<?php //echo base_url();?>images/user.png);"-->
+	
 	</div>
 	<div class="sidebar-user">
-		<div class="sidebar-user-pic"></div>
+		<div class="sidebar-user-pic" style="background-image: url(<?php echo base_url();?>images/Penguins.jpg);"></div>
 		<div class="sidebar-user-name">
 			<span><?php echo $Fname." ".$Lname;?></span>
 			<span><?php echo $Position;?></span>
