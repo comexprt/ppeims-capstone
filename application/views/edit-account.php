@@ -82,21 +82,31 @@ include 'include/sidebar.php'; ?>
 								</div>
 								<div class="panel-body">
 									<div class="row">
+									
 										<div class="col-sm-3">
 											<img src="<?php echo base_url();?>images/user.png" class="img-thumbnail img-responsive" alt="">
+											<button role="button" class="btn btn-danger btn-xs margin-bottom-20">Remove Picture</button>
 										</div>
 										<div class="col-sm-9">
+										<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<input type="file">
+														<p class="help-block">Upload a profile picture, 1mb max.</p>
+													</div>
+												</div>
+											</div>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="fname">First Name</label>
-														<input type="text" id="fname" class="form-control" value="<?=$row->Fname;?>" readonly>
+														<input type="text" id="fname" class="form-control" value="<?=$row->Fname;?>" >
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="lname">Last Name</label>
-														<input type="text" id="lname" class="form-control" value="<?=$row->Lname;?>	" readonly>
+														<input type="text" id="lname" class="form-control" value="<?=$row->Lname;?>	" >
 													</div>
 												</div>
 											</div>
@@ -104,25 +114,23 @@ include 'include/sidebar.php'; ?>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="position">Position</label>
-														<input type="text" id="position" class="form-control" value="<?=$row->Position;?>" readonly>
+														<input type="text" id="position" class="form-control" value="<?=$row->Position;?>" >
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label for="uname">Username</label>
-														<input type="text" id="uname" class="form-control" value="<?=$row->Username;?>" readonly>
+														<input type="text" id="uname" class="form-control" value="<?=$row->Username;?>" >
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label for="">Password</label>
-														<button type="button" data-toggle="modal" data-target="#changeModal" class="btn btn-primary btn-block">Change Password</button>
-													</div>
-												</div>
-											</div>
+											
 										</div>
+									</div>
+								</div>
+									<div class="panel-footer">
+									<div class="text-right">
+										<button type="submit" class="btn btn-success">Save Changes</a>
 									</div>
 								</div>
 								
@@ -173,6 +181,11 @@ include 'include/sidebar.php'; ?>
 			
 					
 					<?php endforeach; ?>
+					<div class="row">
+						<div class="col-md-12">
+							<a href="<?php echo base_url();?>ppeims/manage_account" class="btn btn-default">Back</a>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>

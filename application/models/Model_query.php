@@ -22,25 +22,53 @@ class Model_query extends CI_Model
 					return false;
 				}
 		}
-		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `Administrator` Where Username ='admin'");$result = $query->result();return $result;}
-		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `Group` Where 1 ORDER BY G_No");$result = $query->result();return $result;}
-		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `Equipement_Inventory` Where 1 ORDER BY EI_No");$result = $query->result();return $result;}
-		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `Personnel` JOIN	`Group` ON Personnel.G_No = Group.G_No WHERE 1 ORDER BY GroupName,PersonnelName");$result = $query->result();return $result;}
+		public function getEquipmentList(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=1 ");$result = $query->result();return $result;}
+		public function getEquipmentListDraft(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=2 ");$result = $query->result();return $result;}
+		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
+		
+		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where Username ='admin'");$result = $query->result();return $result;}
+		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY G_No");$result = $query->result();return $result;}
+		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY EI_No");$result = $query->result();return $result;}
+		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE 1 ORDER BY GroupName,PersonnelName");$result = $query->result();return $result;}
 		
 		public function getLastTransaction(){
-			$query = $this->db->query("SELECT * FROM `Updated_Transaction` JOIN	`Updated_Transaction_Details` ON Updated_Transaction.Tr_No = Updated_Transaction_Details.Tr_No ORDER BY Updated_Transaction.Tr_No DESC LIMIT 1");
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No ORDER BY updated_transaction.Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;}
+			
+		
+		public function getLastTransactionS($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No='".$data."' LIMIT 1");
 			$result = $query->result();return $result;}
 			
 		public function getLastTransactionData($data){
-			$query = $this->db->query("SELECT * FROM `Updated_Transaction` JOIN	`Updated_Transaction_Details` ON Updated_Transaction.Tr_No = Updated_Transaction_Details.Tr_No WHERE Updated_Transaction.Tr_No='".$data."'");
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No='".$data."'");
 			$result = $query->result();return $result;}
 		
-		public function getUpdated_TransactionData($data){
-			$query = $this->db->query("SELECT * FROM `Updated_Transaction` JOIN `Updated_Transaction_Details` ON Updated_Transaction.Tr_No = Updated_Transaction_Details.Tr_No JOIN `Equipement_Inventory` ON Updated_Transaction_Details.EI_No = Equipement_Inventory.EI_No WHERE Updated_Transaction.Tr_No='".$data."'");
+		public function getupdated_transactionData($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No JOIN `equipement_inventory` ON updated_transaction_Details.EI_No = equipement_inventory.EI_No WHERE updated_transaction.Tr_No='".$data."'");
 			$result = $query->result();return $result;}
 		
-		public function getUpdated_Transaction($data){
-			$query = $this->db->query("SELECT * FROM `Updated_Transaction` WHERE Updated_Transaction.Tr_No='".$data."'");
+		public function getupdated_transactionDate($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No='".$data."' limit 1");
+			$result = $query->result();return $result;}
+		
+		public function getupdated_transactionAdmin(){
+			$query = $this->db->query("SELECT * FROM `administrator` WHERE 1 limit 1");
+			$result = $query->result();return $result;}
+		
+		public function gettransaction_last(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE 1 ORDER BY Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
+		public function gettransaction_lastS($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No='".$data."' LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
+		
+		public function getupdated_transaction($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE updated_transaction.Tr_No='".$data."'");
 			$result = $query->result();return $result;}
 		
 		public function addPersonnelName($data){$this->db->insert("Personnel",$data);}
@@ -51,15 +79,19 @@ class Model_query extends CI_Model
 		public function updateGroupName($data1,$data2){$this->db->where('G_No', $data1);$this->db->update('Group', $data2);}
 		public function deleteGroupName($data){$this->db->where('G_No', $data);$this->db->delete('Group');}
 		
-		public function addEquipment($data){$this->db->insert("Equipement_Inventory",$data);}
-		public function updateEquipment($data1,$data2){$this->db->where('EI_No', $data1);$this->db->update('Equipement_Inventory', $data2);}
-		public function deleteEquipment($data){$this->db->where('EI_No', $data);$this->db->delete('Equipement_Inventory');}
+		public function addEquipment($data){$this->db->insert("equipement_inventory",$data);}
+		public function updateEquipment($data1,$data2){$this->db->where('EI_No', $data1);$this->db->update('equipement_inventory', $data2);}
+		public function deleteEquipment($data){$this->db->where('EI_No', $data);$this->db->delete('equipement_inventory');}
+		
+		public function updateUI($data1,$data2){$this->db->where('Tr_No', $data1);$this->db->update('updated_transaction', $data2);}
+		public function deleteUI($data){$this->db->where('Tr_No', $data);$this->db->delete('updated_transaction');}
 		
 		public function updateAccount($data1,$data2){$this->db->where('A_No', $data1);$this->db->update('Administrator', $data2);}
-		public function addUI($data){$this->db->insert("Updated_Transaction_Details",$data);}
+		public function addUI($data){$this->db->insert("updated_transaction_Details",$data);}
+		public function addbatch($data){$this->db->insert("updated_transaction",$data);}
 
-		public function updateUpdateTransactionDetails($data1,$data2){$this->db->where('Tr_D_No', $data1);$this->db->update('Updated_Transaction_Details', $data2);}
-		public function deleteUpdateTransactionDetails($data){$this->db->where('Tr_D_No', $data);$this->db->delete('Updated_Transaction_Details');}
+		public function updateUpdateTransactionDetails($data1,$data2){$this->db->where('Tr_D_No', $data1);$this->db->update('updated_transaction_Details', $data2);}
+		public function deleteUpdateTransactionDetails($data){$this->db->where('Tr_D_No', $data);$this->db->delete('updated_transaction_Details');}
 		
 		/************************************************           E        N          D       ****************************************/
 
