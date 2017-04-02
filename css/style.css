@@ -1,4 +1,127 @@
-@import 'general.css';
-@import 'login.css';
-@import 'sidebar.css';
-@import 'content.css';
+.page-dashboard {
+	padding-left: 230px;
+}
+
+.page-login {
+	background-color: #ECF0F1;
+}
+.login-form {
+	padding-top: 100px;
+}
+.login-form-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+.login-form-header h1 {
+	font-size: 30px;
+}
+
+.sidebar {
+	background-color: #0469A5;
+	width: 230px;
+	height: 100%;
+	overflow-x: hidden;
+	position: fixed;
+	left: 0;
+}
+.sidebar-logo {
+	padding: 5px;
+}
+.sidebar-user {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.sidebar-user-pic {
+	width: 100px;
+	height: 100px;
+	background-color: #ececec;
+	border-radius: 50%;
+	background-image: url(../images/user.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border-width: 4px;
+	border-color: #FFF;
+	border-style: solid;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10px;
+}
+.sidebar-user-name {
+	text-align: center;
+}
+.sidebar-user-name span {
+	display: block;
+	color: #6EB9E5;
+	font-size: 12px;
+}
+.sidebar-user-name span:nth-child(1) {
+	font-size: 16px;
+	color: #FFF;
+}
+.sidebar-nav ul {
+	list-style-type: none;
+	padding-left: 0;
+	margin-bottom: 0;
+}
+.sidebar-nav ul li a {
+	display: block;
+	width: 100%;
+	height: 50px;
+	color: #FFF;
+	line-height: 50px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.sidebar-nav ul li a:hover,
+.sidebar-nav ul li a:focus,
+.sidebar-nav ul li.current a {
+	text-decoration: none;
+	background-color: #0578BC;
+}
+
+.navbar--blue {
+	background-color: #007DC7;
+}
+
+.navbar--blue > li > a {
+	color: #FFF;
+}
+
+.navbar--blue .nav .open > a,
+.navbar--blue .nav .open > a:focus,
+.navbar--blue .nav .open > a:hover,
+.navbar--blue .nav > li > a:focus,
+.navbar--blue .nav > li > a:hover,
+.navbar--blue > li > .dropdown-menu {
+	background-color: #0578BC;
+	color: #fff;
+}
+
+.navbar--blue .dropdown > a {
+	color: #FFF;
+}
+
+.margin-bottom-20 {
+	margin-bottom: 20px;
+}
+
+.margin-top-20 {
+	margin-top: 20px;
+}
+
+.margin-0 {
+	margin: 0;
+}
+
+.page-title {
+	font-size: 33px;
+	margin: 0;
+}
+
+.row-header {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #eee;
+}
