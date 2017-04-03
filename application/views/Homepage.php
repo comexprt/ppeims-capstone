@@ -1,5 +1,5 @@
-<?php 
-require_once 'include/header.php';
+<?php
+include 'include/header.php';
 include 'include/sidebar.php';
 include 'include/navbar-top.php'; ?>
 <div class="content">
@@ -109,7 +109,7 @@ include 'include/navbar-top.php'; ?>
 								</table>
 							</div>
 						</div>
-					</div>	
+					</div>
 				</section>
 
 			</div>

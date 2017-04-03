@@ -1,25 +1,11 @@
 <?php
 require_once 'include/header.php';
-include 'include/sidebar.php'; ?>
+include 'include/sidebar.php'; 
+include 'include/navbar-top.php';
 
-	<div class="main">
-		<nav class="navbar navbar-top">
-			 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			 	<ul class="nav navbar-nav navbar-right">
-			 		<li class="dropdown">
-			 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$Lname;?> <span class="caret"></span></a>
-			 			<ul class="dropdown-menu">
-			 				<li><a href="<?=base_url();?>ppeims/manage_account">Account</a></li>
-			 				<li><a href="<?=base_url();?>ppeims/emp_logout">Log Out</a></li>
-			 			</ul>
-			 		</li>
-			 	</ul>
-			 </div>
-		</nav>
-
+?>
 		<div class="content">
 			<div class="container-fluid">
-
 				<section class="section">
 					<div class="row">
 						<div class="col-md-12">
@@ -52,14 +38,15 @@ include 'include/sidebar.php'; ?>
 						<div class="col-md-12">
 							<ol class="breadcrumb">
 								<li><a href="<?=base_url();?>ppeims">Dashboard</a></li>
-								<li class="active">Account Settings</li>
+								<li><a href="<?=base_url();?>ppeims/manage_account">Account Settings</a></li>
+								<li class="active">Edit Profile</li>
 							</ol>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h3>Account Settings</h3>
+								<h1 class="page-title">Edit Profile</h1>
 							</div>
 						</div>
 					</div>
@@ -70,13 +57,8 @@ include 'include/sidebar.php'; ?>
 						<div class="panel panel-default">
 							<div class="panel-heading">
 									<div class="row">
-										<div class="col-sm-6">
-											<h4>User Profile</h4>
-										</div>
-										<div class="col-sm-6">
-											<div class="text-right">
-												<a href="<?php echo base_url();?>ppeims/edit_account" class="btn btn-primary">Edit Profile</a>
-											</div>
+										<div class="col-sm-12">
+											<h4>Profile</h4>
 										</div>
 									</div>
 								</div>
@@ -130,7 +112,7 @@ include 'include/sidebar.php'; ?>
 								</div>
 									<div class="panel-footer">
 									<div class="text-right">
-										<button type="submit" class="btn btn-success">Save Changes</a>
+										<button type="submit" class="btn btn-success">Save</a>
 									</div>
 								</div>
 								

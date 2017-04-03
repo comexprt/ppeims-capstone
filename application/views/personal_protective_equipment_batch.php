@@ -28,52 +28,53 @@ include 'include/navbar-top.php'; ?>
 						<div class="col-md-12">
 							<ol class="breadcrumb">
 								<li><a href="index.html">Dashboard</a></li>
-								<li class="active">Personal Protective Equipment Batch</li>
+								<li class="active">Batch</li>
 							</ol>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="page-header">
-								<h2>Personal Protective Equipment Batch</h2>
+							<div class="row-header">	
+								<div class="row">
+									<div class="col-md-8">
+										<h1 class="page-title">Equipment Batch</h1>
+									</div>
+									<div class="col-md-4">
+										<?php foreach ($gettransaction_last as $lt): ?>
+
+											<?php if ($lt->Status == 0): ?>
+												
+												<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo "new_entry"?>" class="btn btn-success">Resume Batch</a>
+										
+											<?php else: ?>
+											
+											<?php echo form_open("ppeims/addbatch"); ?>
+												
+												<input type="hidden" value="add-ui" name="access">
+												<input type="hidden" class="form-control" value="<?php echo $Fname[0].". ".$Lname;?>" name="Pb">
+												
+												<?php 
+													$data = [
+														'class' => "btn btn-primary pull-right",
+														'title' => 'Add Batch',
+														'type' => 'submit'
+													];
+													echo form_button($data, 'Add Batch');
+													echo form_close();
+												?>
+											
+											<?php endif; ?>
+										
+										<?php endforeach; ?>
+										
+										<a href="<?php echo base_url();?>ppeims/equipment_batch_drafts" class="btn btn-primary">
+											Batch Drafts <span class="badge"><?php foreach ($getEquipmentListDraftCount as $row): echo $row->draftcount; endforeach; ?></span>
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row-header">
-								<h3>Equipment Batch</h3>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="margin-bottom-20">
-								<?php foreach ($gettransaction_last as $lt): if ($lt->Status == 0){ ?>
-								<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo "new_entry"?>" class="btn btn-primary">Continue</a>
-								
-								<?php }else{
-									echo form_open("ppeims/addbatch");?>
-														<input type="hidden" value="add-ui" name="access">
-														<input type="hidden" class="form-control" value="<?php echo $Fname[0].". ".$Lname;?>" name="Pb">
-														<?php $data = array('class' => "btn btn-primary pull-left",'title' => 'Add Equipment Batch','type' => 'submit');
-														echo form_button($data, 'Add Equipment Batch');
-														echo form_close();
-									
-								}
-								endforeach;
-								?>
-								
-								<a href="<?php echo base_url();?>ppeims/equipment_batch_drafts" class="btn btn-primary">View Equipment Batch Drafts <span class="badge">
-								<?php foreach($getEquipmentListDraftCount as $row):
-									echo $row->draftcount;
-									
-									endforeach; ?>
-								</span></a>
-							</div>
-						</div>
-					</div>
-					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="table-responsive">
