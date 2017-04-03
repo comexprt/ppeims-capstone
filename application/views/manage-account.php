@@ -1,22 +1,9 @@
 <?php
 require_once 'include/header.php';
-include 'include/sidebar.php'; ?>
+include 'include/sidebar.php';
+include 'include/navbar-top.php'; 
 
-	<div class="main">
-		<nav class="navbar navbar-top">
-			 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			 	<ul class="nav navbar-nav navbar-right">
-			 		<li class="dropdown">
-			 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$Lname;?> <span class="caret"></span></a>
-			 			<ul class="dropdown-menu">
-			 				<li><a href="<?=base_url();?>ppeims/manage_account">Account</a></li>
-			 				<li><a href="<?=base_url();?>ppeims/emp_logout">Log Out</a></li>
-			 			</ul>
-			 		</li>
-			 	</ul>
-			 </div>
-		</nav>
-
+?>
 		<div class="content">
 			<div class="container-fluid">
 
@@ -59,7 +46,7 @@ include 'include/sidebar.php'; ?>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h3>Account Settings</h3>
+								<h1 class="page-title">Account Settings</h1>
 							</div>
 						</div>
 					</div>
@@ -71,7 +58,7 @@ include 'include/sidebar.php'; ?>
 							<div class="panel-heading">
 									<div class="row">
 										<div class="col-sm-6">
-											<h4>User Profile</h4>
+											<h4>Profile</h4>
 										</div>
 										<div class="col-sm-6">
 											<div class="text-right">
