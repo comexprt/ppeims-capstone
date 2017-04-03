@@ -1,11 +1,11 @@
 
 <?php 
-require_once 'include/header.php';
+include 'include/header.php';
 include 'include/sidebar.php';
 include 'include/navbar-top.php'; ?>
+		
 		<div class="content">
 			<div class="container-fluid">
-
 				<section class="section">
 					<div class="row">
 						<div class="col-md-12">
@@ -24,45 +24,49 @@ include 'include/navbar-top.php'; ?>
 					<?php }} else{}?>
 						</div>
 					</div>
-					
 					<div class="row">
 						<div class="col-md-12">
 							<ol class="breadcrumb">
 								<li><a href="index.html">Dashboard</a></li>
-								<li><a href="personal-protective-equipment-batch.html">Personal Protective Equipment Batch</a></li>
-								<li class="active">Select Personal Protective Equipment</li>
+								<li><a href="equipment-batch.html">Batch</a></li>
+								<li class="active">Add Batch Step 1</li>
 							</ol>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h3>Add Equipment Batch Step 1</h3>
-								<p>Select the equipment you want to add in this batch.</p>
+								<div class="row">
+									<div class="col-md-8">
+										<h1 class="page-title">Add Batch Step 1</h1>
+									</div>
+									<div class="col-md-4">
+										<?php 
+											echo form_open("ppeims/inventory_equipmen_list");?>
+											
+											<input type="hidden" value="add-iel" name="access">
+											<input type="hidden" class="form-control" value="<?php echo $LastSId;?>" name="LastSId">
+											
+											<?php 
+												$data = [
+													'class' => "btn btn-primary pull-right",
+													'type' => 'submit'
+												];
+											
+											echo form_button($data, 'Proceed to Step 2');
+											echo form_close();
+										?>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="row margin-bottom-20">
+					<div class="row">
 					<?php foreach($gettransaction_last as $row):
 						$uri=$row->Tr_No;
 						
 					?>
-						<div class="col-md-3">
-							<strong>Batch:</strong><?php echo $row->Tr_No; ?>
-						</div>
-						<div class="col-md-3">
-							<strong>Date Changes:</strong> <?php echo date('F d , Y',strtotime($row->Tr_Date));?>
-						</div>
-						<div class="col-md-3">
-							<strong>Prepared by:</strong> <?php if (empty($row->Pb)){
-																	echo "-- -- --";
-																}else{
-																	echo $row->Pb;
-																	}	 ?>
-						</div>
-						<div class="col-md-3">
-							<strong>Total Items:</strong> <?php echo count($getLastTransactionData);?>
-						</div>
+						
 						<?php endforeach; ?>
 					</div>
 					<div class="row">
@@ -71,46 +75,31 @@ include 'include/navbar-top.php'; ?>
 								<div class="panel-heading">
 									<div class="row">
 										<div class="col-md-4">
-											<div class="form-group">
-												<label for="search-item" class="sr-only">Search Item</label>
-												<div class="input-group">
-													<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
-													<span class="input-group-btn">
-														<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
-													</span>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-8">
-											<div class="margin-bottom-20 text-right">	
-												<?php 
-													echo form_open("ppeims/inventory_equipmen_list");?>
-													<input type="hidden" value="add-iel" name="access">
-													<input type="hidden" class="form-control" value="<?php echo $LastSId;?>" name="LastSId">
-													<?php $data = array('class' => "btn btn-primary pull-right",'type' => 'submit');
-													echo form_button($data, '<i	data-toggle="tooltip" data-placement="top" title="View equipment list">Proceed to Step 2
-													<i class="glyphicon glyphicon-chevron-right" aria-hidden="true"></i></a>
-													');
-													echo form_close();
-												?>
+											<label for="search-item" class="sr-only">Search Item</label>
+											<div class="input-group">
+												<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
+												<span class="input-group-btn">
+													<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+												</span>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="table-responsive">
-									<table class="table table-bordered">
+									<table class="table">
 										<thead>
 											<tr>
 												<th>No.</th>
 												<th>Particulars</th>
 												<th>Description</th>
-												<th>On Stock</th>
-												<th>Status</th>
-												<th>Action</th>
+												<th>Add/Remove</th>
 											</tr>
 										</thead>
 										<tbody>
-											<?php foreach ($getLastTransaction as $lt){ $Status = $lt->Status; }
+											<?php 
+												foreach ($getLastTransaction as $lt) { $Status = $lt->Status; }
+												
+
 												if ($Status == 0 || $Status == 1 || $Status == 2){?>
 												<?php $i=1; foreach ($getEquipment as $row){ ?>
 												<tr>
