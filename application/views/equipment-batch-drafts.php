@@ -1,89 +1,90 @@
 <?php 
-require_once 'include/header.php';
+include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/navbar-top.php'; ?>
-		<div class="content">
-			<div class="container-fluid">
+include 'include/topbar.php';
+?>
+		
+<div class="content">
+	<div class="container-fluid">
 
-				<section class="section">
-				<div class="row">
-					<div class="col-md-12">
-				<?php if($message){
-					  if (strpos($message, 'Completed') !== false || strpos($message, 'Saved') !== false){
-				?>
-						<!-- Alert for success -->
-						<div class="alert alert-success alert-dismissable" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Success!</strong> <?=$message;?>
-						</div><?php }else{?>
-						<div class="alert alert-danger alert-dismissable" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Success!</strong> <?=$message;?>
-						</div>
-				<?php }} else{}?>
-					</div>
+		<section class="section">
+		<div class="row">
+			<div class="col-md-12">
+		<?php if($message){
+			  if (strpos($message, 'Completed') !== false || strpos($message, 'Saved') !== false){
+		?>
+				<!-- Alert for success -->
+				<div class="alert alert-success alert-dismissable" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Success!</strong> <?=$message;?>
+				</div><?php }else{?>
+				<div class="alert alert-danger alert-dismissable" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<strong>Success!</strong> <?=$message;?>
 				</div>
-				
-					<div class="row">
-						<div class="col-md-12">
-							<ol class="breadcrumb">
-								<li><a href="index.html">Dashboard</a></li>
-								<li class="active">Personal Protective Equipment Batch</li>
-							</ol>
-						</div>
-					</div>
-				
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row-header">
-								<h3>Equipment Batch</h3>
-							</div>
-						</div>
-					</div>
-					
-					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead>
-										<tr class="active">
-											<th>No.</th>
-											<th>Batch No.</th>
-											<th>Date Saved</th>
-											<th>Prepared By</th>
-										
-											<th>Edit</th>
-											<th>View</th>
-										</tr>
-									</thead>
-									<tbody>
-									<?php $i=1;
-									foreach ($getEquipmentListDraft as $row){?>
-										<tr>
-											<th scope="row"><?= $i++;?></th>
-											<td><?= $row->Tr_No;?></td>
-											<td><?= date('F d , Y',strtotime($row->Tr_Date));?></td>
-											<td><?= $row->Pb;?></td>
-											<td class="col-md-1">
-													<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo $row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>												</td>
-												<td class="col-md-1">
-													<a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-trash"></i> <span class="sr-only">View</span></a>
-												</td>
-										</tr>
-									<?php }?>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</section>
+		<?php }} else{}?>
 			</div>
 		</div>
+		
+			<div class="row">
+				<div class="col-md-12">
+					<ol class="breadcrumb">
+						<li><a href="index.html">Dashboard</a></li>
+						<li class="active">Personal Protective Equipment Batch</li>
+					</ol>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row-header">
+						<h3>Equipment Batch</h3>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr class="active">
+									<th>No.</th>
+									<th>Batch No.</th>
+									<th>Date Saved</th>
+									<th>Prepared By</th>
+								
+									<th>Edit</th>
+									<th>View</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php $i=1;
+							foreach ($getEquipmentListDraft as $row){?>
+								<tr>
+									<th scope="row"><?= $i++;?></th>
+									<td><?= $row->Tr_No;?></td>
+									<td><?= date('F d , Y',strtotime($row->Tr_Date));?></td>
+									<td><?= $row->Pb;?></td>
+									<td class="col-md-1">
+											<a href="<?php echo base_url();?>ppeims/update_inventory/<?php echo $row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>												</td>
+										<td class="col-md-1">
+											<a href="#" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-trash"></i> <span class="sr-only">View</span></a>
+										</td>
+								</tr>
+							<?php }?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
+</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -146,4 +147,8 @@ include 'include/navbar-top.php'; ?>
 				</div>
 			</div>
 		</div>
-<?php require_once 'include/footer.php';
+
+<?php 
+include 'include/footer.php';
+
+// EOF

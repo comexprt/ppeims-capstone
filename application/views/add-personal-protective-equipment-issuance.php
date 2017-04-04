@@ -1,7 +1,8 @@
 <?php 
-require_once 'include/header.php';
+include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/navbar-top.php'; ?>
+include 'include/topbar.php'; 
+?>
 
 <div class="content">
 	<div class="container-fluid">
@@ -108,4 +109,7 @@ include 'include/navbar-top.php'; ?>
 	</div>
 </div>
 
-<?php require_once 'include/footer.php';
+<?php 
+include 'include/footer.php';
+
+// EOF
