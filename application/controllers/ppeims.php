@@ -177,7 +177,7 @@ class ppeims extends CI_Controller {
 				$PersonnelName = $this->input->post('PersonnelName');
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->addPersonnelName($newRow);
-				$message="Personnel: $PersonnelName has been added.."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$message="$PersonnelName has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -187,7 +187,7 @@ class ppeims extends CI_Controller {
 				$PersonnelName = $this->input->post('PersonnelName');$P_No = $this->input->post('P_No');
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->updatePersonnelName($P_No,$newRow);
-				$message="Personnel: $PersonnelName has been updated.."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$message="$PersonnelName has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -196,7 +196,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-personnel"){
 				$PersonnelName = $this->input->post('PersonnelName');$P_No = $this->input->post('P_No');
 				$this->Model_query->deletePersonnelName($P_No);
-				$message="Personnel: $PersonnelName has been deleted.."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$message="$PersonnelName has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel Function End --
@@ -218,7 +218,7 @@ class ppeims extends CI_Controller {
 				$GroupName = $this->input->post('GroupName');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
 				$this->Model_query->addGroupName($newRow);
-				$message="Personnel Group : $GroupName has been added.."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				$message="$GroupName has been added."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -228,7 +228,7 @@ class ppeims extends CI_Controller {
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
 				$this->Model_query->updateGroupName($G_No,$newRow);
-				$message="Personnel Group : $GroupName has been updated.."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				$message="$GroupName has been updated."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -237,7 +237,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$this->Model_query->deleteGroupName($G_No);
-				$message="Personnel Group : $GroupName has been deleted.."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				$message="$GroupName has been deleted."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel-Group Function End --		
@@ -261,7 +261,7 @@ class ppeims extends CI_Controller {
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
 				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => "pcs","Remarks" => $this->input->post('Remarks'));
 				$this->Model_query->addEquipment($newRow);
-				$message="Equipment : $Particulars has been added.."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars has been added."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -272,7 +272,7 @@ class ppeims extends CI_Controller {
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
 				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('Unit'),"Remarks" => $this->input->post('Remarks'));
 				$this->Model_query->updateEquipment($EI_No,$newRow);
-				$message="Equipment : $Particulars has been updated.."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars has been updated."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
@@ -281,7 +281,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$this->Model_query->deleteEquipment($EI_No);
-				$message="Equipment: $Particulars has been deleted.."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars has been deleted."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	

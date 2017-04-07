@@ -1,140 +1,143 @@
 <?php 
-require_once 'include/header.php';
+include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/navbar-top.php'; ?>
+?>
 
-		<div class="content">
-			<div class="container-fluid">
+<nav class="navbar navbar--blue navbar-static-top">
+	<div class="container-fluid">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="navbar-left">
+				<ul class="navbar-breadcrumbs list-inline">
+					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
+					<li>/</li>
+					<li>Issuance</li>
+				</ul>
+			</div>
+	   	 	<ul class="nav navbar-nav navbar-right">
+	   	 		<li class="dropdown">
+	   	 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <span class="caret"></span></a>
+	   	 			<ul class="dropdown-menu">
+	   	 				<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
+	   	 			</ul>
+	   	 		</li>
+	   	 	</ul>
+   	 	</div>
+	</div>
+</nav>
 
-				<section class="section">
-					<div class="row">
-						<div class="col-md-12">
-							<ol class="breadcrumb">
-								<li><a href="<?=base_url();?>ppeims">Dashboard</a></li>
-								<li class="active">Personal Protective Equipment Issuance</li>
-							</ol>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="page-header">
-								<h2>Personal Protective Equipment Issuance</h2>
+<div class="content">
+	<div class="container-fluid">
+		<section class="section">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row-header">
+						<div class="row">
+							<div class="col-md-8">
+								<h1 class="page-title">Equipment Issuance</h1>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<div class="form-group pull-left">
-								<label for="search-item" class="sr-only">Search Issuance</label>
-								<div class="input-group">
-									<input type="search" id="search-item" class="form-control" placeholder="Search issuance...">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">
-											<i class="glyphicon glyphicon-search" aria-hidden="true"></i>
-											<span class="sr-only">Search</span>
-										</button>
-									</span>
+							<div class="col-md-4">
+								<div class="text-right">
+									<a href="add-equipment-issuance-step-2.html" class="btn btn-primary"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add</a>
+									<a href="edit-equipment-issuance-step-2.html" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
+									<a href="adjust-equipment-issuance-step-2.html" class="btn btn-warning"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-8">
-							<div class="margin-bottom-20 text-right">
-								<a href="<?=base_url();?>ppeims/select_plant_personnel" class="btn btn-primary">
-									<i class="glyphicon glyphicon-plus" aria-hidden="true"></i>Create Issuance
-								</a>
-							</div>
-						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="table-responsive">
-								<table class="table table-bordered">
-									<thead>
-										<tr class="active">
-											<th class="col-md-1">No.</th>
-											<th class="col-md-2">Issuance No.</th>
-											<th class="col-md-3">Date Completed</th>
-											<th class="col-md-3">Prepared By</th>
-											<th class="col-md-1">Status</th>
-											<th class="col-md-1">Update</th>
-											<th class="col-md-1">View</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<th class="col-md-1" scope="row">1</th>
-											<td class="col-md-2">003</td>
-											<td class="col-md-3"></td>
-											<td class="col-md-3">G. Manlimos</td>
-											<td class="col-md-1"><span class="label label-default">Pending</span></td>
-											<td class="col-md-1">
-												<a href="select-plant-personnel.html" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
-											</td>
-											<td class="col-md-1">
-												<a href="#" role="button" class="btn btn-default btn-xs disabled" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-zoom-in"></i> <span class="sr-only">View</span></a>
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-1" scope="row">2</th>
-											<td class="col-md-2">002</td>
-											<td class="col-md-3">04-05-2017</td>
-											<td class="col-md-3">G. Manlimos</td>
-											<td class="col-md-1"><span class="label label-success">Completed</span></td>
-											<td class="col-md-1">
-												<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
-											</td>
-											<td class="col-md-1">
-												<a href="#" role="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-zoom-in"></i> <span class="sr-only">View</span></a>
-											</td>
-										</tr>
-										<tr>
-											<th class="col-md-1" scope="row">3</th>
-											<td class="col-md-2">001</td>
-											<td class="col-md-3">03-29-2017</td>
-											<td class="col-md-3">G. Manlimos</td>
-											<td class="col-md-1"><span class="label label-success">Completed</span></td>
-											<td class="col-md-1">
-												<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
-											</td>
-											<td class="col-md-1">
-												<a href="#" role="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-zoom-in"></i> <span class="sr-only">View</span></a>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Add Equipment Form</h4>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="ename">Equipment Name</label>
-						<input type="text" class="form-control" id="ename">
-					</div>
-					<div class="form-group">
-						<label for="edescription">Equipment Description</label>
-						<textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save</button>
 				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="search-batch" class="sr-only">Search Issuance</label>
+									<div class="input-group">
+										<input type="search" id="search-batch" class="form-control" placeholder="Search issuance...">
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Issuance</th>
+										<th>Total Item</th>
+										<th>Completed</th>
+										<th>Action</th>
+										<th>View</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr class="success">
+										<th scope="row">1</th>
+										<td>004</td>
+										<td>5</td
+										><td><span class="label label-success">Pending</span></td>
+										<td class="col-md-1">
+											<a href="adjust-equipment-issuance-step-1.html" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Resume Batch</span></a>
+										</td>
+										<td class="col-md-1">
+											<button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></button>
+										</td>
+										
+									</tr>
+									<tr class="warning">
+										<th scope="row">2</th>
+										<td>003</td>
+										<td>5</td>
+										<td><span class="label label-warning">Adjusting</span></td>
+										<td class="col-md-1">
+											<a href="adjust-equipment-issuance-step-1.html" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Resume Adjustment</span></a>
+										</td>
+										<td class="col-md-1">
+											<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></button>
+										</td>
+										
+									</tr>
+									<tr>
+										<th scope="row">3</th>
+										<td>002</td>
+										<td>10</td>
+										<td>12-05-2016</td>
+										<td class="col-md-1">
+											<a href="adjust-equipment-issuance-step-1.html" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										</td>
+										<td class="col-md-1">
+											<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></button>
+										</td>
+										
+									</tr>
+									<tr>
+										<th scope="row">4</th>
+										<td>001</td>
+										<td>15</td>
+										<td>01-01-2016</td>
+										<td class="col-md-1">
+											<a href="adjust-equipment-issuance-step-1.html" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										</td>
+										<td class="col-md-1">
+											<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></button>
+										</td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
+</div>
 
-<?php require_once 'include/footer.php';
+<?php 
+include 'include/footer.php';
+
+// EOF
