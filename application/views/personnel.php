@@ -1,8 +1,29 @@
 <?php
 include 'include/header.php';
-include 'include/sidebar.php';
-include 'include/topbar.php'; 
+include 'include/sidebar.php'; 
 ?>
+
+<nav class="navbar navbar--blue navbar-static-top">
+	<div class="container-fluid">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="navbar-left">
+				<ul class="navbar-breadcrumbs list-inline">
+					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
+					<li>/</li>
+					<li>Personnel</li>
+				</ul>
+			</div>
+	   	 	<ul class="nav navbar-nav navbar-right">
+	   	 		<li class="dropdown">
+	   	 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <span class="caret"></span></a>
+	   	 			<ul class="dropdown-menu">
+	   	 				<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
+	   	 			</ul>
+	   	 		</li>
+	   	 	</ul>
+   	 	</div>
+	</div>
+</nav>
 
 <div class="content">
 	<div class="container-fluid">
@@ -24,16 +45,6 @@ include 'include/topbar.php';
 			<?php }} else{}?>
 				</div>
 			</div>
-
-			<div class="row">
-				<div class="col-md-12">
-					<ol class="breadcrumb">
-						<li><a href="<?=base_url();?>ppeims">Dashboard</a></li>
-						<li class="active">Personnel</li>
-					</ol>
-				</div>
-			</div>
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-header">
@@ -43,7 +54,7 @@ include 'include/topbar.php';
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Personnel</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add</button>
 								</div>
 							</div>
 						</div>
@@ -84,34 +95,36 @@ include 'include/topbar.php';
 								</div>
 							</div>
 						</div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th class="col-md-1">No.</th>
-									<th>Personnel</th>
-									<th>Work Center</th>
-									<th class="col-md-1">Edit</th>
-									<th class="col-md-1">Delete</th>
-								</tr>
-							</thead>
-							<tbody>
-								<?php
-								$i=1;
-								foreach ($getPersonnelName as $row) : ?>
-								<tr>
-									<th class="col-md-1" scope="row"><?=$i++;?></th>
-									<td><?=$row->PersonnelName;?></td>
-									<td><?=$row->GroupName;?></td>
-									<td class="col-md-1">
-										<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
-									</td>
-									<td class="col-md-1">
-										<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></button>
-									</td>
-								</tr>
-								<?php endforeach; ?>
-							</tbody>
-						</table>
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="col-md-1">No.</th>
+										<th>Personnel</th>
+										<th>Work Center</th>
+										<th class="col-md-1">Edit</th>
+										<th class="col-md-1">Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									$i=1;
+									foreach ($getPersonnelName as $row) : ?>
+									<tr>
+										<th class="col-md-1" scope="row"><?=$i++;?></th>
+										<td><?=$row->PersonnelName;?></td>
+										<td><?=$row->GroupName;?></td>
+										<td class="col-md-1">
+											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
+										</td>
+										<td class="col-md-1">
+											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></button>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -163,11 +176,14 @@ include 'include/topbar.php';
 								<?php endforeach; ?>
 							</select>
 						</div>
+						<div class="form-group">
+							<p><em>All fields marked with an asterisk (*) are required.</em></p>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
 					echo form_submit("loginSubmit","Save"," class='btn btn-success'");
 					echo form_close();
@@ -194,17 +210,15 @@ include 'include/topbar.php';
 					<input type="hidden" value="add-personnel" name="access">
 					<input type="hidden" class="form-control" value="<?=$row->PersonnelName;?>" name="PersonnelName">
 					<p>Are you sure to delete <strong><?=$row->PersonnelName;?></strong>?<p>
-
 				</div>
-
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
 					echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
 					echo form_close();
 				?>
-				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -252,16 +266,14 @@ include 'include/topbar.php';
 								<?php endforeach; ?>
 							</select>
 						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<p><em>All fields marked with an asterisk (*) are required.</em></p>
+						<div class="form-group">
+							<p><em>All fields marked with an asterisk (*) are required.</em></p>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
 					echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
 					echo form_close();

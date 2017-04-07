@@ -1,8 +1,29 @@
 <?php
 include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/topbar.php'; 
 ?>
+
+<nav class="navbar navbar--blue navbar-static-top">
+	<div class="container-fluid">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="navbar-left">
+				<ul class="navbar-breadcrumbs list-inline">
+					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
+					<li>/</li>
+					<li>Work Center</li>
+				</ul>
+			</div>
+	   	 	<ul class="nav navbar-nav navbar-right">
+	   	 		<li class="dropdown">
+	   	 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <span class="caret"></span></a>
+	   	 			<ul class="dropdown-menu">
+	   	 				<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
+	   	 			</ul>
+	   	 		</li>
+	   	 	</ul>
+   	 	</div>
+	</div>
+</nav>
 
 <div class="content">
 	<div class="container-fluid">
@@ -25,26 +46,16 @@ include 'include/topbar.php';
 			<?php }} else{}?>
 				</div>
 			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<ol class="breadcrumb">
-						<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
-						<li><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
-						<li class="active">Work Centers</li>
-					</ol>
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-8">
-								<h1 class="page-title">Work Centers</h1>
+								<h1 class="page-title">Work Center</h1>
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Work Center</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add</button>
 								</div>
 							</div>
 						</div>
@@ -114,28 +125,28 @@ include 'include/topbar.php';
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Update Personnel Group Form</h4>
+				<h4 class="modal-title" id="myModalLabel">Edit Work Center</h4>
 			</div>
 			<?php echo form_open("ppeims/update_personnel_group");?>	
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" value="add-group" name="access">
 					<input type="hidden" value="<?php echo $row->G_No;?>" name="G_No">
-					<label for="ename">Personnel Group Name</label>
+					<label for="ename">Work Center Name*</label>
 					<input type="text" class="form-control" value="<?php echo $row->GroupName;?>" name="GroupName">
 				</div>
 				<div class="form-group">
 					<div class="form-group">
-						<label for="edescription">Personnel Group Description</label>
+						<label for="edescription">Description</label>
 						<textarea name="Description" cols="30" rows="5" class="form-control"><?php echo $row->Description;?></textarea>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php //registration button
 							
-								echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
+								echo form_submit("loginSubmit","Save"," class='btn btn-success'");
 								echo form_close();
 						?>
 				</div>
@@ -151,7 +162,7 @@ include 'include/topbar.php';
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+				<h4 class="modal-title" id="myModalLabel">Delete Work Center</h4>
 			</div>
 			<?php echo form_open("ppeims/delete_personnel_group");?>	
 			<div class="modal-body">
@@ -159,17 +170,14 @@ include 'include/topbar.php';
 					<input type="hidden" value="<?php echo $row->G_No;?>" name="G_No">
 					<input type="hidden" value="add-group" name="access">
 					<input type="hidden" class="form-control" value="<?php echo $row->GroupName;?>" name="GroupName">
-					<p>Are you sure to delete Group Name : 
-					<code style="background-color:#FFFFFF;font-size:12px;font-weight:bold;"><?php echo $row->GroupName;?></code> ?<p>
-					
+					<p>Are you sure you want to delete <strong><?php echo $row->GroupName;?></strong>?</p>
 				</div>
-			
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php //registration button
 							
-								echo form_submit("loginSubmit","OK"," class='btn btn-danger'");
+								echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
 								echo form_close();
 						?>
 				</div>
@@ -184,24 +192,27 @@ include 'include/topbar.php';
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add Personnel Group Form</h4>
+				<h4 class="modal-title" id="myModalLabel">Add Work Center</h4>
 			</div>
 			<?php echo form_open("ppeims/new_personnel_group");?>	
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" value="add-group" name="access">
-					<label for="ename">Personnel Group Name</label>
+					<label for="ename">Work Center Name*</label>
 					<input type="text" class="form-control" name="GroupName">
 				</div>
 				<div class="form-group">
 					<div class="form-group">
-						<label for="edescription">Personnel Group Description</label>
+						<label for="edescription">Description</label>
 						<textarea name="Description" cols="30" rows="5" class="form-control"></textarea>
 					</div>
 				</div>
+				<div class="form-group">
+					<p><em>All fields marked with an asterisk (*) are required.</em></p>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					<?php 
 						echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
 						echo form_close();

@@ -1,12 +1,32 @@
 <?php
 include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/topbar.php'; 
 ?>
+
+<nav class="navbar navbar--blue navbar-static-top">
+	<div class="container-fluid">
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="navbar-left">
+				<ul class="navbar-breadcrumbs list-inline">
+					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
+					<li>/</li>
+					<li>Account</li>
+				</ul>
+			</div>
+	   	 	<ul class="nav navbar-nav navbar-right">
+	   	 		<li class="dropdown">
+	   	 			<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <span class="caret"></span></a>
+	   	 			<ul class="dropdown-menu">
+	   	 				<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
+	   	 			</ul>
+	   	 		</li>
+	   	 	</ul>
+   	 	</div>
+	</div>
+</nav>
 
 <div class="content">
 	<div class="container-fluid">
-
 		<section class="section">
 			<div class="row">
 				<div class="col-md-12">
@@ -16,7 +36,7 @@ include 'include/topbar.php';
 					
 					<div class="alert alert-success alert-dismissable" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<strong>Success !</strong> <?php echo $message;?>
+						<strong>Success!</strong> <?php echo $message;?>
 						<script>
 							var timer = setTimeout(function() {
 								window.location='<?=base_url();?>ppeims/emp_logout'
@@ -28,19 +48,11 @@ include 'include/topbar.php';
 					
 					<div class="alert alert-danger alert-dismissable" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<strong>Error !</strong> <?=$message;?>
+						<strong>Error!</strong> <?=$message;?>
 					</div>
 					
 					<?php endif; ?>
 				<?php endif; ?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<ol class="breadcrumb">
-						<li><a href="<?=base_url();?>ppeims">Dashboard</a></li>
-						<li class="active">Account Settings</li>
-					</ol>
 				</div>
 			</div>
 			<div class="row">
@@ -50,7 +62,6 @@ include 'include/topbar.php';
 					</div>
 				</div>
 			</div>
-		
 			<?php foreach ($getAdmin as $row) : ?>
 			<div class="row">
 				<div class="col-md-8">
@@ -62,7 +73,7 @@ include 'include/topbar.php';
 								</div>
 								<div class="col-sm-6">
 									<div class="text-right">
-										<a href="<?php echo base_url();?>ppeims/edit_account" class="btn btn-primary">Edit Profile</a>
+										<a href="<?php echo base_url();?>ppeims/edit_account" class="btn btn-success">Edit Profile</a>
 									</div>
 								</div>
 							</div>
@@ -120,7 +131,7 @@ include 'include/topbar.php';
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 										<h4 class="modal-title" id="myModalLabel">Change Password</h4>
 									</div>
-									<?=form_open("ppeims/update_account_password");?>
+									<?php echo form_open("ppeims/update_account_password"); ?>
 										<input type="hidden" name="access" value="add-account">
 										<input type="hidden" name="A_No" value="<?=$row->A_No;?>">
 										<input type="hidden" name="Username" value="<?=$row->Username;?>">
@@ -145,9 +156,9 @@ include 'include/topbar.php';
 										
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-									<?=form_submit("loginSubmit","Save Changes"," class='btn btn-success'");?>
+									<?php echo form_submit("loginSubmit","Save"," class='btn btn-primary'"); ?>
 									</div>
-									<?=form_close();?>
+									<?php echo form_close(); ?>
 								</div>
 							</div>
 						</div>
