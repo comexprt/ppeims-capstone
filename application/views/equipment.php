@@ -99,7 +99,7 @@ include 'include/sidebar.php';
 									<tr>
 										<th class="col-md-1" scope="row"><?=$i++;?></th>
 										<td><?=$row->Particulars;?></td>
-										<td>pcs</td>
+										<td><?=$row->Unit;?></td>
 										<td><?=$row->Description;?></td>
 										<td class="col-md-1">
 											<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>update" class="btn btn-success btn-xs">
@@ -153,9 +153,10 @@ include 'include/sidebar.php';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="unit">Unit*</label>
-							<select id="unit" class="form-control">
-								<option selected>pcs</option>
-								<option>pairs</option>
+							<select id="unit"  name="Unit" class="form-control">
+								<option selected value="pcs">pcs</option>
+								<option value="pairs">pairs</option>
+								<option value="set">set</option>
 							</select>
 						</div>
 					</div>

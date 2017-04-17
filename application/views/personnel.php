@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false){
+				  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable" role="alert">
@@ -84,12 +84,10 @@ include 'include/sidebar.php';
 											Filter by Work Center <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu">
-											<li><a href="#">All</a></li>
-											<li><a href="#">Agus 6 HEP (Maintenance)</a></li>
-											<li><a href="#">Agus 7 HEP (Technical)</a></li>
-											<li><a href="#">Agus 7 HEP (Maintenance)</a></li>
-											<li><a href="#">Maintenance</a></li>
-											<li><a href="#">Office of the Plant Manager</a></li>
+											<li><a href="<?php echo base_url();?>ppeims/filter_work_center/All">All</a></li>
+											<?php foreach($getGroupName as $row){?>
+											<li><a href="<?php echo base_url();?>ppeims/filter_work_center/<?= $row->GroupName; ?>"><?= $row->GroupName; ?></a></li>
+											<?php } ?>
 										</ul>
 									</div>
 								</div>
@@ -102,6 +100,7 @@ include 'include/sidebar.php';
 										<th class="col-md-1">No.</th>
 										<th>Personnel</th>
 										<th>Work Center</th>
+										<th class="col-md-1">Issued</th>
 										<th class="col-md-1">Edit</th>
 										<th class="col-md-1">Delete</th>
 									</tr>
@@ -114,6 +113,9 @@ include 'include/sidebar.php';
 										<th class="col-md-1" scope="row"><?=$i++;?></th>
 										<td><?=$row->PersonnelName;?></td>
 										<td><?=$row->GroupName;?></td>
+										<td class="col-md-1">
+													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+										</td>
 										<td class="col-md-1">
 											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
 										</td>
@@ -283,6 +285,73 @@ include 'include/sidebar.php';
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>Issued Items History</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										
+										<th>Issuance No.</th>
+										<th>Date Received</th>
+										<th>Particular</th>
+										<th>Issued</th>
+										<th>Issued By</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										
+										<td>088</td>
+										<td>02-22-17</td>
+										<td>Hard Hat (Blue)</td>
+										<td>2 pcs</td>
+										<td>Rolando Lemence</td>
+									</tr>
+									<tr>
+									
+										<td>050</td>
+										<td>02-01-17</td>
+										<td>Hard Hat (Yellow)</td>
+										<td>1 pcs</td>
+										<td>Rolando Lemence</td>
+									</tr>
+									<tr>
+										
+										<td>022</td>
+										<td>01-22-17</td>
+										<td>Protective Eyewear</td>
+										<td>1 pcs</td>
+										<td>Rolando Lemence</td>
+									</tr>
+									<tr>
+									
+										<td>011</td>
+										<td>10-22-16</td>
+										<td>Face Shield</td>
+										<td>3 pcs</td>
+										<td>Rolando Lemence</td>
+									</tr>
+							
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <?php 
 include 'include/footer.php';

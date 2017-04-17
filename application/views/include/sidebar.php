@@ -17,6 +17,7 @@
 			<li><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/Equipment_Batch">Equipment Batch</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/issuance">Equipment Issuance</a></li>
+			<li><a href="<?php echo base_url();?>ppeims/Inventory_Report">Inventory Report</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/manage_account">Account Settings</a></li>
 		</ul>
 	</div>
