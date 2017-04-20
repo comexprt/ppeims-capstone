@@ -111,7 +111,14 @@ include 'include/sidebar.php';
 									foreach ($getPersonnelName as $row) : ?>
 									<tr>
 										<th class="col-md-1" scope="row"><?=$i++;?></th>
-										<td><?=$row->PersonnelName;?></td>
+										<td>
+										<?php 
+											$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+										
+										?>
+										</td>
 										<td><?=$row->GroupName;?></td>
 										<td class="col-md-1">
 													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
@@ -148,25 +155,31 @@ include 'include/sidebar.php';
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
+										<?php 
+											$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											
+										
+										?>
 							<input type="hidden" value="add-personnel" name="access">
 							<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 							<label for="first-name">First Name*</label>
-							<input type="text" class="form-control" id="first-name" value="<?=$row->PersonnelName;?>" name="PersonnelName">
+							<input type="text" class="form-control" id="first-name" value="<?=$PersonnelName[0];?>" name="Fname">
 						</div>
 					</div>
 					<div class="col-md-4">
-						<label for="last-name">Last Name*</label>
-						<input type="text" class="form-control" id="last-name">
+						<label for="middle-name">Middle Name*</label>
+						<input type="text" class="form-control" id="middle-name" name="Mname" value="<?=$PersonnelName[1];?>">
 					</div>
 					<div class="col-md-4">
-						<label for="middle-name">Middle Name*</label>
-						<input type="text" class="form-control" id="middle-name">
+						<label for="last-name">Last Name*</label>
+						<input type="text" class="form-control" id="last-name" value="<?=$PersonnelName[2];?>" name="Lname">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="work-center">Work Center</label>
+							<label for="work-center">Work Center*</label>
 							<select class="form-control" id="work-center" name="G_No">
 								<option value="<?=$row->G_No;?>"><?=$row->GroupName;?></option>
 								<?php
@@ -211,7 +224,13 @@ include 'include/sidebar.php';
 					<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 					<input type="hidden" value="add-personnel" name="access">
 					<input type="hidden" class="form-control" value="<?=$row->PersonnelName;?>" name="PersonnelName">
-					<p>Are you sure to delete <strong><?=$row->PersonnelName;?></strong>?<p>
+					<p>Are you sure to delete <strong style="text-transform:capitalize;">
+					<?php 
+					 $PersonnelName=explode ("-",$row->PersonnelName);
+					 $Mname=$PersonnelName[1];
+					 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+					?></strong>?
+					<p>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -241,28 +260,28 @@ include 'include/sidebar.php';
 						<div class="form-group">
 							<input type="hidden" value="add-personnel" name="access">
 							<label for="first-name">First Name*</label>
-							<input type="text" class="form-control" id="first-name" name="PersonnelName">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="last-name">Last Name*</label>
-							<input type="text" class="form-control" id="last-name" name="last-name">
+							<input type="text" class="form-control" id="first-name" name="Fname" required>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="middle-name">Middle Name*</label>
-							<input type="text" class="form-control" id="middle-name" name="middle-name">
+							<input type="text" class="form-control" id="middle-name" name="Mname" required>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="last-name">Last Name*</label>
+							<input type="text" class="form-control" id="last-name" name="Lname" required>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="work-center">Group</label>
-							<select class="form-control" id="work-center" name="G_No">
-								<option value="" disabled selected>Select a group</option>
+							<label for="work-center">Work Center*</label>
+							<select class="form-control" id="work-center" name="G_No" required>
+								<option value="" disabled selected>Choose a Work Center</option>
 								<?php foreach ($getGroupName as $row) : ?>
 									<option value="<?=$row->G_No;?>"><?=$row->GroupName;?></option>
 								<?php endforeach; ?>

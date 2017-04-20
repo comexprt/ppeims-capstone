@@ -33,7 +33,8 @@ class Model_query extends CI_Model
 		
 		public function getInventoryReport($data){ $query = $this->db->query("SELECT * FROM `inventory_report_details` Where irid = '".$data."' ORDER BY Particular");$result = $query->result();return $result;}
 		
-		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE 1 ORDER BY GroupName,PersonnelName");$result = $query->result();return $result;}
+		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE 1 ORDER BY PersonnelName");$result = $query->result();return $result;}
+		
 		public function getSpecificPersonnelName($data){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE GroupName = '".$data."' ORDER BY PersonnelName");$result = $query->result();return $result;}
 		
 		public function getLastTransaction(){
@@ -46,6 +47,10 @@ class Model_query extends CI_Model
 			
 		public function getLastIssuance(){
 			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno where 1 ORDER BY issuance.isno DESC LIMIT 1");
+			$result = $query->result();return $result;}
+		
+		public function getLastBatch(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No where 1 ORDER BY updated_transaction.Tr_No DESC LIMIT 1");
 			$result = $query->result();return $result;}
 			
 		public function getLastIssuanceS($data){
@@ -61,8 +66,17 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;}
 		
 		
+		public function getLastBatchData($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No = '".$data."'");
+			$result = $query->result();return $result;}
+		
+		
 		public function getLastIssuanceItemData($data){
 			$query = $this->db->query("SELECT * FROM `personnel_issued` WHERE isno = '".$data."'");
+			$result = $query->result();return $result;}
+		
+		public function getLastBatchItemData($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction_Details` WHERE Tr_No = '".$data."'");
 			$result = $query->result();return $result;}
 		
 		public function getPersonnelIssuanceItemData($data){
@@ -121,8 +135,18 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;
 		}
 		
+		public function getbatch_last(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE 1 ORDER BY Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
 		public function getIssuance_lastS($data){
 			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno='".$data."' LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
+		public function getbatch_lastS($data){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No='".$data."' LIMIT 1");
 			$result = $query->result();return $result;
 		}
 		
@@ -131,8 +155,18 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;
 		}
 		
+		public function getlast_batch(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE 1 ORDER BY Tr_No DESC LIMIT 1");
+			$result = $query->result();return $result;
+		}
+		
 		public function getlist_issuance(){
-			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 1 ORDER BY status,date_modified DESC");
+			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 1 ORDER BY status DESC,date_modified DESC");
+			$result = $query->result();return $result;
+		}
+		
+		public function getlist_batch(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 ORDER BY status DESC,Tr_Date DESC");
 			$result = $query->result();return $result;
 		}
 		
@@ -150,6 +184,7 @@ class Model_query extends CI_Model
 		public function deleteGroupName($data){$this->db->where('G_No', $data);$this->db->delete('Group');}
 		
 		public function deleteIssuancePersonnel($data){$this->db->where('pino', $data);$this->db->delete('personnel_issued');}
+		public function deleteIssuancePersonnelItem($data){$this->db->where('iino',$data);$this->db->delete('item_issued');}
 		
 		public function delete_issuance($data){$this->db->where('isno', $data);$this->db->delete('issuance');}
 	
@@ -173,8 +208,44 @@ class Model_query extends CI_Model
 		public function addInventoryReport($data){$this->db->insert("inventory_report",$data);}
 		public function addInventoryReportDetails($data){$this->db->insert("inventory_report_details",$data);}
 		
+		public function getIssuanceDistinctItem($data){
+			$query = $this->db->query("SELECT item_issued.EI_No, item_issued.particulars FROM personnel_issued JOIN item_issued on personnel_issued.pino = item_issued.pino  WHERE personnel_issued.isno = '".$data."' group BY item_issued.EI_No ORDER BY item_issued.EI_No");
+			$result = $query->result();return $result;}
+			
+		public function getIssuanceDistinctItemInfo($data){
+			$query = $this->db->query("SELECT item_issued.EI_No, personnel_issued.personnel_name, personnel_issued.work_center, item_issued.issued, item_issued.date_received, equipement_inventory.Unit FROM personnel_issued JOIN item_issued on personnel_issued.pino = item_issued.pino JOIN equipement_inventory on item_issued.EI_No = equipement_inventory.EI_No  WHERE personnel_issued.isno = '".$data."' ORDER BY item_issued.EI_No");
+			$result = $query->result();return $result;}
+		
 		public function getLastInventoryReport(){
 			$query = $this->db->query("SELECT * FROM `inventory_report` where 1 ORDER BY irid DESC LIMIT 1");
+			$result = $query->result();return $result;}
+		
+		public function getallitems(){
+			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 ORDER BY EI_No");
+			$result = $query->result();return $result;}
+		
+		public function getallissueditems(){
+			$query = $this->db->query("SELECT SUM(issued) as sum_issued, EI_No FROM item_issued group BY EI_No");
+			$result = $query->result();return $result;}
+		
+		public function getUpdatedStock(){
+			$query = $this->db->query("SELECT Stock, EI_No FROM `equipement_inventory`");
+			$result = $query->result();return $result;}
+		
+		public function getPendingCount(){
+			$query = $this->db->query("SELECT count(*) as countpending FROM `issuance` WHERE status = 2");
+			$result = $query->result();return $result;}
+		
+		public function getPendingCountb(){
+			$query = $this->db->query("SELECT count(*) as countpending FROM `updated_transaction` WHERE status = 2");
+			$result = $query->result();return $result;}
+		
+		public function getIssuedOnPersonnel($data){
+			$query = $this->db->query("SELECT sum(total_item_issued) as countissued FROM `personnel_issued` WHERE isno = '".$data."'");
+			$result = $query->result();return $result;}
+		
+		public function getitemsbatch($data){
+			$query = $this->db->query("SELECT count(*) as countissued FROM `updated_transaction_Details` WHERE Tr_No = '".$data."'");
 			$result = $query->result();return $result;}
 		
 		public function getInventoryReportInfo(){
@@ -197,6 +268,27 @@ class Model_query extends CI_Model
 		public function deleteInventoryReportDetails($data){
 			$query = $this->db->query("delete from inventory_report_details where irid = '".$data."' ");}
 		
+		public function complete_issuance($data){
+			$query = $this->db->query("update issuance set status = 1 where isno = '".$data."' ");}
+		
+		public function complete_inventory_report($data){
+			$query = $this->db->query("update inventory_report set status = 0 where irid = '".$data."' ");}
+		
+		public function adjust_issuance($data){
+			$query = $this->db->query("update issuance set status = 2 where isno = '".$data."' ");}
+		
+		public function updateIssuancePersonnelItem($data,$data1){
+			$query = $this->db->query("update equipement_inventory set Stock = Stock + '".$data."' where EI_No = '".$data1."' ");}
+		
+		public function removeitemsonbatch($data){
+			$query = $this->db->query("delete from updated_transaction_Details where Tr_D_No = '".$data."' ");}
+			
+			
+		public function updateBatchItem($data,$data1,$data2,$data3){
+			$query = $this->db->query("update updated_transaction_details set Added_S = '".$data."',Re_OrderPt = '".$data1."',Expiration_Date = '".$data2."' where Tr_D_No = '".$data3."' ");}
+	
+		public function CompleteBatchItem($data,$data1){
+			$query = $this->db->query("update updated_transaction set Status = 2 ,Tr_Date = '".$data."' where Tr_No = '".$data1."' ");}
 		
 		public function updateUpdateTransactionDetails($data1,$data2){$this->db->where('Tr_D_No', $data1);$this->db->update('updated_transaction_Details', $data2);}
 		public function deleteUpdateTransactionDetails($data){$this->db->where('Tr_D_No', $data);$this->db->delete('updated_transaction_Details');}

@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h1 class="page-title">Edit Issuance</h1>
+								<h1 class="page-title">Adjust Issuance</h1>
 							</div>
 						</div>
 					</div>
@@ -39,7 +39,7 @@ include 'include/sidebar.php';
 					<div class="row">
 					<div class="col-md-12">
 					<?php if($message){
-						 if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'Adjusting') !== false){
+						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'Adjusting') !== false){
 					?>
 							<!-- Alert for success -->
 							<div class="alert alert-success alert-dismissable" role="alert">
@@ -115,7 +115,7 @@ include 'include/sidebar.php';
 													<a href="<?php echo base_url();?>ppeims/update_issuance_item/<?= $row->pino;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> <span class="sr-only">Add</span></a>
 												</td>
 												<td>
-													<a  href="<?php echo base_url();?>ppeims/delete_issuance_personnel/<?= $LastSId; ?>/<?= $row->pino;?>" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
+													<a  href="<?php echo base_url();?>ppeims/delete_issuance_personnel/<?= $LastSId; ?>/<?= $row->pino;?>" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i> <span class="sr-only">Remove</span></a>
 												</td>
 											<?php } ?>
 												
@@ -127,14 +127,7 @@ include 'include/sidebar.php';
 								<div class="panel-footer">
 									<div class="row">
 										<div class="col-md-6">
-										<?php foreach ($getIssuedOnPersonnel as $row){ 
-											$countissued = $row->countissued;
-											
-										}
-										if ($countissued >= 1){}else{
-										?>
 											<button type="button" data-toggle="modal" data-target="#deleteModal" class="btn btn-danger">Delete</button>
-										<?php }?>
 										</div>
 										<div class="col-md-6">
 											<div class="text-right">

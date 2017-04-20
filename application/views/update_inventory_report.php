@@ -114,6 +114,7 @@ include 'include/sidebar.php';
 											<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteReportModal">Delete</button>
 										</div>
 										<div class="col-md-6 text-right">
+										
 											<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">
 											<i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
 										</div>

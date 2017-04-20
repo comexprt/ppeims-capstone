@@ -230,12 +230,12 @@ include 'include/sidebar.php';
 							</thead>
 							<tbody>
 							<?php 
-								$i++;
+								$count = 1;
 								foreach ($getInventoryReportInfo as $row1) {
 								if ($row->irid != $row1->irid){}else{
 							?>
 								<tr>
-									<th class="col-md-1" scope="row"><?=$i++?></th>
+									<th class="col-md-1" scope="row"><?=$count++;?></th>
 									<td><?=$row1->Particular;?></td>
 									<td><?=$row1->In_Stock;?></td>
 									<td class="col-md-4"><?=$row1->Remarks;?></td>

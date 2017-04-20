@@ -49,7 +49,12 @@ class ppeims extends CI_Controller {
 		if($this->session->userdata('logged_so')){
 		
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
-			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			$data['getallitems'] = $this->Model_query->getallitems();	
+			$data['getallissueditems'] = $this->Model_query->getallissueditems();	
+			$data['getLastInventoryReport'] = $this->Model_query->getLastInventoryReport();
+			$data['getEquipment'] = $this->Model_query->getEquipmentName();
+			$data['getlast_issuance'] = $this->Model_query->getlast_issuance();	
 			$this->load->view('Homepage',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
@@ -151,8 +156,11 @@ class ppeims extends CI_Controller {
 		public function print_inventory_report_confirm(){
 		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
-			$this->Model_query->getInventoryReportStatus($id);			
-			$this->load->view('print-inventory-report-confirm');
+			$data['id'] = $id;
+			 $this->Model_query->complete_inventory_report($id);		
+			$data['getInventoryReport'] = $this->Model_query->getInventoryReport($id);		
+					
+			$this->load->view('print-inventory-report-confirm',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function issuance(){
@@ -163,9 +171,25 @@ class ppeims extends CI_Controller {
 			
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
+			$data['getPendingCount'] = $this->Model_query->getPendingCount();			
 			$data['getlast_issuance'] = $this->Model_query->getlast_issuance();			
 			$data['getlist_issuance'] = $this->Model_query->getlist_issuance();			
 			$this->load->view('issuance',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
+		
+		public function batch_equipment(){
+		if($this->session->userdata('logged_so')){
+		$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			
+			if ($action =="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
+			
+			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
+			$data['getPendingCount'] = $this->Model_query->getPendingCountb();			
+			$data['getlast_issuance'] = $this->Model_query->getlast_batch();			
+			$data['getlist_issuance'] = $this->Model_query->getlist_batch();			
+			$this->load->view('batch-equipement',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
 			
@@ -178,8 +202,8 @@ class ppeims extends CI_Controller {
 				$message="New Equipment Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/new_entry');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
-	
-		public function update_issuance(){
+			
+	public function update_issuance(){
 		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
@@ -204,12 +228,77 @@ class ppeims extends CI_Controller {
 				$LastSId = $Id_array ['isno'];
 			// echo $LastSId;
 			$data['LastSId'] = $LastSId;
+			$data['getIssuedOnPersonnel'] = $this->Model_query->getIssuedOnPersonnel($LastSId);
 			$data['getLastIssuanceData'] = $this->Model_query->getLastIssuanceData($LastSId);
+			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();
 			$data['getLastIssuanceItemData'] = $this->Model_query->getLastIssuanceItemData($LastSId);
 		
 			$this->load->view('issuance_personnel',$data);
 		}else{redirect('ppeims/InvalidURL');}}
+	
+	public function addBatch1(){
+		if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$Cur_date = date("Y-m-d");
+				$newRow=array( "Tr_Date" => '0000-00-00',"Pb" => '0',"Status" => 3);
+				$this->Model_query->addbatch($newRow);
+				
+				$message="New Equipment Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_batch/new_entry');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+	
+		public function update_batch(){
+		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+			$id = $this->uri->segment(3);
+			
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
+			//echo $id;
+			if ($action=="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
+			$data['getallitems'] = $this->Model_query->getallitems();
+			
+			if ($id == "new_entry"){
+				$data['getLastTransaction'] = $this->Model_query->getLastBatch();
+				$result = $this->Model_query->getbatch_last();
+				
+			}else{
+				$data['getLastTransaction'] = $this->Model_query->getupdated_transactionDate($id);
+				$result = $this->Model_query->getbatch_lastS($id);
+				
+			}
+				if($result){ $Id_array = array(); foreach($result as $row){$Id_array = array( 'Tr_No' => $row->Tr_No);}}else{$Id_array = array();$Id_array = array( 'Tr_No' =>0);}
+				$LastSId = $Id_array ['Tr_No'];
+			// echo $LastSId;
+			$data['LastSId'] = $LastSId;
+			$data['getIssuedOnPersonnel'] = $this->Model_query->getitemsbatch($LastSId);
+			$data['getLastIssuanceData'] = $this->Model_query->getLastBatchData($LastSId);
+			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();
+			$data['getLastIssuanceItemData'] = $this->Model_query->getLastBatchItemData($LastSId);
 		
+			$this->load->view('batch-item',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
+		public function view_issuance(){
+		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+			$id = $this->uri->segment(3);
+			$id1 = $this->uri->segment(4);
+			
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
+			
+			$LastSId = $id;
+			$LastSId1 = $id1;
+			$data['LastSId'] = $LastSId;
+			$data['LastSId1'] = $LastSId1;
+			$data['getIssuanceDistinctItem'] = $this->Model_query->getIssuanceDistinctItem($LastSId);
+			$data['getIssuanceDistinctItemInfo'] = $this->Model_query->getIssuanceDistinctItemInfo($LastSId);
+		
+			$this->load->view('view-issuance-item',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
+			
 		public function delete_issuance_personnel(){
 		if($this->session->userdata('logged_so')){
 				$id = $this->uri->segment(3);
@@ -220,6 +309,24 @@ class ppeims extends CI_Controller {
 				redirect('ppeims/update_issuance/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
+		public function complete_issuance(){
+		if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				
+				$this->Model_query->complete_issuance($id);
+				$message="Issuance Has been completed"; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/issuance');
+			}else{redirect('ppeims/InvalidURL');}}
+		
+		public function adjust_issuance(){
+		if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				
+				$this->Model_query->adjust_issuance($id);
+				$message="Adjusting Issuance ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_issuance/'.$id);
+			}else{redirect('ppeims/InvalidURL');}}
+		
 		public function delete_issuance(){
 		if($this->session->userdata('logged_so')){
 				$id = $this->uri->segment(3);
@@ -227,6 +334,19 @@ class ppeims extends CI_Controller {
 				$this->Model_query->delete_issuance($id);
 				$message="Issuance has been successfully deleted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/issuance');
+			}else{redirect('ppeims/InvalidURL');}}
+		
+		public function delete_issuance_personnel_item(){
+		if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				$id1 = $this->uri->segment(4);
+				$id2 = $this->uri->segment(5);
+				$id3 = $this->uri->segment(6);
+
+				$this->Model_query->deleteIssuancePersonnelItem($id3);
+				$this->Model_query->updateIssuancePersonnelItem($id1,$id2);
+				$message="Item has been removed ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_issuance_item/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function update_issuance_item(){
@@ -242,6 +362,7 @@ class ppeims extends CI_Controller {
 			$data['LastSId'] = $id;
 			$data['getPersonnelIssuanceItemData'] = $this->Model_query->getPersonnelIssuanceItemData($id);
 			$data['getPersonnelIssuanceISNO'] = $this->Model_query->getPersonnelIssuanceISNO($id);
+			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();
 			$data['getEquipment'] = $this->Model_query->getEquipment();
 			$this->load->view('issuance_personnel_item',$data);
 		}else{redirect('ppeims/InvalidURL');}}
@@ -313,13 +434,67 @@ class ppeims extends CI_Controller {
 				$arrlength = count($item_array);
 					for($x = 0; $x < $arrlength; $x++) 
 					{
-						$separate_name=explode('-',$item_array[$x]);
+						$separate_name=explode('//',$item_array[$x]);
 						$newRow=array( "personnel_name" => $separate_name[0],"work_center" => $separate_name[1],"total_item_issued" => 0,"isno" => $LastSId);
 						$this->Model_query->addPersonnelIssued($newRow);
 					}
 				$message="New Personnel on Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/'.$LastSId);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+		
+	public function addBatchItem(){
+	if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$LastSId=$this->input->post('LastSId');
+				$item_array=$this->input->post('items');
+				$arrlength = count($item_array);
+					for($x = 0; $x < $arrlength; $x++) 
+					{
+						$separate_name=explode('//',$item_array[$x]);
+						$newRow=array( "Particulars" => $separate_name[0],"Added_S" => 0,"Subtracted_S" => 0,"Unit" => $separate_name[3],"Re_OrderPt" => $separate_name[2],
+										"Expiration_Date" => '0000-00-00',"Remarks" => '',"Tr_No" => $LastSId,"EI_No" => $separate_name[1]);
+						$this->Model_query->addUI($newRow);
+					}
+				$message="New Equipment on Batch has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_batch/'.$LastSId);
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+		
+	public function updateBatchItem(){
+	if($this->session->userdata('logged_so')){
+			if ($this->input->post('access') == "add-ui"){
+				$LastSId=$this->input->post('LastSId');
+				$Tr_D_No=$this->input->post('Tr_D_No');
+				$Added_S=$this->input->post('Added_S');
+				$Re_OrderPt=$this->input->post('Re_OrderPt');
+				$Expiration_Date=$this->input->post('Expiration_Date');
+				
+				
+				$this->Model_query->updateBatchItem($Added_S,$Re_OrderPt,$Expiration_Date,$Tr_D_No);
+				$message="Equipment on Batch has been Updated .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_batch/'.$LastSId);
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+		
+	public function removeBatchItem(){
+	if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				$id1 = $this->uri->segment(4);
+				
+				
+				$this->Model_query->removeitemsonbatch($id1);
+				$message="Equipment on Batch has been remove ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_batch/'.$id);
+			}else{redirect('ppeims/InvalidURL');}}
+		
+	public function CompleteBatchItem(){
+	if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				
+				 $Cur_date =  date('Y-m-d',time());
+				 echo $Cur_date;
+				$this->Model_query->CompleteBatchItem($Cur_date,$id);
+				$message="Equipment on Batch has been Completed .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/batch_equipment');
+			}else{redirect('ppeims/InvalidURL');}}
 		
 	
 	
@@ -443,29 +618,40 @@ class ppeims extends CI_Controller {
 	public function new_personnel(){
 		if($this->session->userdata('logged_so')){
 			if ($this->input->post('access') == "add-personnel"){
-				$PersonnelName = $this->input->post('PersonnelName');
+				
+				$Fname = $this->input->post('Fname');
+				$Mname = $this->input->post('Mname');
+				$Lname = $this->input->post('Lname');
+				$PersonnelName = "$Fname-$Mname-$Lname";
+					
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->addPersonnelName($newRow);
-				$message="$PersonnelName has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$message="$Lname, $Fname $Mname[0]. has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function update_personnel(){
 		if($this->session->userdata('logged_so')){
 			if ($this->input->post('access') == "add-personnel"){
-				$PersonnelName = $this->input->post('PersonnelName');$P_No = $this->input->post('P_No');
+				$Fname = $this->input->post('Fname');
+				$Mname = $this->input->post('Mname');
+				$Lname = $this->input->post('Lname');
+				$PersonnelName = "$Fname-$Mname-$Lname";$P_No = $this->input->post('P_No');
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->updatePersonnelName($P_No,$newRow);
-				$message="$PersonnelName has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$message="$PersonnelName has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function delete_personnel(){
 		if($this->session->userdata('logged_so')){
 			if ($this->input->post('access') == "add-personnel"){
-				$PersonnelName = $this->input->post('PersonnelName');$P_No = $this->input->post('P_No');
+				$P_No = $this->input->post('P_No');
 				$this->Model_query->deletePersonnelName($P_No);
-				$message="$PersonnelName has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				$PersonnelName=explode ("-",$this->input->post('PersonnelName'));
+				 $Mname=$PersonnelName[1];
+				 
+				$message="$PersonnelName[0] $Mname[0]. $PersonnelName[2] has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel Function End --
