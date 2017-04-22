@@ -199,6 +199,10 @@ strong, th, label, span.label {
 	border-bottom: 1px solid #eee;
 }
 
+.max-height-500 {
+	max-height: 500px;
+}
+
 .max-height-400 {
 	max-height: 400px;
 }

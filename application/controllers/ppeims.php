@@ -117,7 +117,7 @@ class ppeims extends CI_Controller {
 					}
 				
 				
-				$message="Inventory Report Has been created .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An inventory report has been created."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_inventory_report/'.$Lastirid);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -127,7 +127,7 @@ class ppeims extends CI_Controller {
 				
 				$this->Model_query->deleteInventoryReport($id);
 				$this->Model_query->deleteInventoryReportDetails($id);
-				$message="Inventory Report has been Deleted .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An inventory report has been deleted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/Inventory_Report');
 		}
 		else{redirect('ppeims/InvalidURL');}}
@@ -177,7 +177,7 @@ class ppeims extends CI_Controller {
 				$Remarks = $this->input->post('Remarks');
 				//echo $irdid."-".$irid."-".$Remarks;
 				$this->Model_query->addInventoryReportRemarks($Remarks,$irdid);
-				$message="Remarks has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="A remark has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_inventory_report/'.$irid);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		

@@ -34,11 +34,11 @@ include 'include/sidebar.php';
 				  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
 			?>
 					<!-- Alert for success -->
-					<div class="alert alert-success alert-dismissable" role="alert">
+					<div id="success-alert" class="alert alert-success alert-dismissable" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<strong>Success!</strong> <?=$message;?>
 					</div><?php }else{?>
-					<div class="alert alert-danger alert-dismissable" role="alert">
+					<div id="danger-alert" class="alert alert-danger alert-dismissable" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<strong>Success!</strong> <?=$message;?>
 					</div>
@@ -54,7 +54,7 @@ include 'include/sidebar.php';
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Personnel</button>
 								</div>
 							</div>
 						</div>

@@ -27,8 +27,8 @@ class Model_query extends CI_Model
 		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
 		
 		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where Username ='admin'");$result = $query->result();return $result;}
-		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY G_No");$result = $query->result();return $result;}
-		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY EI_No");$result = $query->result();return $result;}
+		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY GroupName");$result = $query->result();return $result;}
+		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
 		public function getEquipmentName(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
 		
 		public function getInventoryReport($data){ $query = $this->db->query("SELECT * FROM `inventory_report_details` Where irid = '".$data."' ORDER BY Particular");$result = $query->result();return $result;}
@@ -245,7 +245,7 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;}
 		
 		public function getallitems(){
-			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 ORDER BY EI_No");
+			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 ORDER BY Particulars");
 			$result = $query->result();return $result;}
 		
 		public function getallissueditems(){

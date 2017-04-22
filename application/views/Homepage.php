@@ -19,7 +19,7 @@ foreach ($getitemexpiredcount as $row){
 							<div class="row-header">
 								<div class="row">
 									<div class="col-md-8">
-										<h1 class="page-title">PPE Inventory <small><?php echo date('F d, Y',time()); ?></small></h1>
+										<h1 class="page-title">PPE Inventory <small>as of <?php echo date('F d, Y',time()); ?></small></h1>
 									</div>
 									
 								</div>
@@ -121,7 +121,7 @@ foreach ($getitemexpiredcount as $row){
 										</div>
 									</div>
 								</div>
-								<div class="table-responsive max-height-350">
+								<div class="table-responsive max-height-500">
 									<table class="table table-bordered">
 										<thead>
 											<tr>
