@@ -65,6 +65,10 @@ class Model_query extends CI_Model
 			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno WHERE issuance.isno = '".$data."'");
 			$result = $query->result();return $result;}
 		
+		public function getIssuanceData(){
+			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno WHERE 1");
+			$result = $query->result();return $result;}
+		
 		
 		public function getLastBatchData($data){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No = '".$data."'");

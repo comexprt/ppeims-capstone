@@ -302,6 +302,7 @@ class ppeims extends CI_Controller {
 			$data['LastSId'] = $LastSId;
 			$data['getIssuedOnPersonnel'] = $this->Model_query->getitemsbatch($LastSId);
 			$data['getLastIssuanceData'] = $this->Model_query->getLastBatchData($LastSId);
+			$data['getIssuanceData'] = $this->Model_query->getIssuanceData();
 			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();
 			$data['getLastIssuanceItemData'] = $this->Model_query->getLastBatchItemData($LastSId);
 		
