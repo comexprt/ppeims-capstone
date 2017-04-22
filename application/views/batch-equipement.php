@@ -10,7 +10,7 @@ include 'include/sidebar.php';
 				<ul class="navbar-breadcrumbs list-inline">
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
-					<li>Issuance</li>
+					<li>Batch</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -50,15 +50,15 @@ include 'include/sidebar.php';
 					</div>
 						<div class="row">
 							<div class="col-md-8">
-								<h1 class="page-title">Equipment Issuance</h1>
+								<h1 class="page-title">Equipment Batch</h1>
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
 								<?php foreach ($getlast_issuance as $lt): ?>
 
-									<?php if ($lt->status != 3): ?>
+									<?php if ($lt->Status != 3): ?>
 										
-									<?php echo form_open("ppeims/addIssuance"); ?>
+									<?php echo form_open("ppeims/addBatch1"); ?>
 										
 										<input type="hidden" value="add-ui" name="access">
 										<?php 
@@ -73,7 +73,7 @@ include 'include/sidebar.php';
 								
 									<?php else: ?>
 									
-										<a href="<?php echo base_url();?>ppeims/update_issuance/<?php echo "new_entry"?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
+										<a href="<?php echo base_url();?>ppeims/update_batch/<?php echo "new_entry"?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
 									
 									<?php endif; ?>
 								
@@ -90,9 +90,9 @@ include 'include/sidebar.php';
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-md-4">
-									<label for="search-batch" class="sr-only">Search Issuance</label>
+									<label for="search-batch" class="sr-only">Search Batch</label>
 									<div class="input-group">
-										<input type="search" id="search-batch" class="form-control" placeholder="Search issuance...">
+										<input type="search" id="search-batch" class="form-control" placeholder="Search Batch...">
 										<span class="input-group-btn">
 											<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
 										</span>
@@ -105,9 +105,8 @@ include 'include/sidebar.php';
 								<thead>
 									<tr>
 										<th>No.</th>
-										<th>Issuance</th>
-										<th>Total Personnel</th>
-										<th>Status</th>
+										<th>Batch</th>
+										
 										<th>Action</th>
 										<th>View</th>
 									</tr>
@@ -117,9 +116,9 @@ include 'include/sidebar.php';
 								$id = 1;
 								foreach($getlist_issuance as $row){?>
 										
-										<?php if ($row->status == 1){ ?>
+										<?php if ($row->Status == 1){ ?>
 										<tr>
-										<?php }elseif ($row->status == 2){ ?>
+										<?php }elseif ($row->Status == 2){ ?>
 										<tr class="warning">
 										<?php }else{ ?>
 										<tr class="success">
@@ -127,19 +126,18 @@ include 'include/sidebar.php';
 										
 										<th scope="row"><?php echo $id++; ?></th>
 										<td><?php 
-										if ($row->isno < 10){
-											echo "00".$row->isno;
+										if ($row->Tr_No < 10){
+											echo "00".$row->Tr_No;
 										}
-										elseif ($row->isno < 100 && $row->isno >= 10){
-											echo "0".$row->isno;
-										}else {echo $row->isno; }
+										elseif ($row->Tr_No < 100 && $row->Tr_No >= 10){
+											echo "0".$row->Tr_No;
+										}else {echo $row->Tr_No; }
 										
 										?></td>
-										<td><?php echo $row->total_personnel; ?></td>
+
 										
-										
-										<?php if ($row->status == 1){ ?>
-										<td><?php echo  date('F d, Y',strtotime($row->date_modified)); ?></td>
+										<?php if ($row->Status == 1){ ?>
+										<td><?php echo  date('F d, Y',strtotime($row->Tr_Date)); ?></td>
 										<td class="col-md-1">
 										<?php 
 										foreach ($getPendingCount as $row1){
@@ -148,31 +146,31 @@ include 'include/sidebar.php';
 										if ($countpending >= 1){ ?>
 										<a href="adjust-equipment-issuance-step-1.html" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php }else { ?>
-										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->isno;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="<?php echo base_url();?>ppeims/adjust_batch/<?=$row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php } ?>
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-default btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										
-										<?php }elseif ($row->status == 2){ ?>
+										<?php }elseif ($row->Status == 2){ ?>
 										<td><span class="label label-warning">Adjusting</span></td>
 										<td class="col-md-1">
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+											<a href="<?php echo base_url();?>ppeims/update_batch/<?=$row->Tr_No;?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-warning btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-warning btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										<?php }else{ ?>
 										<td><span class="label label-success">Pending</span></td>
 										<td class="col-md-1">
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+											<a href="<?php echo base_url();?>ppeims/update_batch/<?=$row->Tr_No;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-success btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										<?php } ?>
 										
@@ -190,6 +188,60 @@ include 'include/sidebar.php';
 	</div>
 </div>
 
+<?php foreach($getlist_issuance as $row){?> 
+<div class="modal fade" id="<?=$row->Tr_No;?>viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>Batch <?php 
+					if ($row->Tr_No < 10){
+											echo "00".$row->Tr_No;
+										}
+										elseif ($row->Tr_No < 100 && $row->Tr_No >= 10){
+											echo "0".$row->Tr_No;
+										}else {echo $row->Tr_No; }
+					?></h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th class="col-md-1">No.</th>
+												<th>Particulars</th>
+												<th>Added Stock</th>
+												<th>Threshold</th>
+												<th>Expiry</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php $i=1;
+								foreach ($getitemsbatchinfo as $row1) {
+								if ($row->Tr_No != $row1->Tr_No){}else{
+								?>
+									<tr>
+										<th scope="row"><?=$i++;?></th>
+										<td><?=$row1->Particulars;?>)</td>
+										<td><?=$row1->Added_S." ".$row1->Unit;?></td>
+										<td><?=$row1->Re_OrderPt." ".$row1->Unit;?></td>
+										<td><?=$row1->Expiration_Date;?></td>
+									</tr>
+						
+								<?php }} ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php } ?>
 <?php 
 include 'include/footer.php';
 

@@ -1,9 +1,9 @@
 <?php 
 include 'include/header.php';
 include 'include/sidebar.php';
-include 'include/navbar-top.php';
+include 'include/topbar.php';
 ?>
-		
+
 <div class="content">
 	<div class="container-fluid">
 

@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false){
+				  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable" role="alert">
@@ -84,12 +84,10 @@ include 'include/sidebar.php';
 											Filter by Work Center <span class="caret"></span>
 										</button>
 										<ul class="dropdown-menu">
-											<li><a href="#">All</a></li>
-											<li><a href="#">Agus 6 HEP (Maintenance)</a></li>
-											<li><a href="#">Agus 7 HEP (Technical)</a></li>
-											<li><a href="#">Agus 7 HEP (Maintenance)</a></li>
-											<li><a href="#">Maintenance</a></li>
-											<li><a href="#">Office of the Plant Manager</a></li>
+											<li><a href="<?php echo base_url();?>ppeims/filter_work_center/All">All</a></li>
+											<?php foreach($getGroupName as $row){?>
+											<li><a href="<?php echo base_url();?>ppeims/filter_work_center/<?= $row->GroupName; ?>"><?= $row->GroupName; ?></a></li>
+											<?php } ?>
 										</ul>
 									</div>
 								</div>
@@ -102,6 +100,7 @@ include 'include/sidebar.php';
 										<th class="col-md-1">No.</th>
 										<th>Personnel</th>
 										<th>Work Center</th>
+										<th class="col-md-1">Issued</th>
 										<th class="col-md-1">Edit</th>
 										<th class="col-md-1">Delete</th>
 									</tr>
@@ -112,8 +111,18 @@ include 'include/sidebar.php';
 									foreach ($getPersonnelName as $row) : ?>
 									<tr>
 										<th class="col-md-1" scope="row"><?=$i++;?></th>
-										<td><?=$row->PersonnelName;?></td>
+										<td>
+										<?php 
+											$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+										
+										?>
+										</td>
 										<td><?=$row->GroupName;?></td>
+										<td class="col-md-1">
+													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->P_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+										</td>
 										<td class="col-md-1">
 											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
 										</td>
@@ -146,25 +155,31 @@ include 'include/sidebar.php';
 				<div class="row">
 					<div class="col-md-4">
 						<div class="form-group">
+										<?php 
+											$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											
+										
+										?>
 							<input type="hidden" value="add-personnel" name="access">
 							<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 							<label for="first-name">First Name*</label>
-							<input type="text" class="form-control" id="first-name" value="<?=$row->PersonnelName;?>" name="PersonnelName">
+							<input type="text" class="form-control" id="first-name" value="<?=$PersonnelName[0];?>" name="Fname">
 						</div>
 					</div>
 					<div class="col-md-4">
-						<label for="last-name">Last Name*</label>
-						<input type="text" class="form-control" id="last-name">
+						<label for="middle-name">Middle Name*</label>
+						<input type="text" class="form-control" id="middle-name" name="Mname" value="<?=$PersonnelName[1];?>">
 					</div>
 					<div class="col-md-4">
-						<label for="middle-name">Middle Name*</label>
-						<input type="text" class="form-control" id="middle-name">
+						<label for="last-name">Last Name*</label>
+						<input type="text" class="form-control" id="last-name" value="<?=$PersonnelName[2];?>" name="Lname">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="work-center">Work Center</label>
+							<label for="work-center">Work Center*</label>
 							<select class="form-control" id="work-center" name="G_No">
 								<option value="<?=$row->G_No;?>"><?=$row->GroupName;?></option>
 								<?php
@@ -209,7 +224,13 @@ include 'include/sidebar.php';
 					<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 					<input type="hidden" value="add-personnel" name="access">
 					<input type="hidden" class="form-control" value="<?=$row->PersonnelName;?>" name="PersonnelName">
-					<p>Are you sure to delete <strong><?=$row->PersonnelName;?></strong>?<p>
+					<p>Are you sure to delete <strong style="text-transform:capitalize;">
+					<?php 
+					 $PersonnelName=explode ("-",$row->PersonnelName);
+					 $Mname=$PersonnelName[1];
+					 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+					?></strong>?
+					<p>
 				</div>
 			</div>
 			<div class="modal-footer">
@@ -239,28 +260,28 @@ include 'include/sidebar.php';
 						<div class="form-group">
 							<input type="hidden" value="add-personnel" name="access">
 							<label for="first-name">First Name*</label>
-							<input type="text" class="form-control" id="first-name" name="PersonnelName">
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="last-name">Last Name*</label>
-							<input type="text" class="form-control" id="last-name" name="last-name">
+							<input type="text" class="form-control" id="first-name" name="Fname" required>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="middle-name">Middle Name*</label>
-							<input type="text" class="form-control" id="middle-name" name="middle-name">
+							<input type="text" class="form-control" id="middle-name" name="Mname" required>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="last-name">Last Name*</label>
+							<input type="text" class="form-control" id="last-name" name="Lname" required>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="work-center">Group</label>
-							<select class="form-control" id="work-center" name="G_No">
-								<option value="" disabled selected>Select a group</option>
+							<label for="work-center">Work Center*</label>
+							<select class="form-control" id="work-center" name="G_No" required>
+								<option value="" disabled selected>Choose a Work Center</option>
 								<?php foreach ($getGroupName as $row) : ?>
 									<option value="<?=$row->G_No;?>"><?=$row->GroupName;?></option>
 								<?php endforeach; ?>
@@ -283,6 +304,64 @@ include 'include/sidebar.php';
 		</div>
 	</div>
 </div>
+
+<?php foreach ($getPersonnelName as $row) : ?>
+<div class="modal fade" id="<?=$row->P_No;?>viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>Issued Items History - <?php
+						$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+					?></h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										
+										<th>Issuance No.</th>
+										<th>Date Received</th>
+										<th>Particular</th>
+										<th>Issued</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php foreach ($getissueonpersonnel as $row1) : 
+									if ($row->PersonnelName != $row1->personnel_name){}else{
+								?>
+								
+									<tr>
+										
+										<td><?php
+											if ($row1->isno < 10){
+											echo "00".$row1->isno;
+										}
+										elseif ($row1->isno < 100 && $row1->isno >= 10){
+											echo "0".$row1->isno;
+										}else {echo $row1->isno; }
+										?></td>
+										<td><?=$row1->date_received;?></td>
+										<td><?=$row1->particulars;?></td>
+										<td><?=$row1->issued." ".$row1->unit;?></td>
+									</tr>
+								<?php } endforeach; ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endforeach; ?>
 
 <?php 
 include 'include/footer.php';
