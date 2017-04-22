@@ -15,60 +15,91 @@
 			background-color: #e1e1e1;
 			padding-top: 50px;
 		}
-		.print-form-header {
+		.print-preview-header-top,
+		.print-preview-footer {
 			display: none;
 		}
+		.print-preview-header-bottom {
+			margin-bottom: 20px;
+		}
+		.print-preview-header-bottom h4 {
+			font-size: 22px;
+			font-family: 'source_sans_probold';
+		}
 		@media print {
-			/*.container {
-				display: none;
-			}*/
+			@page {
+				margin: 0;
+			}
+			body {
+				font-family: sans-serif;
+				padding-top: 0;
+				margin: 40px 20px;
+			}
 			.panel-heading,
 			.panel-footer {
 				display: none;
 			}
-			.print-form-header {
-				display: block;
-				margin-bottom: 40px;
-				width: 500px;
-				margin-left: auto;
-				margin-right: auto;
-			}
 			.container {
 				width: 100%;
 			}
-			.print-form-header img {
+			.print-preview-header-top {
+				position: relative;
 				display: block;
-				margin-right: 15px;
+				width: 100%;
+				margin-bottom: 20px;
+				padding-top: 10px;
+			}
+			.print-preview-header-top img {
+				display: block;
+				width: 64px;
+				height: auto;
+				position: absolute;
+				top: 0;
+				left: 12%;
+			}
+			.print-preview-header-top p {
+				margin-bottom: 3px;
+				font-size: 16px;
+				line-height: 16px;
+			}
+			.print-preview-header-bottom h4 {
+				font-size: 18px;
+				margin-bottom: 5px;
+			}
+			.print-preview-footer {
+				width: 100%;
+				display: block;
+			}
+			.print-preview-footer-left,
+			.print-preview-footer-right {
+				width: 50%;
 				float: left;
 			}
-			.print-form-header h4 {
-				display: block;
-				/*padding-top: 20px;*/
-				float: left;
-				font-size: 20px;
+
+			.print-preview-footer-left p,
+			.print-preview-footer-right p {
+				margin-bottom: 30px;
+			}
+
+			.print-preview-footer-name p:first-child {
+				margin-bottom: 0;
+				font-weight: 700;
+				text-transform: uppercase;
 			}
 		}
 	</style>
 </head>
 
 <div class="container">
-		<div class="row print-form-header clearfix">
-			<!-- <div class="col-md-10 col-md-offset-1"> -->
-				<!-- <div class="row"> -->
-					<!-- <div class="col-md-2"> -->
-						<img src="<?php echo base_url(); ?>images/logo.png">
-					<!-- </div> -->
-					<!-- <div class="col-md-10"> -->
-						<h4>
-							NATIONAL POWER CORPORATION <br>
-							AGUS 6/7 HYDROELECTRIC PLANT COMPLEX <br>
-							MINDANAO GENERATION
-						</h4>
-						<!-- <p>AGUS 6/7 HYDROELECTRIC PLANT COMPLEX</p>
-						<p>MINDANAO GENERATION</p> -->
-					<!-- </div> -->
-				<!-- </div> -->
-			<!-- </div> -->
+		<div class="print-preview-header-top text-center">
+			<img src="<?php echo base_url(); ?>images/logo.png">
+			<p><small>NATIONAL POWER CORPORATION</small></p>
+			<p>AGUS 6/7 HYDROELECTRIC PLANT COMPLEX</p>
+			<p><small>MINDANAO GENERATION</small></p>
+		</div>
+		<div class="print-preview-header-bottom text-center">
+			<h4>PERSONAL PROTECTIVE EQUIPMENT INVENTORY</h4>
+			<p>As of March 20, 2017</p>
 		</div>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -79,11 +110,11 @@
 								<h4>Report Preview</h4>
 							</div>
 							<div class="col-md-4 text-right">
-								<a href="#" onclick="window.print();" role="button" class="btn btn-info"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
+								<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
 							</div>
 						</div>
 					</div>
-					<div class="table-responsive max-height-350">
+					<div class="table-responsive">
 									<table class="table table-bordered">
 										<thead>
 											<tr>
@@ -118,6 +149,22 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="print-preview-footer text-center">
+			<div class="print-preview-footer-left">
+				<p>Prepared by:</p>
+				<div class="print-preview-footer-name">
+					<p>RS LEMENCE</p>
+					<p>Safety Officer, Agus 6/7 HEPC</p>
+				</div>
+			</div>
+			<div class="print-preview-footer-right">
+				<p>Noted by:</p>
+				<div class="print-preview-footer-name">
+					<p>MB JABAY</p>
+					<p>OIC PTS, Agus 6/7 HEPC</p>
 				</div>
 			</div>
 		</div>

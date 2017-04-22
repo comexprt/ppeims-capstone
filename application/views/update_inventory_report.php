@@ -13,7 +13,7 @@ include 'include/sidebar.php';
 							<li>/</li>
 							<li><a href="inventory-report.html">Inventory Report</a></li>
 							<li>/</li>
-							<li>Details</li>
+							<li>Report Details</li>
 						</ul>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
@@ -36,11 +36,11 @@ include 'include/sidebar.php';
 						  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'created') !== false){
 					?>
 							<!-- Alert for success -->
-							<div class="alert alert-success alert-dismissable" role="alert">
+							<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<strong>Success!</strong> <?=$message;?>
 							</div><?php }else{?>
-							<div class="alert alert-danger alert-dismissable" role="alert">
+							<div id="danger-alert" class="alert alert-danger alert-dismissable" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<strong>Success!</strong> <?=$message;?>
 							</div>
@@ -50,7 +50,7 @@ include 'include/sidebar.php';
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h1 class="page-title">Details</h1>
+								<h1 class="page-title">Report Details</h1>
 							</div>
 						</div>
 					</div>
@@ -75,11 +75,11 @@ include 'include/sidebar.php';
 									<table class="table table-bordered">
 										<thead>
 											<tr>
-												<th class="col-md-1">No.</th>
+												<th>No.</th>
 												<th>Particulars</th>
 												<th>In Stock</th>
-												<th class="col-md-4">Remarks</th>
-												<th class="col-md-1">Add Remarks</th>
+												<th>Remarks</th>
+												<th>Add</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -91,7 +91,7 @@ include 'include/sidebar.php';
 										?>
 										
 											
-												<th class="col-md-1" scope="row"><?= $i++;?></th>
+												<th scope="row"><?= $i++;?></th>
 												<td><?= $row->Particular;?></td>
 												<td><?= $row->In_Stock;?></td>
 												<td><?= $row->Remarks;?></td>
@@ -115,8 +115,7 @@ include 'include/sidebar.php';
 										</div>
 										<div class="col-md-6 text-right">
 										
-											<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">
-											<i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
+											<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">Complete Report</a>
 										</div>
 									</div>
 								</div>
@@ -185,7 +184,7 @@ include 'include/sidebar.php';
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					<?php
-					echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
+					echo form_submit("loginSubmit","Save"," class='btn btn-success'");
 					echo form_close();
 				?>
 				</div>

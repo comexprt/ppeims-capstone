@@ -32,7 +32,7 @@ include 'include/sidebar.php';
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h1 class="page-title">Graphs & Statistics</h1>
+								<h1 class="page-title">Graphs &amp; Statistics</h1>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -62,5 +62,36 @@ include 'include/sidebar.php';
 	<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
 	<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url();?>js/Chart.bundle.min.js"></script>
-	<script src="<?php echo base_url();?>js/script.js"></script>
+	<!-- <script src="<?php echo base_url();?>js/script.js"></script> -->
+	<script>
+		var pieChartElement = $('#pieChart');
+
+		var data = {
+			labels: [
+				"Red",
+				"Blue",
+				"Yellow"
+			],
+			datasets: [
+				{
+					data: [300, 50, 100],
+					backgroundColor: [
+						"#FF6384",
+						"#36A2EB",
+						"#FFCE56"
+					],
+					hoverBackgroundColor: [
+						"FF6384",
+						"#36A2EB",
+						"#FFCE56"
+					]
+				}]
+		};
+
+		var pieChart = new Chart(pieChartElement, {
+			type: 'doughnut',
+			data: data
+
+		});
+	</script>
 </body>

@@ -67,7 +67,7 @@ include 'include/sidebar.php';
 												'title' => 'Add Batch',
 												'type' => 'submit'
 											];
-											echo form_button($data, '<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add');
+											echo form_button($data, 'Add Issuance');
 											echo form_close();
 										?>
 								
