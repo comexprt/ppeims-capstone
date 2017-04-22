@@ -54,7 +54,7 @@ include 'include/sidebar.php';
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Add</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Equipment</button>
 								</div>
 							</div>
 						</div>
@@ -80,7 +80,7 @@ include 'include/sidebar.php';
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive max-height-500">
 							<table class="table table-bordered">
 								<thead>
 									<tr>

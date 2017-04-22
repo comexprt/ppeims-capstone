@@ -34,13 +34,13 @@ include 'include/sidebar.php';
 					  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
 				?>
 						<!-- Alert for success -->
-						<div class="alert alert-success alert-dismissable" role="alert">
+						<div id="success-alert" class="alert alert-success alert-dismissable" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 							<strong>Success!</strong> <?=$message;?>
 						</div><?php }else{?>
-						<div class="alert alert-danger alert-dismissable" role="alert">
+						<div id="danger-alert" class="alert alert-danger alert-dismissable alert-auto-dismiss" role="alert">
 							<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<strong>Success!</strong> <?=$message;?>
+							<strong>Attention!</strong> <?=$message;?>
 						</div>
 				<?php }} else{}?>
 					</div>
@@ -50,7 +50,7 @@ include 'include/sidebar.php';
 							<div class="row-header">
 								<div class="row">
 									<div class="col-md-8">
-										<h1 class="page-title">PPE Inventory <small>as of <?php $date_now = date("Y-m-d"); echo date("F d, Y"); ?></small></h1>
+										<h1 class="page-title">Inventory Report</h1>
 									</div>
 									<div class="col-md-4 text-right">
 									
@@ -70,7 +70,7 @@ include 'include/sidebar.php';
 												'title' => 'create',
 												'type' => 'submit'
 											];
-											echo form_button($data, '<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create');
+											echo form_button($data, 'Create Report');
 											echo form_close();
 										 ?>
 									<?php }else{} ?>
@@ -90,7 +90,7 @@ include 'include/sidebar.php';
 												'title' => 'create',
 												'type' => 'submit'
 											];
-											echo form_button($data, '<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create');
+											echo form_button($data, 'Create Report');
 											echo form_close();
 										} ?>
 										
@@ -126,6 +126,7 @@ include 'include/sidebar.php';
 												<th>Report</th>
 												<th>Created</th>
 												<th>Prepared By</th>
+												<th>Noted By</th>
 												<th class="col-md-1">Action</th>
 											</tr>
 										</thead>
@@ -171,6 +172,7 @@ include 'include/sidebar.php';
 												<?php }?>
 												</td>
 												<td><?= $row->prepared_by;?></td>
+												<td></td>
 												<td class="col-md-1">
 													<?php
 														if ($row->status == '1'){
