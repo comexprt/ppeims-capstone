@@ -107,7 +107,6 @@ include 'include/sidebar.php';
 										<th>No.</th>
 										<th>Batch</th>
 										
-										<th>Complete</th>
 										<th>Action</th>
 										<th>View</th>
 									</tr>
@@ -117,8 +116,10 @@ include 'include/sidebar.php';
 								$id = 1;
 								foreach($getlist_issuance as $row){?>
 										
-										<?php if ($row->Status == 1 || $row->Status == 2){ ?>
+										<?php if ($row->Status == 1){ ?>
 										<tr>
+										<?php }elseif ($row->Status == 2){ ?>
+										<tr class="warning">
 										<?php }else{ ?>
 										<tr class="success">
 										<?php } ?>
@@ -133,10 +134,9 @@ include 'include/sidebar.php';
 										}else {echo $row->Tr_No; }
 										
 										?></td>
+
 										
-										
-										
-										<?php if ($row->Status == 2){ ?>
+										<?php if ($row->Status == 1){ ?>
 										<td><?php echo  date('F d, Y',strtotime($row->Tr_Date)); ?></td>
 										<td class="col-md-1">
 										<?php 
@@ -146,7 +146,7 @@ include 'include/sidebar.php';
 										if ($countpending >= 1){ ?>
 										<a href="adjust-equipment-issuance-step-1.html" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php }else { ?>
-										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="<?php echo base_url();?>ppeims/adjust_batch/<?=$row->Tr_No;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php } ?>
 										</td>
 										
@@ -188,12 +188,20 @@ include 'include/sidebar.php';
 	</div>
 </div>
 
-<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<?php foreach($getlist_issuance as $row){?> 
+<div class="modal fade" id="<?=$row->Tr_No;?>viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4>Batch 001</h4>
+					<h4>Batch <?php 
+					if ($row->Tr_No < 10){
+											echo "00".$row->Tr_No;
+										}
+										elseif ($row->Tr_No < 100 && $row->Tr_No >= 10){
+											echo "0".$row->Tr_No;
+										}else {echo $row->Tr_No; }
+					?></h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel panel-default">
@@ -201,55 +209,27 @@ include 'include/sidebar.php';
 							<table class="table table-bordered">
 								<thead>
 									<tr>
-										<th>No.</th>
-										<th>Particulars</th>
-										<th>In Stock</th>
-										<th>Added</th>
-										<th>Threshold</th>
-										<th>Expiry Date</th>
+										<th class="col-md-1">No.</th>
+												<th>Particulars</th>
+												<th>Added Stock</th>
+												<th>Threshold</th>
+												<th>Expiry</th>
 									</tr>
 								</thead>
 								<tbody>
+								<?php $i=1;
+								foreach ($getitemsbatchinfo as $row1) {
+								if ($row->Tr_No != $row1->Tr_No){}else{
+								?>
 									<tr>
-										<th scope="row">1</th>
-										<td>Hard Hat (Blue)</td>
-										<td>60 pcs</td>
-										<td>50 pcs</td>
-										<td>15 pcs</td>
-										<td>02-10-2020</td>
+										<th scope="row"><?=$i++;?></th>
+										<td><?=$row1->Particulars;?>)</td>
+										<td><?=$row1->Added_S." ".$row1->Unit;?></td>
+										<td><?=$row1->Re_OrderPt." ".$row1->Unit;?></td>
+										<td><?=$row1->Expiration_Date;?></td>
 									</tr>
-									<tr>
-										<th scope="row">2</th>
-										<td>Hard Hat (Yellow)</td>
-										<td>40 pcs</td>
-										<td>29 pcs</td>
-										<td>10 pcs</td>
-										<td>02-10-2019</td>
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Protective Eyewear</td>
-										<td>80 pcs</td>
-										<td>40 pcs</td>
-										<td>20 pcs</td>
-										<td>02-10-2018</td>
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>Face Shield</td>
-										<td>100 pcs</td>
-										<td>70 pcs</td>
-										<td>10 pcs</td>
-										<td>02-10-2020</td>
-									</tr>
-									<tr>
-										<th scope="row">5</th>
-										<td>Safety Shoes</td>
-										<td>80 pairs</td>
-										<td>30 pairs</td>
-										<td>20 pairs</td>
-										<td>02-10-2018</td>
-									</tr>
+						
+								<?php }} ?>
 								</tbody>
 							</table>
 						</div>
@@ -261,7 +241,7 @@ include 'include/sidebar.php';
 			</div>
 		</div>
 	</div>
-
+<?php } ?>
 <?php 
 include 'include/footer.php';
 

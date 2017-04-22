@@ -170,7 +170,7 @@ include 'include/sidebar.php';
 					<h4 class="modal-title" id="myModalLabel">Add/Select Equipment</h4>
 				</div>
 				<div class="modal-body">
-					<p>Select the Equipment you want to add in this issuance.</p>
+					<p>Select the Equipment you want to add in this Batch.</p>
 					<div class="panel panel-default">
 						
 						<div class="table-responsive max-height-300">
@@ -227,10 +227,10 @@ include 'include/sidebar.php';
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Complete Issuance</h4>
+					<h4 class="modal-title" id="myModalLabel">Complete Batch</h4>
 				</div>
 				<div class="modal-body">
-					<p>Are you sure you want to save this issuance as complete?</p>
+					<p>Are you sure you want to save this Batch as complete?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -246,14 +246,14 @@ include 'include/sidebar.php';
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Delete Issuance</h4>
+					<h4 class="modal-title" id="myModalLabel">Delete Batch</h4>
 				</div>
 				<div class="modal-body">
-					<p>Are you sure you want to delete this issuance?</p>
+					<p>Are you sure you want to delete this Batch?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger" > <a href="<?php echo base_url();?>ppeims/delete_issuance/<?= $LastSId; ?>" style="color:#ffffff;text-decoration:none;">Delete</a></button>
+					<button type="button" class="btn btn-danger" > <a href="<?php echo base_url();?>ppeims/deleteBatchItem/<?= $LastSId; ?>" style="color:#ffffff;text-decoration:none;">Delete</a></button>
 				</div>
 			</div>
 		</div>
@@ -279,16 +279,16 @@ include 'include/sidebar.php';
 							
 							<div class="form-group">
 								<label for="">Quantity*</label>
-								<input type="number" class="form-control" placeholder="0" name="Added_S" min="0" value="<?=$row->Added_S;?>">
+								<input type="number" class="form-control" placeholder="0" name="Added_S" min="0" value="<?=$row->Added_S;?>" required>
 							</div>
 							<div class="form-group">
 								<label for="">Threshold</label>
-								<input type="number" class="form-control" name="Re_OrderPt" placeholder="0" min="0" value="<?=$row->Re_OrderPt;?>">
+								<input type="number" class="form-control" name="Re_OrderPt" placeholder="0" min="0" value="<?=$row->Re_OrderPt;?>" required>
 							</div>
 							<div class="form-group">
 								<label for="">Expiry</label>
 								
-								<input type="date" class="form-control" name="Expiration_Date" value="<?=$row->Expiration_Date;?>">
+								<input type="date" class="form-control" name="Expiration_Date" value="<?=$row->Expiration_Date;?>" required>
 							</div>
 						</div>
 					</div>

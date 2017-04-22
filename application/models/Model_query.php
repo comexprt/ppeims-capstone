@@ -75,6 +75,30 @@ class Model_query extends CI_Model
 			$query = $this->db->query("SELECT * FROM `personnel_issued` WHERE isno = '".$data."'");
 			$result = $query->result();return $result;}
 		
+		public function getitemlow(){
+			$query = $this->db->query("SELECT * FROM `equipement_inventory` WHERE Re_Ordering_Pt >= Stock order by Particulars");
+			$result = $query->result();return $result;}
+			
+		public function getitemlowcount(){
+			$query = $this->db->query("SELECT count(*) as count FROM `equipement_inventory` WHERE Re_Ordering_Pt >= Stock");
+			$result = $query->result();return $result;}
+		
+		public function getitemexpired(){
+			$query = $this->db->query("SELECT updated_transaction.Tr_No, updated_transaction.Tr_Date,updated_transaction.Status, updated_transaction_details.Particulars, 
+			updated_transaction_details.Added_S, updated_transaction_details.Unit,updated_transaction_details.Expiration_Date 
+			FROM  `updated_transaction` join `updated_transaction_details` ON updated_transaction.Tr_No = updated_transaction_details.Tr_No 
+			WHERE Expiration_Date <= CURRENT_DATE AND updated_transaction.Status != 3 ORDER by Expiration_Date DESC");
+			$result = $query->result();return $result;}
+			
+		public function getitemexpiredcount(){
+			$query = $this->db->query("SELECT count(*) as count FROM  `updated_transaction` join `updated_transaction_details` ON updated_transaction.Tr_No = updated_transaction_details.Tr_No 
+			WHERE Expiration_Date <= CURRENT_DATE AND updated_transaction.Status != 3");
+			$result = $query->result();return $result;}
+		
+		public function getissueonpersonnel(){
+			$query = $this->db->query("SELECT * FROM issuance JOIN personnel_issued ON issuance.isno = personnel_issued.isno JOIN item_issued ON personnel_issued.pino = item_issued.pino ORDER BY date_received desc");
+			$result = $query->result();return $result;}
+		
 		public function getLastBatchItemData($data){
 			$query = $this->db->query("SELECT * FROM `updated_transaction_Details` WHERE Tr_No = '".$data."'");
 			$result = $query->result();return $result;}
@@ -248,6 +272,10 @@ class Model_query extends CI_Model
 			$query = $this->db->query("SELECT count(*) as countissued FROM `updated_transaction_Details` WHERE Tr_No = '".$data."'");
 			$result = $query->result();return $result;}
 		
+		public function getitemsbatchinfo(){
+			$query = $this->db->query("SELECT *  FROM `updated_transaction_Details` WHERE 1 order by Tr_No");
+			$result = $query->result();return $result;}
+		
 		public function getInventoryReportInfo(){
 			$query = $this->db->query("SELECT * FROM `inventory_report` join `inventory_report_details` on inventory_report.irid = inventory_report_details.irid where 1 ORDER BY inventory_report.status DESC, inventory_report.irid DESC");
 			$result = $query->result();return $result;}
@@ -276,6 +304,9 @@ class Model_query extends CI_Model
 		
 		public function adjust_issuance($data){
 			$query = $this->db->query("update issuance set status = 2 where isno = '".$data."' ");}
+	
+	public function adjust_batch($data){
+			$query = $this->db->query("update updated_transaction set Status = 2 where Tr_No = '".$data."' ");}
 		
 		public function updateIssuancePersonnelItem($data,$data1){
 			$query = $this->db->query("update equipement_inventory set Stock = Stock + '".$data."' where EI_No = '".$data1."' ");}
@@ -288,8 +319,11 @@ class Model_query extends CI_Model
 			$query = $this->db->query("update updated_transaction_details set Added_S = '".$data."',Re_OrderPt = '".$data1."',Expiration_Date = '".$data2."' where Tr_D_No = '".$data3."' ");}
 	
 		public function CompleteBatchItem($data,$data1){
-			$query = $this->db->query("update updated_transaction set Status = 2 ,Tr_Date = '".$data."' where Tr_No = '".$data1."' ");}
-		
+			$query = $this->db->query("update updated_transaction set Status = 1 ,Tr_Date = '".$data."' where Tr_No = '".$data1."' ");}
+	
+		public function deleteBatchIssuance($data){
+			$query = $this->db->query("delete from updated_transaction where Tr_No = '".$data."' ");}
+			
 		public function updateUpdateTransactionDetails($data1,$data2){$this->db->where('Tr_D_No', $data1);$this->db->update('updated_transaction_Details', $data2);}
 		public function deleteUpdateTransactionDetails($data){$this->db->where('Tr_D_No', $data);$this->db->delete('updated_transaction_Details');}
 		

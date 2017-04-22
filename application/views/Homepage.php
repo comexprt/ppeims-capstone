@@ -2,6 +2,13 @@
 include 'include/header.php';
 include 'include/sidebar.php';
 include 'include/topbar.php';
+foreach ($getitemlowcount as $row){
+	$low_count = $row->count;
+}
+
+foreach ($getitemexpiredcount as $row){
+	$expired_count = $row->count;
+}
 ?>
 
 			<div class="content">
@@ -14,10 +21,7 @@ include 'include/topbar.php';
 									<div class="col-md-8">
 										<h1 class="page-title">PPE Inventory <small><?php echo date('F d, Y',time()); ?></small></h1>
 									</div>
-									<div class="col-md-4 text-right">
-										<a href="low-supply-equipment.html" class="btn btn-warning">Low Supplies <span class="badge">10</span></a>
-										<a href="expired-equipment.html" class="btn btn-danger">Expired <span class="badge">5</span></a>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -84,24 +88,23 @@ include 'include/topbar.php';
 									<?php } ?>
 							
 							
-							<!--div class="alert alert-warning" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<p>Looks like you have <strong>10</strong> supplies below their threshold, click <strong>View</strong> to view them.</p>
+						<?php  if ($low_count != 0){ ?>
+							<div class="alert alert-warning" role="alert">
+							
+								<p>Looks like you have <strong><?=$low_count;?></strong> supplies below their threshold, click <strong>View</strong> to view them.</p>
 								<p>
-									<a href="low-supply-equipment.html" class="btn btn-warning"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> View</a>
+									<a href="#" role="button" data-toggle="modal" data-target="#viewModal" class="btn btn-warning"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> View</a>
 								</p>
 							</div>
+						<?php } if ($expired_count != 0){ ?>
 							<div class="alert alert-danger" role="alert">
-								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<p>Looks like you have <strong>5</strong> supplies that are expired, click <strong>View</strong> to view them.</p>
+								
+								<p>Looks like you have <strong><?=$expired_count;?></strong> supplies that are expired, click <strong>View</strong> to view them.</p>
 								<p>
-									<a href="expired-equipment.html" class="btn btn-danger"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> View</a>
+									<a href="#" role="button" data-toggle="modal" data-target="#viewModalE" class="btn btn-danger"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> View</a>
 								</p>
-							</div-->
+							</div>
+						<?php }?>
 						</div>
 						<div class="col-md-8">
 							<div class="panel panel-default">
@@ -157,5 +160,98 @@ include 'include/topbar.php';
 				</section>
 			</div>
 		</div>
+		
+		<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>LOW SUPPLIES ( <?=$low_count;?> ITEMS)</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Particulars</th>
+										<th>In Stock</th>
+										<th>Threshold</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php $i=1;
+								foreach ($getitemlow as $row){ ?>
+									<tr>
+										<th scope="row"><?=$i++;?></th>
+										<td><?=$row->Particulars;?></td>
+										<td><?=$row->Stock." ".$row->Unit;?> </td>
+										<td><?=$row->Re_Ordering_Pt." ".$row->Unit;?> </td>
+									</tr>
+								<?php } ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="viewModalE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4>EXPIRED ( <?=$low_count;?> ITEMS)</h4>
+				</div>
+				<div class="modal-body">
+					<div class="panel panel-default">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>No.</th>
+										<th>Particulars</th>
+										<th>Expired</th>
+										<th>Batch No</th>
+									</tr>
+								</thead>
+								<tbody>
+								<?php $i=1;
+								foreach ($getitemexpired as $row){ ?>
+									<tr>
+										<th scope="row"><?=$i++;?></th>
+										<td><?=$row->Particulars;?></td>
+										<td><?=$row->Expiration_Date;?></td>
+										<td>
+										<?php
+											if ($row->Tr_No < 10){
+											echo "00".$row->Tr_No;
+										}
+										elseif ($row->Tr_No < 100 && $row->Tr_No >= 10){
+											echo "0".$row->Tr_No;
+										}else {echo $row->Tr_No; }
+										?>
+										</td>
+									</tr>
+								<?php } ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 <?php include 'include/footer.php'; 
 // EOF

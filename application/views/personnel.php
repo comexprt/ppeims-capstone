@@ -121,7 +121,7 @@ include 'include/sidebar.php';
 										</td>
 										<td><?=$row->GroupName;?></td>
 										<td class="col-md-1">
-													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->P_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										<td class="col-md-1">
 											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
@@ -305,12 +305,17 @@ include 'include/sidebar.php';
 	</div>
 </div>
 
-<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<?php foreach ($getPersonnelName as $row) : ?>
+<div class="modal fade" id="<?=$row->P_No;?>viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4>Issued Items History</h4>
+					<h4>Issued Items History - <?php
+						$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[1];
+											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+					?></h4>
 				</div>
 				<div class="modal-body">
 					<div class="panel panel-default">
@@ -323,43 +328,28 @@ include 'include/sidebar.php';
 										<th>Date Received</th>
 										<th>Particular</th>
 										<th>Issued</th>
-										<th>Issued By</th>
 									</tr>
 								</thead>
 								<tbody>
+								<?php foreach ($getissueonpersonnel as $row1) : 
+									if ($row->PersonnelName != $row1->personnel_name){}else{
+								?>
+								
 									<tr>
 										
-										<td>088</td>
-										<td>02-22-17</td>
-										<td>Hard Hat (Blue)</td>
-										<td>2 pcs</td>
-										<td>Rolando Lemence</td>
+										<td><?php
+											if ($row1->isno < 10){
+											echo "00".$row1->isno;
+										}
+										elseif ($row1->isno < 100 && $row1->isno >= 10){
+											echo "0".$row1->isno;
+										}else {echo $row1->isno; }
+										?></td>
+										<td><?=$row1->date_received;?></td>
+										<td><?=$row1->particulars;?></td>
+										<td><?=$row1->issued." ".$row1->unit;?></td>
 									</tr>
-									<tr>
-									
-										<td>050</td>
-										<td>02-01-17</td>
-										<td>Hard Hat (Yellow)</td>
-										<td>1 pcs</td>
-										<td>Rolando Lemence</td>
-									</tr>
-									<tr>
-										
-										<td>022</td>
-										<td>01-22-17</td>
-										<td>Protective Eyewear</td>
-										<td>1 pcs</td>
-										<td>Rolando Lemence</td>
-									</tr>
-									<tr>
-									
-										<td>011</td>
-										<td>10-22-16</td>
-										<td>Face Shield</td>
-										<td>3 pcs</td>
-										<td>Rolando Lemence</td>
-									</tr>
-							
+								<?php } endforeach; ?>
 								</tbody>
 							</table>
 						</div>
@@ -371,6 +361,7 @@ include 'include/sidebar.php';
 			</div>
 		</div>
 	</div>
+<?php endforeach; ?>
 
 <?php 
 include 'include/footer.php';

@@ -55,6 +55,12 @@ class ppeims extends CI_Controller {
 			$data['getLastInventoryReport'] = $this->Model_query->getLastInventoryReport();
 			$data['getEquipment'] = $this->Model_query->getEquipmentName();
 			$data['getlast_issuance'] = $this->Model_query->getlast_issuance();	
+			
+			$data['getitemexpired'] = $this->Model_query->getitemexpired();	
+			$data['getitemexpiredcount'] = $this->Model_query->getitemexpiredcount();	
+			$data['getitemlow'] = $this->Model_query->getitemlow();	
+			$data['getitemlowcount'] = $this->Model_query->getitemlowcount();	
+			
 			$this->load->view('Homepage',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
@@ -125,6 +131,28 @@ class ppeims extends CI_Controller {
 				redirect('ppeims/Inventory_Report');
 		}
 		else{redirect('ppeims/InvalidURL');}}
+		
+	public function Graphs_Statistics_Pie(){
+		if($this->session->userdata('logged_so')){
+		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			
+				$data['getEquipment'] = $this->Model_query->getEquipmentName();
+			
+			$this->load->view('statistics',$data);
+		}
+		else{redirect('ppeims/InvalidURL');}}
+	
+	public function Graphs_Statistics_line(){
+		if($this->session->userdata('logged_so')){
+		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			
+				$data['getEquipment'] = $this->Model_query->getEquipmentName();
+			
+			$this->load->view('statistics2',$data);
+		}
+		else{redirect('ppeims/InvalidURL');}}
 	
 	public function update_inventory_report(){
 		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
@@ -187,6 +215,7 @@ class ppeims extends CI_Controller {
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
 			$data['getPendingCount'] = $this->Model_query->getPendingCountb();			
+			$data['getitemsbatchinfo'] = $this->Model_query->getitemsbatchinfo();			
 			$data['getlast_issuance'] = $this->Model_query->getlast_batch();			
 			$data['getlist_issuance'] = $this->Model_query->getlist_batch();			
 			$this->load->view('batch-equipement',$data);
@@ -496,8 +525,23 @@ class ppeims extends CI_Controller {
 				redirect('ppeims/batch_equipment');
 			}else{redirect('ppeims/InvalidURL');}}
 		
-	
-	
+	public function deleteBatchItem(){
+	if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				
+				$this->Model_query->deleteBatchIssuance($id);
+				$message="Equipment on Batch has been deleted .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/batch_equipment');
+			}else{redirect('ppeims/InvalidURL');}}
+		
+	public function adjust_batch(){
+		if($this->session->userdata('logged_so')){
+				$id = $this->uri->segment(3);
+				
+				$this->Model_query->adjust_batch($id);
+				$message="Adjusting Batch ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/update_batch/'.$id);
+			}else{redirect('ppeims/InvalidURL');}}
 	
 	public function Equipment_Batch(){
 		if($this->session->userdata('logged_so')){
@@ -600,6 +644,7 @@ class ppeims extends CI_Controller {
 				}else{$data['getPersonnelName'] = $this->Model_query->getPersonnelName();}
 			}else{$data['message'] = "";$data['getPersonnelName'] = $this->Model_query->getPersonnelName();	}
 			
+			$data['getissueonpersonnel'] = $this->Model_query->getissueonpersonnel();			
 			$data['getGroupName'] = $this->Model_query->getGroupName();			
 			$this->load->view('personnel',$data);
 		}else{redirect('ppeims/InvalidURL');}}
