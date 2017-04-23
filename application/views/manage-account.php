@@ -81,7 +81,7 @@ include 'include/sidebar.php';
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-sm-3">
-									<img src="<?php echo base_url();?>images/user.png" class="img-thumbnail img-responsive" alt="">
+									<img src="<?php echo base_url();?>images/image_preview.jpg" class="img-thumbnail img-responsive" alt="">
 								</div>
 								<div class="col-sm-9">
 									<div class="row">

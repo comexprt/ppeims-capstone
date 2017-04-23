@@ -80,18 +80,11 @@ include 'include/sidebar.php';
 							<div class="row">
 							
 								<div class="col-sm-3">
-									<img src="<?php echo base_url();?>images/user.png" class="img-thumbnail img-responsive" alt="">
-									<button role="button" class="btn btn-danger btn-xs margin-bottom-20">Remove Picture</button>
+									<img src="<?php echo base_url();?>images/image_preview.jpg" class="img-thumbnail img-responsive" alt="" style="margin-bottom:5px;">
+									<a href="#" role="button" data-toggle="modal" data-target="#changePictureModal" class="btn btn-success btn-sm btn-block">Change Picture</a>
+									<a href="#" role="button" data-toggle="modal" data-target="#removePictureModal" class="btn btn-danger btn-sm btn-block">Remove Picture</a>
 								</div>
 								<div class="col-sm-9">
-								<div class="row">
-										<div class="col-sm-12">
-											<div class="form-group">
-												<input type="file">
-												<p class="help-block">Upload a profile picture, 1mb max.</p>
-											</div>
-										</div>
-									</div>
 									<div class="row">
 										<div class="col-sm-6">
 											<div class="form-group">
@@ -183,6 +176,45 @@ include 'include/sidebar.php';
 				</div>
 			</div>
 		</section>
+	</div>
+</div>
+
+<div class="modal fade" id="changePictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Change Picture</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<input type="file">
+					<p class="help-block">Upload a profile picture, 1mb max.</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-success">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="removePictureModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Remove Picture</h4>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to remove this picture?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-danger">Remove</button>
+			</div>
+		</div>
 	</div>
 </div>
 

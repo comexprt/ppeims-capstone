@@ -68,7 +68,6 @@ include 'include/sidebar.php';
 												</span>
 											</div>
 										</div>
-										
 									</div>
 								</div>
 								<div class="table-responsive max-height-350">
