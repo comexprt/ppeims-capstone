@@ -104,8 +104,8 @@ include 'include/sidebar.php';
 														<th scope="row"><?=$i++;?></th>
 														<td><?php
 														$PersonnelName=explode ("-",$row1->personnel_name);
-														 $Mname=$PersonnelName[1];
-														 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 														
+														 $Mname=$PersonnelName[2];
+														 echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[2]."."; 														
 														 ?></td>
 														<td><?=$row1->work_center;?></td>
 														<td><?=$row1->issued;?></td>

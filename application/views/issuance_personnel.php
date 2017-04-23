@@ -94,8 +94,8 @@ include 'include/sidebar.php';
 												<td>
 													<?php
 														$PersonnelName=explode ("-",$row->personnel_name);
-														 $Mname=$PersonnelName[1];
-														 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+														 $Mname=$PersonnelName[2];
+														 echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0]."."; 
 													?>
 												</td>
 												<td><?= $row->work_center; ?></td>
@@ -193,8 +193,8 @@ include 'include/sidebar.php';
 									<td>
 									<?php
 										$PersonnelName=explode ("-",$row->PersonnelName);
-										$Mname=$PersonnelName[1];
-										echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+										$Mname=$PersonnelName[2];
+										echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0]; 
 									?>
 									</td>
 									<td><?= $row->GroupName; ?></td>

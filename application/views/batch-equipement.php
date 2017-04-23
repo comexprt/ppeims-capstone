@@ -34,7 +34,7 @@ include 'include/sidebar.php';
 					<div class="row">
 					<div class="col-md-12">
 					<?php if($message){
-						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'completed') !== false){
+						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'Completed') !== false){
 					?>
 							<!-- Alert for success -->
 							<div class="alert alert-success alert-dismissable" role="alert">
@@ -151,7 +151,7 @@ include 'include/sidebar.php';
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-default btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->Tr_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										
 										<?php }elseif ($row->Status == 2){ ?>
@@ -161,7 +161,7 @@ include 'include/sidebar.php';
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-warning btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-warning btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->Tr_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										<?php }else{ ?>
 										<td><span class="label label-success">Pending</span></td>
@@ -170,7 +170,7 @@ include 'include/sidebar.php';
 										</td>
 										
 										<td class="col-md-1">
-											<a type="button" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+											<a type="button" class="btn btn-success btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->Tr_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
 										<?php } ?>
 										
@@ -188,7 +188,7 @@ include 'include/sidebar.php';
 	</div>
 </div>
 
-<?php foreach($getlist_issuance as $row){?> 
+<?php foreach($getBatchData as $row){?> 
 <div class="modal fade" id="<?=$row->Tr_No;?>viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -218,7 +218,7 @@ include 'include/sidebar.php';
 								</thead>
 								<tbody>
 								<?php $i=1;
-								foreach ($getitemsbatchinfo as $row1) {
+								foreach ($getBatchData as $row1) {
 								if ($row->Tr_No != $row1->Tr_No){}else{
 								?>
 									<tr>

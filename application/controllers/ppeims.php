@@ -216,7 +216,8 @@ class ppeims extends CI_Controller {
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
 			$data['getPendingCount'] = $this->Model_query->getPendingCountb();			
 			$data['getitemsbatchinfo'] = $this->Model_query->getitemsbatchinfo();			
-			$data['getlast_issuance'] = $this->Model_query->getlast_batch();			
+			$data['getlast_issuance'] = $this->Model_query->getlast_batch();
+			$data['getBatchData'] = $this->Model_query->getBatchData();			
 			$data['getlist_issuance'] = $this->Model_query->getlist_batch();			
 			$this->load->view('batch-equipement',$data);
 		}else{redirect('ppeims/InvalidURL');}}
@@ -302,7 +303,6 @@ class ppeims extends CI_Controller {
 			$data['LastSId'] = $LastSId;
 			$data['getIssuedOnPersonnel'] = $this->Model_query->getitemsbatch($LastSId);
 			$data['getLastIssuanceData'] = $this->Model_query->getLastBatchData($LastSId);
-			$data['getIssuanceData'] = $this->Model_query->getIssuanceData();
 			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();
 			$data['getLastIssuanceItemData'] = $this->Model_query->getLastBatchItemData($LastSId);
 		
@@ -668,7 +668,7 @@ class ppeims extends CI_Controller {
 				$Fname = $this->input->post('Fname');
 				$Mname = $this->input->post('Mname');
 				$Lname = $this->input->post('Lname');
-				$PersonnelName = "$Fname-$Mname-$Lname";
+				$PersonnelName = "$Lname-$Fname-$Mname";
 					
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->addPersonnelName($newRow);
@@ -682,10 +682,10 @@ class ppeims extends CI_Controller {
 				$Fname = $this->input->post('Fname');
 				$Mname = $this->input->post('Mname');
 				$Lname = $this->input->post('Lname');
-				$PersonnelName = "$Fname-$Mname-$Lname";$P_No = $this->input->post('P_No');
+				$PersonnelName = "$Lname-$Fname-$Mname";$P_No = $this->input->post('P_No');
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
 				$this->Model_query->updatePersonnelName($P_No,$newRow);
-				$message="$PersonnelName has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				$message="$Lname, $Fname $Mname[0]. has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -697,7 +697,7 @@ class ppeims extends CI_Controller {
 				$PersonnelName=explode ("-",$this->input->post('PersonnelName'));
 				 $Mname=$PersonnelName[1];
 				 
-				$message="$PersonnelName[0] $Mname[0]. $PersonnelName[2] has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				$message="$Lname, $Fname $Mname[0]. has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel Function End --

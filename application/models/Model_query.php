@@ -62,16 +62,18 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;}
 			
 		public function getLastIssuanceData($data){
-			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno WHERE issuance.isno = '".$data."'");
+			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno WHERE issuance.isno = '".$data."' ORDER BY personnel_name");
 			$result = $query->result();return $result;}
 		
-		public function getIssuanceData(){
-			$query = $this->db->query("SELECT * FROM `issuance` JOIN `personnel_issued` ON issuance.isno = personnel_issued.isno WHERE 1");
-			$result = $query->result();return $result;}
 		
 		
 		public function getLastBatchData($data){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No WHERE updated_transaction.Tr_No = '".$data."'");
+			$result = $query->result();return $result;}
+		
+		
+		public function getBatchData(){
+			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN `updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No");
 			$result = $query->result();return $result;}
 		
 		
@@ -189,12 +191,12 @@ class Model_query extends CI_Model
 		}
 		
 		public function getlist_issuance(){
-			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 1 ORDER BY status DESC,date_modified DESC");
+			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 0 ORDER BY status DESC,date_modified DESC");
 			$result = $query->result();return $result;
 		}
 		
 		public function getlist_batch(){
-			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 ORDER BY status DESC,Tr_Date DESC");
+			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 0 ORDER BY status DESC,Tr_Date DESC");
 			$result = $query->result();return $result;
 		}
 		
@@ -241,7 +243,7 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;}
 			
 		public function getIssuanceDistinctItemInfo($data){
-			$query = $this->db->query("SELECT item_issued.EI_No, personnel_issued.personnel_name, personnel_issued.work_center, item_issued.issued, item_issued.date_received, equipement_inventory.Unit FROM personnel_issued JOIN item_issued on personnel_issued.pino = item_issued.pino JOIN equipement_inventory on item_issued.EI_No = equipement_inventory.EI_No  WHERE personnel_issued.isno = '".$data."' ORDER BY item_issued.EI_No");
+			$query = $this->db->query("SELECT item_issued.EI_No, personnel_issued.personnel_name, personnel_issued.work_center, item_issued.issued, item_issued.date_received, equipement_inventory.Unit FROM personnel_issued JOIN item_issued on personnel_issued.pino = item_issued.pino JOIN equipement_inventory on item_issued.EI_No = equipement_inventory.EI_No  WHERE personnel_issued.isno = '".$data."' ORDER BY item_issued.EI_No,personnel_issued.personnel_name");
 			$result = $query->result();return $result;}
 		
 		public function getLastInventoryReport(){

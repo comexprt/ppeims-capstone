@@ -55,8 +55,8 @@ include 'include/sidebar.php';
 							<div class="row-header">
 								<h1 class="page-title">Issue Equipment to <?php
 								$PersonnelName=explode ("-",$personnel_name);
-								 $Mname=$PersonnelName[1];
-								 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+								 $Mname=$PersonnelName[2];
+								 echo $PersonnelName[0]." ".$PersonnelName[1].". ".$Mname[0]."."; 
 								 ?></h1>
 							</div>	
 						</div>

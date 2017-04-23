@@ -115,7 +115,7 @@ include 'include/sidebar.php';
 										</div>
 										<div class="col-md-6 text-right">
 										
-											<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">Complete Report</a>
+											<button type="button" class="btn btn-primary" href="#" data-toggle="modal" data-target="#completeReportModal">Complete Report</button>
 										</div>
 									</div>
 								</div>
@@ -224,6 +224,24 @@ include 'include/sidebar.php';
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 					<a type="button" class="btn btn-danger" href="<?php echo base_url();?>ppeims/delete_inventory_report/<?php echo $id;?>">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="completeReportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to complete this report ?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">Yes</a>
 				</div>
 			</div>
 		</div>
