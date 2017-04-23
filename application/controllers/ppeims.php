@@ -2,18 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ppeims extends CI_Controller {
-	
+		
 	function __construct()
 	{
 	   parent::__construct();
 	   date_default_timezone_set('asia/manila');
 	   $this->load->model('Model_query','',TRUE);
 	   $this->load->library('pagination');
-	   
+	  
 		$prefs = array (
 			   'local_time'    => time(),
 	        );
 		   
+		 $this->load->helper('form');
+ 
+        $this->load->helper('url');
 		$this->load->library('calendar', $prefs);
 		$this->load->library('session');	
     }
@@ -46,7 +49,7 @@ class ppeims extends CI_Controller {
 	public function emp_logout(){if ($this->session->userdata('logged_so')){$this->session->sess_destroy();redirect('ppeims');}else{redirect('ppeims/InvalidURL');}}
 	
 	public function Homepage(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
@@ -67,7 +70,7 @@ class ppeims extends CI_Controller {
 	//Initial page w/o Function
 		
 	public function inventory(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";	
 			$data['getEquipment'] = $this->Model_query->getEquipment();			
@@ -75,7 +78,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 	//Initial page w/o Function End --
 	 public function Inventory_Report(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');	
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');	
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
@@ -91,7 +94,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 		public function createinventoryreport(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 		
 			if ($this->input->post('access') == "add-ui"){
@@ -122,7 +125,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 	public function delete_inventory_report(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->deleteInventoryReport($id);
@@ -133,7 +136,7 @@ class ppeims extends CI_Controller {
 		else{redirect('ppeims/InvalidURL');}}
 		
 	public function Graphs_Statistics_Pie(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			
@@ -144,7 +147,7 @@ class ppeims extends CI_Controller {
 		else{redirect('ppeims/InvalidURL');}}
 	
 	public function Graphs_Statistics_line(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			
@@ -155,7 +158,7 @@ class ppeims extends CI_Controller {
 		else{redirect('ppeims/InvalidURL');}}
 	
 	public function update_inventory_report(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
@@ -170,7 +173,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 		public function addremarks(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$irid = $this->input->post('irid');
 				$irdid = $this->input->post('irdid');
@@ -182,7 +185,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 		public function print_inventory_report_confirm(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			$data['id'] = $id;
 			 $this->Model_query->complete_inventory_report($id);		
@@ -192,7 +195,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function issuance(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			
 			if ($action =="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
@@ -207,7 +210,7 @@ class ppeims extends CI_Controller {
 		
 		
 		public function batch_equipment(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			
 			if ($action =="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
@@ -224,7 +227,7 @@ class ppeims extends CI_Controller {
 		
 			
 	public function addIssuance(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Cur_date = date("Y-m-d");
 				$newRow=array( "status" => 3,"date_modified" => $Cur_date ,"total_personnel" => 0);
@@ -234,7 +237,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function update_issuance(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
@@ -267,7 +270,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 	
 	public function addBatch1(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Cur_date = date("Y-m-d");
 				$newRow=array( "Tr_Date" => '0000-00-00',"Pb" => '0',"Status" => 3);
@@ -278,7 +281,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
 		public function update_batch(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
@@ -310,7 +313,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 		public function view_issuance(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			$id1 = $this->uri->segment(4);
 			
@@ -330,7 +333,7 @@ class ppeims extends CI_Controller {
 		
 			
 		public function delete_issuance_personnel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				$id1 = $this->uri->segment(4);
 
@@ -340,7 +343,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function complete_issuance(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->complete_issuance($id);
@@ -349,7 +352,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function adjust_issuance(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->adjust_issuance($id);
@@ -358,7 +361,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function delete_issuance(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 
 				$this->Model_query->delete_issuance($id);
@@ -367,7 +370,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function delete_issuance_personnel_item(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				$id1 = $this->uri->segment(4);
 				$id2 = $this->uri->segment(5);
@@ -380,7 +383,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 		public function update_issuance_item(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
@@ -399,7 +402,7 @@ class ppeims extends CI_Controller {
 		
 		
 	public function delete_issuance_item(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id=$this->input->post('LastSId');
 				$item_array=$this->input->post('item_issued');
 				$arrlength = count($item_array);
@@ -415,7 +418,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 	
 	public function addItemIssued(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$id=$this->input->post('LastSId');
 				$item_array=$this->input->post('particulars');
@@ -432,7 +435,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 	public function UpdateItemIssued(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$id=$this->input->post('LastSId');
 				$old_issued=$this->input->post('old_issued');
@@ -457,7 +460,7 @@ class ppeims extends CI_Controller {
 	
 	
 	public function addPersonnelIssued(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$LastSId=$this->input->post('LastSId');
 				$item_array=$this->input->post('items');
@@ -473,7 +476,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 	public function addBatchItem(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$LastSId=$this->input->post('LastSId');
 				$item_array=$this->input->post('items');
@@ -490,7 +493,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 	public function updateBatchItem(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$LastSId=$this->input->post('LastSId');
 				$Tr_D_No=$this->input->post('Tr_D_No');
@@ -505,7 +508,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
 	public function removeBatchItem(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				$id1 = $this->uri->segment(4);
 				
@@ -516,7 +519,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 	public function CompleteBatchItem(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				 $Cur_date =  date('Y-m-d',time());
@@ -527,7 +530,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 	public function deleteBatchItem(){
-	if($this->session->userdata('logged_so')){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->deleteBatchIssuance($id);
@@ -536,7 +539,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 		
 	public function adjust_batch(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->adjust_batch($id);
@@ -545,7 +548,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}
 	
 	public function Equipment_Batch(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
@@ -561,7 +564,7 @@ class ppeims extends CI_Controller {
 	
 	
 	public function equipment_batch_drafts(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
@@ -577,7 +580,7 @@ class ppeims extends CI_Controller {
 	
 	//Manage_account Function
 		public function manage_account(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
@@ -587,17 +590,67 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 		public function edit_account(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
-			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";	
+			
+			
 			if ($action =="add-a") {$data['message']= $message;}else{$data['message'] = "";}
 			$data['getAdmin'] = $this->Model_query->getAdmin();	
 			$this->load->view('edit-account',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
-		public function update_account(){
+		public function update_info(){
+		if($this->session->userdata('logged_so')){ 
+				$this->Model_query->update_info($this->input->post('fname'),$this->input->post('lname'),$this->input->post('uname'),$this->input->post('position'));
+				$this->session->set_flashdata('action','add-a');$this->session->set_flashdata('message',"Changes has been saved and REDIRECTED in a few seconds ...");
+				redirect('ppeims/edit_account');
+		}else{redirect('ppeims/InvalidURL');}}
+			
+			
+		public function remove_pic(){
+		if($this->session->userdata('logged_so')){ 
+				$this->Model_query->getremoveimage();
+				$this->session->set_flashdata('action','add-a');$this->session->set_flashdata('message',"Picture has been removed ...");
+				redirect('ppeims/edit_account');
+		}else{redirect('ppeims/InvalidURL');}}
+			
+		public function add_pic(){
 		if($this->session->userdata('logged_so')){
+			
+		//	$image = $this->input->post('userfile');
+			 $config =  array(
+                  'upload_path'     => "./images/",
+                  'allowed_types'   => "jpg|png|jpeg|",
+                  'overwrite'       => TRUE,
+                  'max_size'        => "1000-",  // Can be set to particular file size
+                  'max_height'      => "1200",
+                  'max_width'       => "1200"  
+                );    
+				
+				$this->load->library('upload',$config);
+				if($this->upload->do_upload())
+				{
+					$data = array('upload_data' => $this->upload->data());
+					$upload_data = $this->upload->data(); 
+					$file_name =   $upload_data['file_name'];
+					$this->Model_query->add_pic($file_name);
+				
+					$message = "Picture has been Successfully Uploaded ...";
+				}else{
+					$error=$this->upload->display_errors();
+					$message = "$error";
+					
+				}
+				
+				
+			$this->session->set_flashdata('action','add-a');$this->session->set_flashdata('message',"$message");
+			redirect('ppeims/edit_account');
+		}else{redirect('ppeims/InvalidURL');}}
+			
+		public function update_account(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-account"){$A_No = $this->input->post('A_No');
 				if ($this->input->post('old_id1') == $this->input->post('old_id2')){
 					$newPassword = $this->input->post('new_id');$message="Saved Changes and REDIRECTED in a few seconds ..";
@@ -610,7 +663,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 		public function update_account_password(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-account"){$A_No = $this->input->post('A_No');
 				if ($this->input->post('password') != $this->input->post('cpassword')){
 					$message="Invalid Current Password ..";
@@ -634,7 +687,7 @@ class ppeims extends CI_Controller {
 	
 	//Personnel-Group Function
 	public function personnel(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');	
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');	
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$GroupName = $this->session->flashdata('GroupName');$this->session->keep_flashdata('GroupName');
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
@@ -651,7 +704,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function filter_work_center(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$GroupName = $this->uri->segment(3);
 			$extract = explode("%20",$GroupName);
 			$combine = implode(" ",$extract);
@@ -662,7 +715,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 	
 	public function new_personnel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-personnel"){
 				
 				$Fname = $this->input->post('Fname');
@@ -677,7 +730,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function update_personnel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-personnel"){
 				$Fname = $this->input->post('Fname');
 				$Mname = $this->input->post('Mname');
@@ -690,7 +743,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function delete_personnel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-personnel"){
 				$P_No = $this->input->post('P_No');
 				$this->Model_query->deletePersonnelName($P_No);
@@ -704,7 +757,7 @@ class ppeims extends CI_Controller {
 	
 	//Personnel-Group Function
 	public function personnel_group(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
@@ -714,7 +767,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function new_personnel_group(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
@@ -724,7 +777,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function update_personnel_group(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
@@ -734,7 +787,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function delete_personnel_group(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$this->Model_query->deleteGroupName($G_No);
@@ -745,7 +798,7 @@ class ppeims extends CI_Controller {
 	
 	//Equipment Function
 	public function equipment(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
@@ -756,7 +809,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 	
 	public function new_equipment(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
@@ -767,7 +820,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function update_equipment(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
@@ -778,7 +831,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
 	public function delete_equipment(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$this->Model_query->deleteEquipment($EI_No);
@@ -790,7 +843,7 @@ class ppeims extends CI_Controller {
 	
 	//Update Inventory Function
 	public function update_inventory(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
@@ -819,7 +872,7 @@ class ppeims extends CI_Controller {
 		}else{redirect('ppeims/InvalidURL');}}
 	
 	public function inventory_equipmen_list(){
-		if($this->session->userdata('logged_so')){$session_data = $this->session->userdata('logged_so');
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$LastSId1 = $this->session->flashdata('LastSId1');$this->session->keep_flashdata('LastSId1');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
@@ -837,7 +890,7 @@ class ppeims extends CI_Controller {
 
 	// start - Equipment - Batch
 	public function new_ui(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Particulars = $this->input->post('Particulars');
 				$uri = $this->input->post('uri');
@@ -852,7 +905,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function addbatch(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Cur_date = date("Y-m-d");
 				$Pb=$this->input->post('Pb');
@@ -863,7 +916,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function delete_iel_step1(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Particulars = $this->input->post('Particulars');$Tr_D_No = $this->input->post('Tr_D_No');$uri = $this->input->post('uri');
 				$this->Model_query->deleteUpdateTransactionDetails($Tr_D_No);
@@ -875,7 +928,7 @@ class ppeims extends CI_Controller {
 	// end - Equipment Batch
 	
 	public function update_iel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-iel"){
 				$Particulars = $this->input->post('Particulars');$Tr_D_No = $this->input->post('Tr_D_No');$Tr_No = $this->input->post('Tr_No');
 				$Stock= $this->input->post('Stock');$Total_S = $Stock - $this->input->post('old_Added_S') + $this->input->post('Added_S');
@@ -890,7 +943,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
 	public function delete_iel(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-iel"){
 				$Particulars = $this->input->post('Particulars');$Tr_D_No = $this->input->post('Tr_D_No');$Tr_No = $this->input->post('Tr_No');
 				$this->Model_query->deleteUpdateTransactionDetails($Tr_D_No);
@@ -901,7 +954,7 @@ class ppeims extends CI_Controller {
 	
 			
 	public function update_ui(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Tr_No = $this->input->post('Tr_No');
 				$newRow=array( "Tr" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
@@ -912,7 +965,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
 	public function update_tr_complete(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Tr_No = $this->input->post('Tr_No');
 				$Cur_date = date("Y-m-d");
@@ -923,7 +976,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
 	public function update_tr_Draft(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Tr_No = $this->input->post('Tr_No');
 				$Cur_date = date("Y-m-d");
@@ -934,7 +987,7 @@ class ppeims extends CI_Controller {
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
 	public function delete_tr(){
-		if($this->session->userdata('logged_so')){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Tr_No = $this->input->post('Tr_No');
 				$this->Model_query->deleteUI($Tr_No);
