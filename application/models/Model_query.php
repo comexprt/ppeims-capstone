@@ -26,7 +26,7 @@ class Model_query extends CI_Model
 		public function getEquipmentListDraft(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=2 ");$result = $query->result();return $result;}
 		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
 		
-		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where Username ='admin'");$result = $query->result();return $result;}
+		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where A_No = 1");$result = $query->result();return $result;}
 		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY GroupName");$result = $query->result();return $result;}
 		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
 		public function getEquipmentName(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
@@ -245,6 +245,19 @@ class Model_query extends CI_Model
 		public function getIssuanceDistinctItemInfo($data){
 			$query = $this->db->query("SELECT item_issued.EI_No, personnel_issued.personnel_name, personnel_issued.work_center, item_issued.issued, item_issued.date_received, equipement_inventory.Unit FROM personnel_issued JOIN item_issued on personnel_issued.pino = item_issued.pino JOIN equipement_inventory on item_issued.EI_No = equipement_inventory.EI_No  WHERE personnel_issued.isno = '".$data."' ORDER BY item_issued.EI_No,personnel_issued.personnel_name");
 			$result = $query->result();return $result;}
+		
+		public function getimage(){
+			$query = $this->db->query("SELECT * from image");
+			$result = $query->result();return $result;}
+		
+		public function getremoveimage(){
+			$query = $this->db->query("update image set image_name = 'image_preview.jpg'");}
+		
+		public function add_pic($data){
+			$query = $this->db->query("update image set image_name = '".$data."'");}
+		
+		public function update_info($data,$data1,$data2,$data3){
+			$query = $this->db->query("update administrator set Fname = '".$data."',Lname = '".$data1."',Username = '".$data2."',Position = '".$data3."'");}
 		
 		public function getLastInventoryReport(){
 			$query = $this->db->query("SELECT * FROM `inventory_report` where 1 ORDER BY irid DESC LIMIT 1");

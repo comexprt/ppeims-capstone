@@ -3,7 +3,7 @@
 		<a href="<?=base_url();?>"><h4>AGUS 6/7 PPE IMS</h4></a>
 	</div>
 	<div class="sidebar-user clearfix">
-		<div class="sidebar-user-pic" style="background-image: url(<?php echo base_url();?>images/image_preview.jpg);"></div>
+		<div class="sidebar-user-pic" style="background-image: url(<?php echo base_url();?>images/<?=$u_image;?>);"></div>
 		<div class="sidebar-user-name">
 			<span><?php echo $Fname." ".$Lname;?></span>
 			<span><?php echo $Position;?></span>

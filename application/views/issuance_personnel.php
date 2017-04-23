@@ -1,6 +1,7 @@
 <?php 
 include 'include/header.php';
 include 'include/sidebar.php';
+
 ?>
 		<nav class="navbar navbar--blue navbar-static-top">
 			<div class="container-fluid">
