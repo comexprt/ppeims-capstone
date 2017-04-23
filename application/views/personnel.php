@@ -114,8 +114,8 @@ include 'include/sidebar.php';
 										<td>
 										<?php 
 											$PersonnelName=explode ("-",$row->PersonnelName);
-											$Mname=$PersonnelName[1];
-											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+											$Mname=$PersonnelName[2];
+											echo $PersonnelName[0].", ".$PersonnelName[1]." ".$Mname[0].". ";
 										
 										?>
 										</td>
@@ -157,23 +157,23 @@ include 'include/sidebar.php';
 						<div class="form-group">
 										<?php 
 											$PersonnelName=explode ("-",$row->PersonnelName);
-											$Mname=$PersonnelName[1];
+											$Mname=$PersonnelName[2];
 											
 										
 										?>
 							<input type="hidden" value="add-personnel" name="access">
 							<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 							<label for="first-name">First Name*</label>
-							<input type="text" class="form-control" id="first-name" value="<?=$PersonnelName[0];?>" name="Fname">
+							<input type="text" class="form-control" id="first-name" value="<?=$PersonnelName[1];?>" name="Fname">
 						</div>
 					</div>
 					<div class="col-md-4">
 						<label for="middle-name">Middle Name*</label>
-						<input type="text" class="form-control" id="middle-name" name="Mname" value="<?=$PersonnelName[1];?>">
+						<input type="text" class="form-control" id="middle-name" name="Mname" value="<?=$PersonnelName[2];?>">
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4"
 						<label for="last-name">Last Name*</label>
-						<input type="text" class="form-control" id="last-name" value="<?=$PersonnelName[2];?>" name="Lname">
+						<input type="text" class="form-control" id="last-name" value="<?=$PersonnelName[0];?>" name="Lname">
 					</div>
 				</div>
 				<div class="row">
@@ -226,9 +226,9 @@ include 'include/sidebar.php';
 					<input type="hidden" class="form-control" value="<?=$row->PersonnelName;?>" name="PersonnelName">
 					<p>Are you sure to delete <strong style="text-transform:capitalize;">
 					<?php 
-					 $PersonnelName=explode ("-",$row->PersonnelName);
-					 $Mname=$PersonnelName[1];
-					 echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2]; 
+					$PersonnelName=explode ("-",$row->PersonnelName);
+											$Mname=$PersonnelName[2];
+											echo $PersonnelName[0].", ".$PersonnelName[1]." ".$Mname[0].". ";
 					?></strong>?
 					<p>
 				</div>
@@ -313,8 +313,8 @@ include 'include/sidebar.php';
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4>Issued Items History - <?php
 						$PersonnelName=explode ("-",$row->PersonnelName);
-											$Mname=$PersonnelName[1];
-											echo $PersonnelName[0]." ".$Mname[0].". ".$PersonnelName[2];
+											$Mname=$PersonnelName[2];
+											echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0].". ";
 					?></h4>
 				</div>
 				<div class="modal-body">
