@@ -34,10 +34,10 @@ include 'include/sidebar.php';
 					<div class="row">
 					<div class="col-md-12">
 					<?php if($message){
-						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'completed') !== false){
+						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'completed') !== false || strpos($message, 'deleted') !== false){
 					?>
 							<!-- Alert for success -->
-							<div class="alert alert-success alert-dismissable" role="alert">
+							<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
 								<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 								<strong>Success!</strong> <?php echo $message;?>
 							</div><?php }else{?>
@@ -73,7 +73,7 @@ include 'include/sidebar.php';
 								
 									<?php else: ?>
 									
-										<a href="<?php echo base_url();?>ppeims/update_issuance/<?php echo "new_entry"?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
+										<!-- <a href="<?php echo base_url();?>ppeims/update_issuance/<?php echo "new_entry"?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a> -->
 									
 									<?php endif; ?>
 								
@@ -108,23 +108,16 @@ include 'include/sidebar.php';
 										<th>Issuance</th>
 										<th>Total Personnel</th>
 										<th>Status</th>
-										<th>Action</th>
+										<th>Completed</th>
 										<th>View</th>
+										<th>Adjust</th>
 									</tr>
 								</thead>
 								<tbody>	
 								<?php 
 								$id = 1;
 								foreach($getlist_issuance as $row){?>
-										
-										<?php if ($row->status == 1){ ?>
 										<tr>
-										<?php }elseif ($row->status == 2){ ?>
-										<tr class="warning">
-										<?php }else{ ?>
-										<tr class="success">
-										<?php } ?>
-										
 										<th scope="row"><?php echo $id++; ?></th>
 										<td><?php 
 										if ($row->isno < 10){
@@ -136,44 +129,54 @@ include 'include/sidebar.php';
 										
 										?></td>
 										<td><?php echo $row->total_personnel; ?></td>
-										
+										<td>
+											<?php if($row->status == 1): ?>
+											Completed
+											<?php elseif($row->status == 2): ?>
+											Adjusting
+											<?php else: ?>
+											Pending
+											<?php endif; ?>
+										</td>
 										
 										<?php if ($row->status == 1){ ?>
 										<td><?php echo  date('F d, Y',strtotime($row->date_modified)); ?></td>
 										<td class="col-md-1">
+											<a type="button" class="btn btn-default btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+										</td>
+										<td class="col-md-1">
 										<?php 
+										
 										foreach ($getPendingCount as $row1){
 											$countpending = $row1->countpending;
 										}
 										if ($countpending >= 1){ ?>
-										<a href="adjust-equipment-issuance-step-1.html" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php }else { ?>
-										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->isno;?>" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->isno;?>" data-toggle="tooltip" data-placement="left" title="Adjust Issuance" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php } ?>
 										</td>
 										
+										<?php }elseif ($row->status == 2){ ?>
+										<td><a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-share-alt"></i> Resume</a></td>
+										<td>
+											<a type="button" class="btn btn-default btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+										</td>
+										<td>
+											<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										</td>
+										
+										
+										<?php }else{ ?>
+										<td><a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt"></i> Resume</a></td>
 										<td class="col-md-1">
 											<a type="button" class="btn btn-default btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
 										</td>
-										
-										<?php }elseif ($row->status == 2){ ?>
-										<td><span class="label label-warning">Adjusting</span></td>
 										<td class="col-md-1">
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-warning btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+											<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										</td>
 										
-										<td class="col-md-1">
-											<a type="button" class="btn btn-warning btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
-										</td>
-										<?php }else{ ?>
-										<td><span class="label label-success">Pending</span></td>
-										<td class="col-md-1">
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$row->isno;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
-										</td>
 										
-										<td class="col-md-1">
-											<a type="button" class="btn btn-success btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row->isno; ?>/<?= $row->status; ?>"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
-										</td>
 										<?php } ?>
 										
 										

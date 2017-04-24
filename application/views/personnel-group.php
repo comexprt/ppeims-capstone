@@ -35,11 +35,11 @@ include 'include/sidebar.php';
 				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false){
 			?>
 					<!-- Alert for success -->
-					<div class="alert alert-success alert-dismissable" role="alert">
+					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<strong>Success!</strong> <?php echo $message;?>
 					</div><?php }else{?>
-					<div class="alert alert-danger alert-dismissable" role="alert">
+					<div class="alert alert-danger alert-dismissable alert-auto-dismiss" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 						<strong>Success!</strong> <?php echo $message;?>
 					</div>

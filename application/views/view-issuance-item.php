@@ -62,7 +62,7 @@ include 'include/sidebar.php';
 										<?php if ($LastSId1 == 3){ ?>
 											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
 										<?php }elseif ($LastSId1 == 2){ ?>
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-warning"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Adjust</a>
+											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-warning"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
 										<?php }else{ ?>
 											
 										<?php } ?>
@@ -92,7 +92,7 @@ include 'include/sidebar.php';
 														<th>Personnel</th>
 														<th>Work Center</th>
 														<th>Issued</th>
-														<th>Date</th>
+														<th>Received</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -105,7 +105,7 @@ include 'include/sidebar.php';
 														<td><?php
 														$PersonnelName=explode ("-",$row1->personnel_name);
 														 $Mname=$PersonnelName[2];
-														 echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[2]."."; 														
+														 echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0]."."; 														
 														 ?></td>
 														<td><?=$row1->work_center;?></td>
 														<td><?=$row1->issued;?></td>

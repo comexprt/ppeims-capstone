@@ -8,16 +8,16 @@ include 'include/sidebar.php';
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<div class="navbar-left">
 						<ul class="navbar-breadcrumbs list-inline">
-							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 							<li>/</li>
 							<li>Graphs &amp; Statistics</li>
 						</ul>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lemence <spa class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <spa class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Log Out</a></li>
+								<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -48,11 +48,11 @@ include 'include/sidebar.php';
 					</div>
 					
 					<div class="row">
-							<center>
-								<div class="panel-body" style="width:50%;">
-									<canvas id="pieChart"></canvas>
-								</div>
-							</center>
+						<center>
+							<div class="panel-body" style="width:50%;">
+								<canvas id="pieChart"></canvas>
+							</div>
+						</center>
 					</div>
 				</section>
 			</div>

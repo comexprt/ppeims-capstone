@@ -9,18 +9,18 @@ include 'include/sidebar.php';
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<div class="navbar-left">
 						<ul class="navbar-breadcrumbs list-inline">
-							<li><a href="index.html">Dashboard</a></li>
+							<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 							<li>/</li>
-							<li><a href="inventory-report.html">Inventory Report</a></li>
+							<li><a href="<?php echo base_url(); ?>ppeims/Inventory_Report">Inventory Report</a></li>
 							<li>/</li>
 							<li>Report Details</li>
 						</ul>
 					</div>
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lemence <spa class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $Lname;?> <spa class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Log Out</a></li>
+								<li><a href="<?php echo base_url();?>ppeims/emp_logout">Log Out</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -50,7 +50,7 @@ include 'include/sidebar.php';
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h1 class="page-title">Report Details</h1>
+								<h1 class="page-title">Report Details <small>of April 24, 2017</small></h1>
 							</div>
 						</div>
 					</div>
@@ -233,14 +233,14 @@ include 'include/sidebar.php';
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Confirmation Message</h4>
+					<h4 class="modal-title" id="myModalLabel">Complete Report</h4>
 				</div>
 				<div class="modal-body">
-					<p>Are you sure you want to complete this report ?</p>
+					<p>Are you sure you want to complete this report?</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">Yes</a>
+					<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?php echo $id;?>">Complete</a>
 				</div>
 			</div>
 		</div>

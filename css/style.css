@@ -227,9 +227,9 @@ strong, th, label, span.label {
 
 .panel-group-issuance .panel-heading a {
 	color: inherit;
-	font-family: 'source_sans_probold';
+	/*font-family: 'source_sans_probold';*/
 	font-size: 16px;
-	padding: 15px;
+	padding: 5px 10px;
 	position: relative;
 	display: block;
 }

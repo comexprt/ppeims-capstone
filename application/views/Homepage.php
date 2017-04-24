@@ -36,7 +36,7 @@ foreach ($getitemexpiredcount as $row){
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<p>Looks like you have a pending issuance, click <strong>Resume</strong> to resume.</p>
+										<p>Looks like you have a <strong>pending issuance</strong>, click <strong>Resume</strong> to resume.</p>
 										<p>
 										<a href="<?php echo base_url();?>ppeims/update_issuance/<?php echo "new_entry"?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
 											</p>
@@ -46,46 +46,21 @@ foreach ($getitemexpiredcount as $row){
 								
 								<?php endforeach; ?>
 							
-							
-									<?php foreach ($getLastInventoryReport as $row) {
+								<?php foreach ($getLastInventoryReport as $row):
+								
+									if ($row->status == '1'): ?>
+									<div class="alert alert-success" role="alert">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										<p>Looks like you have a pending <strong>inventory report</strong>, click <strong>Resume</strong> to resume.</p>
+										<p>
+											<a href="<?php echo base_url();?>ppeims/update_inventory_report/<?php echo $row->irid;?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
+										</p>
+									</div>
+									<?php endif; ?>
 									
-										if ($row->status == '1'){ ?>
-										<div class="alert alert-success" role="alert">
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											<p>Looks like you have a pending inventory report, click <strong>Resume</strong> to resume.</p>
-											<p>
-												<a href="<?php echo base_url();?>ppeims/update_inventory_report/<?php echo $row->irid;?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
-											</p>
-										</div>
-										<?php }else{ ?>
-										<div class="alert alert-info" role="alert">
-											<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-											<p>Would you like to create an inventory report, click <strong>Create</strong> to create.</p>
-											<p>
-												
-													<?php echo form_open("ppeims/createinventoryreport"); ?>
-													
-													<input type="hidden" value="add-ui" name="access">
-													<?php foreach ($getEquipment as $row){ ?>
-													<input type="hidden" name="equipment[]" value="<?= $row->Particulars."-".$row->Stock."-".$row->Unit; ?>">
-													
-													<?php }
-														$data = [
-															'class' => "btn btn-primary",
-															'title' => 'create',
-															'type' => 'submit'
-														];
-														echo form_button($data, '<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> Create');
-														echo form_close(); ?>
-															</p>
-										</div>
-										<?php } ?>
-										
-									<?php } ?>
+								<?php endforeach; ?>
 							
 							
 						<?php  if ($low_count != 0){ ?>

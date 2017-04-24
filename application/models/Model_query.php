@@ -191,7 +191,7 @@ class Model_query extends CI_Model
 		}
 		
 		public function getlist_issuance(){
-			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 0 ORDER BY status DESC,date_modified DESC");
+			$query = $this->db->query("SELECT * FROM `issuance` WHERE isno != 0 ORDER BY isno DESC,date_modified DESC");
 			$result = $query->result();return $result;
 		}
 		
