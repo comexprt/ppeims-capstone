@@ -232,7 +232,7 @@ class ppeims extends CI_Controller {
 				$Cur_date = date("Y-m-d");
 				$newRow=array( "status" => 3,"date_modified" => $Cur_date ,"total_personnel" => 0);
 				$this->Model_query->addIssuance($newRow);
-				$message="New Equipment Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="A new equipment issuance has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/new_entry');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -273,10 +273,10 @@ class ppeims extends CI_Controller {
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-ui"){
 				$Cur_date = date("Y-m-d");
-				$newRow=array( "Tr_Date" => '0000-00-00',"Pb" => '0',"Status" => 3);
+				$newRow=array( "Tr_Date" => '0000-00-00',"Pb" => '0',"Status" => 3, "total_equipment" => 0);
 				$this->Model_query->addbatch($newRow);
 				
-				$message="New Equipment Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="A new equipment batch has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_batch/new_entry');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
@@ -338,7 +338,7 @@ class ppeims extends CI_Controller {
 				$id1 = $this->uri->segment(4);
 
 				$this->Model_query->deleteIssuancePersonnel($id1);
-				$message="Personnel on Issuance has been removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="A personnel has been removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -347,7 +347,7 @@ class ppeims extends CI_Controller {
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->complete_issuance($id);
-				$message="Issuance Has been completed"; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment issuance has been completed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/issuance');
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -356,7 +356,7 @@ class ppeims extends CI_Controller {
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->adjust_issuance($id);
-				$message="Adjusting Issuance ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="This issuance can now be adjusted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -365,7 +365,7 @@ class ppeims extends CI_Controller {
 				$id = $this->uri->segment(3);
 
 				$this->Model_query->delete_issuance($id);
-				$message="Issuance has been successfully deleted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An issuance has been deleted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/issuance');
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -378,7 +378,7 @@ class ppeims extends CI_Controller {
 
 				$this->Model_query->deleteIssuancePersonnelItem($id3);
 				$this->Model_query->updateIssuancePersonnelItem($id1,$id2);
-				$message="Item has been removed ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An item has been removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance_item/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -413,7 +413,7 @@ class ppeims extends CI_Controller {
 					}
 					
 				$this->Model_query->deleteItemIssuedPersonnel($id);
-				$message="All Items on Personnel Issued has been Removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance_item/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 	
@@ -430,7 +430,7 @@ class ppeims extends CI_Controller {
 						$newRow=array( "particulars" => $separate_name[0],"in_stock" => $separate_name[1],"issued" => 0,"unit" => $separate_name[2],"date_received" => "00-00-00","pino" => $id,"EI_No" => $separate_name[3]);
 					$this->Model_query->addItemIssued($newRow);
 					}
-				$message="New Item on Personnel has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance_item/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -453,7 +453,7 @@ class ppeims extends CI_Controller {
 				$this->Model_query->updateItemIssued($iino,$issued,$new_date_recieved);
 				$this->Model_query->updateItemIssuedonEI($issued,$old_issued,$EI_No);
 				
-				$message="Particular has been updated ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been issued."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance_item/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -471,7 +471,7 @@ class ppeims extends CI_Controller {
 						$newRow=array( "personnel_name" => $separate_name[0],"work_center" => $separate_name[1],"total_item_issued" => 0,"isno" => $LastSId);
 						$this->Model_query->addPersonnelIssued($newRow);
 					}
-				$message="New Personnel on Issuance has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="A personnel has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_issuance/'.$LastSId);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -488,7 +488,7 @@ class ppeims extends CI_Controller {
 										"Expiration_Date" => '0000-00-00',"Remarks" => '',"Tr_No" => $LastSId,"EI_No" => $separate_name[1]);
 						$this->Model_query->addUI($newRow);
 					}
-				$message="New Equipment on Batch has been added .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been added."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_batch/'.$LastSId);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -503,7 +503,7 @@ class ppeims extends CI_Controller {
 				
 				
 				$this->Model_query->updateBatchItem($Added_S,$Re_OrderPt,$Expiration_Date,$Tr_D_No);
-				$message="Equipment on Batch has been Updated .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been updated."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_batch/'.$LastSId);
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 		
@@ -514,7 +514,7 @@ class ppeims extends CI_Controller {
 				
 				
 				$this->Model_query->removeitemsonbatch($id1);
-				$message="Equipment on Batch has been remove ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment has been removed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_batch/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -525,7 +525,7 @@ class ppeims extends CI_Controller {
 				 $Cur_date =  date('Y-m-d',time());
 				 echo $Cur_date;
 				$this->Model_query->CompleteBatchItem($Cur_date,$id);
-				$message="Equipment on Batch has been Completed .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment batch has been completed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/batch_equipment');
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -543,7 +543,7 @@ class ppeims extends CI_Controller {
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->adjust_batch($id);
-				$message="Adjusting Batch ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="This batch can now be adjusted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/update_batch/'.$id);
 			}else{redirect('ppeims/InvalidURL');}}
 	
