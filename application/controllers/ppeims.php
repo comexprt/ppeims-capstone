@@ -534,7 +534,7 @@ class ppeims extends CI_Controller {
 				$id = $this->uri->segment(3);
 				
 				$this->Model_query->deleteBatchIssuance($id);
-				$message="Equipment on Batch has been deleted .."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				$message="An equipment batch has been deleted."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/batch_equipment');
 			}else{redirect('ppeims/InvalidURL');}}
 		

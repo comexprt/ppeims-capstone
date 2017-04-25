@@ -80,7 +80,7 @@ include 'include/sidebar.php';
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive max-height-500">
+						<div class="table-responsive max-height-400">
 							<table class="table table-bordered">
 								<thead>
 									<tr>

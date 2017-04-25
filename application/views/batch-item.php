@@ -184,7 +184,7 @@ include 'include/sidebar.php';
 								<tr>
 									<th class="col-md-1">Select</th>	
 									<th>Particulars</th>
-									<th class="col-md-1">Unit</th>
+									<th>In Stock</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -197,10 +197,17 @@ include 'include/sidebar.php';
 							foreach ($getallitems as $row){ ?>
 							
 							<tr>
-								<td class="col-md-1"><input type="checkbox" name="items[]" value="<?= $row->Particulars."//".$row->EI_No."//".$row->Re_Ordering_Pt."//".$row->Unit;?>"></td>
-								
+								<td class="col-md-1">
+									<input type="checkbox" name="items[]" value="<?= $row->Particulars."//".$row->EI_No."//".$row->Re_Ordering_Pt."//".$row->Unit;?>">
+								</td>
 								<td><?= $row->Particulars; ?></td>
-								<td class="col-md-1"><?= $row->Unit; ?></td>
+								<td>
+									<?php if($row->Stock > 0): ?>
+										<?=$row->Stock." ".$row->Unit;?>
+									<?php else: ?>
+										<span class="label label-danger">Out of Stock</span>
+									<?php endif; ?>
+								</td>
 							</tr>
 							<?php } ?>
 						
