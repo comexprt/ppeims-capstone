@@ -14,21 +14,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4 page-login-form">
-				<img src="<?=base_url();?>images/logo.png" alt="" class="img-responsive center-block">
+				<img src="<?php echo base_url(); ?>images/logo.png" alt="" class="img-responsive center-block">
 				<h1>Sign in to Agus 6/7 PPE-IMS</h1>
 				<div class="well">
 					<?php echo form_open("ppeims/verifyloginEmployee"); ?>
-							<center>
-							<h3 style='color:#FF0000;font-size:12px;margin-top:-5px;'>
-							<?php 
-								
-								if (validation_errors()==false)
-								{}else {
-								echo validation_errors();
-								} 
-								echo "</h3>";
-								?>
-						</center>
+						<?php if(validation_errors() == true): ?>
+							<div class="alert alert-danger">
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								<?php echo validation_errors(); ?>
+							</div>
+						<?php endif; ?>
+						
 						<input type="hidden" name="login" value="login">
 						<div class="form-group">
 							<label for="username">Username</label>

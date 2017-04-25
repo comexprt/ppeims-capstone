@@ -43,7 +43,7 @@ class ppeims extends CI_Controller {
 		   if($result){$sess_array = array(); foreach($result as $row){$sess_array = array('Username' => $row->Username,
 				'Password' => $row->Password,'Fname' => $row->Fname,'Lname' => $row->Lname,'Position' => $row->Position,);
 			  	$this->session->set_userdata('logged_so', $sess_array);}return TRUE;}else{
-				$this->form_validation->set_message('check_database_employee', 'Opps !!  Error: Invalid username or password');
+				$this->form_validation->set_message('check_database_employee', 'Invalid username or password.');
 				return false;}}else{redirect('ppeims/InvalidURL');}}
 	
 	public function emp_logout(){if ($this->session->userdata('logged_so')){$this->session->sess_destroy();redirect('ppeims');}else{redirect('ppeims/InvalidURL');}}
