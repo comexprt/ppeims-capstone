@@ -207,6 +207,7 @@ class Model_query extends CI_Model
 		
 		public function addPersonnelName($data){$this->db->insert("Personnel",$data);}
 		public function updatePersonnelName($data1,$data2){$this->db->where('P_No', $data1);$this->db->update('Personnel', $data2);}
+		public function updatedelegates($data1,$data2){$this->db->where('id', $data1);$this->db->update('delegates', $data2);}
 		public function deletePersonnelName($data){$this->db->where('P_No', $data);$this->db->delete('Personnel');}
 		
 		public function addGroupName($data){$this->db->insert("Group",$data);}
@@ -261,6 +262,10 @@ class Model_query extends CI_Model
 		
 		public function getLastInventoryReport(){
 			$query = $this->db->query("SELECT * FROM `inventory_report` where 1 ORDER BY irid DESC LIMIT 1");
+			$result = $query->result();return $result;}
+		
+		public function getdelegates(){
+			$query = $this->db->query("SELECT * FROM `delegates` where id = 1 LIMIT 1");
 			$result = $query->result();return $result;}
 			
 		public function getPendingInventoryReport(){

@@ -219,7 +219,7 @@ include 'include/sidebar.php';
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Print Preview</button>
+					<a type="button" href="<?php echo base_url();?>ppeims/print_inventory_report_confirm/<?=$row->irid;?>" class="btn btn-primary">Print Preview</a>
 				</div>
 			</div>
 		</div>

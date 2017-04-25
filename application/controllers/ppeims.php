@@ -192,8 +192,19 @@ class ppeims extends CI_Controller {
 			$data['id'] = $id;
 			 $this->Model_query->complete_inventory_report($id);		
 			$data['getInventoryReport'] = $this->Model_query->getInventoryReport($id);		
+			$data['getdelegates'] = $this->Model_query->getdelegates();		
 					
 			$this->load->view('print-inventory-report-confirm',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
+		public function update_delegates(){
+		if($this->session->userdata('logged_so')){ 
+			$id = $this->uri->segment(3);
+			$id1 = '1';
+			$newRow=array( "pname" => $this->input->post('pname'),"pby" => $this->input->post('pby'),"nname" => $this->input->post('nname'),"nby" => $this->input->post('nby'));
+				$this->Model_query->updatedelegates($id1,$newRow);
+			
+			redirect('ppeims/print_inventory_report_confirm/'.$id);
 		}else{redirect('ppeims/InvalidURL');}}
 		
 	public function issuance(){
