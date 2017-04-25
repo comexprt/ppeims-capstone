@@ -322,6 +322,10 @@ class Model_query extends CI_Model
 		public function getInventoryReportInfoDetails(){
 			$query = $this->db->query("SELECT * FROM `inventory_report_details` ");
 			$result = $query->result();return $result;}
+		
+		public function getDateCreate($data){
+			$query = $this->db->query("SELECT * FROM `inventory_report` where irid =  '".$data."' limit 1");
+			$result = $query->result();return $result;}
 			
 		public function getInventoryReportStatus($data){
 			$query = $this->db->query("update inventory_report set status = 0 where irid = '".$data."' ");}

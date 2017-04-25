@@ -101,8 +101,6 @@ include 'include/sidebar.php';
 											<tr>
 												<th class="col-md-1">No.</th>
 												<th>Report</th>
-												<th>Prepared By</th>
-												<th>Noted By</th>
 												<th>Status</th>
 												<th>Created</th>
 												<th class="col-md-1">View</th>
@@ -134,8 +132,7 @@ include 'include/sidebar.php';
 												?>
 												
 												</td>
-												<td><?= $row->prepared_by;?></td>
-												<td></td>
+												
 												<td>
 													<?php if($row->status == '1'): ?>
 													Pending
@@ -147,7 +144,7 @@ include 'include/sidebar.php';
 													<?php if($row->status == '1'): ?>
 													<a href="<?php echo base_url();?>ppeims/update_inventory_report/<?php echo $row->irid;?>" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-share-alt"></i> Resume</a>
 													<?php else: ?>
-													<?= $row->date_create;?>
+													<?= date('F d, Y',strtotime($row->date_create));?>
 													<?php endif; ?>
 												</td>
 												<td class="col-md-1">

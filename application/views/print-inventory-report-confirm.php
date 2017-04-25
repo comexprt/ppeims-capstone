@@ -99,7 +99,8 @@
 		</div>
 		<div class="print-preview-header-bottom text-center">
 			<h4>PERSONAL PROTECTIVE EQUIPMENT INVENTORY</h4>
-			<p>As of March 20, 2017</p>
+			<p>As of <?php foreach ($getDateCreate as $row) { echo date('F d, Y', strtotime($row->date_create));}?>
+			</p>
 		</div>
 		<div class="row">
 			<div class="col-md-10 col-md-offset-1">
@@ -111,7 +112,7 @@
 							</div>
 							<div class="col-md-4 text-right">
 								<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
-								<a href="#" data-toggle="modal" data-target="#addDelegates"  class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"  class="btn btn-info"> Settings</i></a>
+								<a href="#" data-toggle="modal" data-target="#addDelegates"  class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"  class="btn btn-info"></i> Settings</a>
 							</div>
 						</div>
 					</div>
@@ -148,76 +149,30 @@
 							<div class="col-md-12 text-right">
 								<a href="<?php echo base_url();?>ppeims/Inventory_Report" class="btn btn-primary">Done</a>
 							</div>
-s
+
 						</div>
 					</div>
 				</div>
-				<div class="table-responsive">
-					<table class="table table-bordered">
-						<thead>
-							<tr>
-								<th class="col-md-1">No.</th>
-								<th>Particulars</th>
-								<th>In Stock</th>
-								<th class="col-md-4">Remarks</th>
-							</tr>
-						</thead>
-						<tbody>
-						<?php 
-						$i=1;
-						foreach ($getInventoryReport as $row){
-						?>
-						
-								<tr>
-								<th class="col-md-1" scope="row"><?= $i++;?></th>
-								<td><?= $row->Particular;?></td>
-								<td><?= $row->In_Stock;?></td>
-								<td><?= $row->Remarks;?></td>
-							
-							</tr>
-						<?php }?>
-						</tbody>
-					</table>
-				</div>
-				<div class="panel-footer text-right">
-					<a href="<?php echo base_url();?>ppeims/Inventory_Report" class="btn btn-primary">Done</a>
-				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
-	</div>
-	<div class="print-preview-footer text-center">
-		<div class="print-preview-footer-left">
-			<p>Prepared by:</p>
-			<div class="print-preview-footer-name">
-				<p>RS LEMENCE</p>
-				<p>Safety Officer, Agus 6/7 HEPC</p>
-			</div>
-		</div>
-		<div class="print-preview-footer-right">
-			<p>Noted by:</p>
-			<div class="print-preview-footer-name">
-				<p>MB JABAY</p>
-				<p>OIC PTS, Agus 6/7 HEPC</p>
-=======
 		<div class="print-preview-footer text-center" style="text-transform:uppercase;">
-				<?php foreach ($getdelegates as $row){ ?>
-					<div class="print-preview-footer-left">
-						<p>Prepared by:</p>
-						<div class="print-preview-footer-name">
-							<p><?=$row->pname;?></p>
-							<p><?=$row->pby;?></p>
-						</div>
+			<?php foreach ($getdelegates as $row){ ?>
+				<div class="print-preview-footer-left">
+					<p>Prepared by:</p>
+					<div class="print-preview-footer-name">
+						<p><?=$row->pname;?></p>
+						<p><?=$row->pby;?></p>
 					</div>
-					<div class="print-preview-footer-right">
-						<p>Noted by:</p>
-						<div class="print-preview-footer-name">
-							<p><?=$row->nname;?></p>
-							<p><?=$row->nby;?></p>
-						</div>
-					</div>
-				<?php } ?>
 				</div>
+				<div class="print-preview-footer-right">
+					<p>Noted by:</p>
+					<div class="print-preview-footer-name">
+						<p><?=$row->nname;?></p>
+						<p><?=$row->nby;?></p>
+					</div>
+				</div>
+			<?php } ?>
+			</div>
 	</div>
 <div class="modal fade" id="addDelegates" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -226,36 +181,28 @@ s
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Settings</h4>
 			</div>
-			<div class="modal-body col-lg-12"  style="text-transform:uppercase;">
-			
-		
-				<div class="form-group">
+			<div class="modal-body">
+				<div class="row">
 				<?=form_open("ppeims/update_delegates/".$id);?>
 				<?php foreach ($getdelegates as $row){ ?>
-					<div class="col-lg-6">
+					<div class="col-md-6">
 						<label>Prepared by:</label>
-						<div>
-							<input class="form-control" type="text" name="pname" placeholder="Name" value="<?=$row->pname;?>" required>
-							<input class="form-control" type="text" name="pby" placeholder="Position" value="<?=$row->pby;?>" required>
-							
-						</div>
+						<input class="form-control margin-bottom-20" type="text" name="pname" placeholder="Name" value="<?=$row->pname;?>" required>
+						<input class="form-control" type="text" name="pby" placeholder="Position" value="<?=$row->pby;?>" required>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-md-6">
 						<label>Noted by:</label>
-						<div>
-							<input	class="form-control" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
-							<input  class="form-control" type="text" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
-						
-						</div>
+						<input	class="form-control margin-bottom-20" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
+						<input  class="form-control" type="text" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
 					</div>
 				<?php } ?>
-			</div>
+				</div>
 			</div>
 				
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
-					echo form_submit("loginSubmit","Save Changes"," class='btn btn-primary'");
+					echo form_submit("loginSubmit","Save"," class='btn btn-primary'");
 					echo form_close();
 				?>
 
