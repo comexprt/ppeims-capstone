@@ -148,7 +148,7 @@
 							<div class="col-md-12 text-right">
 								<a href="<?php echo base_url();?>ppeims/Inventory_Report" class="btn btn-primary">Done</a>
 							</div>
->>>>>>> 505122963b911b779795599f7cf6618bc634eb17
+s
 						</div>
 					</div>
 				</div>
@@ -258,7 +258,7 @@
 					echo form_submit("loginSubmit","Save Changes"," class='btn btn-primary'");
 					echo form_close();
 				?>
->>>>>>> 505122963b911b779795599f7cf6618bc634eb17
+
 			</div>
 		</div>
 	</div>
