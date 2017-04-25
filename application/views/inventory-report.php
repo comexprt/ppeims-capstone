@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 				<div class="row">
 				<div class="col-md-12">
 				<?php if($message){
-					  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
+					  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') !== false){
 				?>
 						<!-- Alert for success -->
 						<div id="success-alert" class="alert alert-success alert-dismissable" role="alert">
