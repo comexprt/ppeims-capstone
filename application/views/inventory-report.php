@@ -55,7 +55,7 @@ include 'include/sidebar.php';
 									<div class="col-md-4 text-right">
 									
 									<?php 
-									$count = count($getLastInventoryReport);
+									$count = count($getPendingInventoryReport);
 									
 									if ($count == 0): ?>
 									<?php echo form_open("ppeims/createinventoryreport"); ?>

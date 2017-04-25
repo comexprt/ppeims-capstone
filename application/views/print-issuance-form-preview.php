@@ -58,7 +58,6 @@ include 'include/sidebar.php';
 										</h1>
 									</div>
 									<div class="col-md-4">
-											<a href="<?php echo base_url();?>ppeims/Print_view_issuance/<?=$LastSId;?>/<?=$LastSId1;?>" class="btn btn-primary"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Print</a>
 										<div class="text-right">
 										<?php if ($LastSId1 == 3){ ?>
 											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>

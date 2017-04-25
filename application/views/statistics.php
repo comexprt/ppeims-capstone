@@ -2,6 +2,84 @@
 include 'include/header.php';
 include 'include/sidebar.php'; 
 ?>
+<script src="<?php echo base_url();?>graph_js/amcharts.js"></script>
+<script src="<?php echo base_url();?>graph_js/pie.js"></script>
+<script src="<?php echo base_url();?>graph_js/export.min.js"></script>
+<link rel="stylesheet" href="<?php echo base_url();?>graph_js/export.css" type="text/css" media="all" />
+<script src="<?php echo base_url();?>graph_js/light.js"></script>
+<style>
+#chartdiv {
+	width		: 100%;
+	height		: 400px;
+	font-size	: 11px;
+}						
+</style>
+
+<!-- Chart code -->
+<script>
+var chart = AmCharts.makeChart("chartdiv", {
+   "type": "pie",
+  "startDuration": 0,
+   "theme": "light",
+  "addClassNames": true,
+  "legend":{
+   	"position":"right",
+    "marginRight":100,
+    "autoMargins":false
+  },
+  "innerRadius": "30%",
+  "defs": {
+    "filter": [{
+      "id": "shadow",
+      "width": "200%",
+      "height": "200%",
+      "feOffset": {
+        "result": "offOut",
+        "in": "SourceAlpha",
+        "dx": 0,
+        "dy": 0
+      },
+      "feGaussianBlur": {
+        "result": "blurOut",
+        "in": "offOut",
+        "stdDeviation": 5
+      },
+      "feBlend": {
+        "in": "SourceGraphic",
+        "in2": "blurOut",
+        "mode": "normal"
+      }
+    }]
+  },
+  "dataProvider": [
+  <?php foreach ($getitemssummary as $row){ ?>
+  {
+    "Items": "<?php echo $row->Particulars;?>",
+    "Stock": <?php echo $row->Stock;?>
+  },
+  <?php } ?>
+  
+  ],
+  "valueField": "Stock",
+  "titleField": "Items",
+ 
+});
+
+chart.addListener("init", handleInit);
+
+chart.addListener("rollOverSlice", function(e) {
+  handleRollOver(e);
+});
+
+function handleInit(){
+  chart.legend.addListener("rollOverItem", handleRollOver);
+}
+
+function handleRollOver(e){
+  var wedge = e.dataItem.wedge.node;
+  wedge.parentNode.appendChild(wedge);
+}
+</script>
 	<div class="main">
 		<nav class="navbar navbar--blue navbar-static-top">
 			<div class="container-fluid">
@@ -48,50 +126,20 @@ include 'include/sidebar.php';
 					</div>
 					
 					<div class="row">
-						<center>
-							<div class="panel-body" style="width:50%;">
-								<canvas id="pieChart"></canvas>
+							<div id="chartdiv"></div>	
 							</div>
-						</center>
+
+				
 					</div>
 				</section>
 			</div>
 		</div>
 	</div>
 
+	
+</body>
 	<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
 	<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url();?>js/Chart.bundle.min.js"></script>
-	<!-- <script src="<?php echo base_url();?>js/script.js"></script> -->
-	<script>
-		var pieChartElement = $('#pieChart');
-
-		var data = {
-			labels: [
-				"Red",
-				"Blue",
-				"Yellow"
-			],
-			datasets: [
-				{
-					data: [300, 50, 100],
-					backgroundColor: [
-						"#FF6384",
-						"#36A2EB",
-						"#FFCE56"
-					],
-					hoverBackgroundColor: [
-						"FF6384",
-						"#36A2EB",
-						"#FFCE56"
-					]
-				}]
-		};
-
-		var pieChart = new Chart(pieChartElement, {
-			type: 'doughnut',
-			data: data
-
-		});
-	</script>
-</body>
+	
+</html>

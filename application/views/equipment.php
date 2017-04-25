@@ -243,9 +243,10 @@ include 'include/sidebar.php';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="unit">Unit*</label>
-							<select id="unit" class="form-control">
-								<option selected>pcs</option>
-								<option>pairs</option>
+							<select id="unit" name="unit" class="form-control">
+								<option selected value="pcs">pcs</option>
+								<option value="pairs">pairs</option>
+								<option value="set">set</option>
 							</select>
 						</div>
 					</div>

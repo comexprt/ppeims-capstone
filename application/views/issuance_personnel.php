@@ -50,7 +50,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-header">
-						<h1 class="page-title">Add Issuance</h1>
+						<h1 class="page-title">Issuance</h1>
 					</div>
 				</div>
 			</div>

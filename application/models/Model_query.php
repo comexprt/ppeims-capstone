@@ -262,6 +262,10 @@ class Model_query extends CI_Model
 		public function getLastInventoryReport(){
 			$query = $this->db->query("SELECT * FROM `inventory_report` where 1 ORDER BY irid DESC LIMIT 1");
 			$result = $query->result();return $result;}
+			
+		public function getPendingInventoryReport(){
+			$query = $this->db->query("SELECT * FROM `inventory_report` where status = 1 ORDER BY irid");
+			$result = $query->result();return $result;}
 		
 		public function getallitems(){
 			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 ORDER BY Particulars");
@@ -293,6 +297,17 @@ class Model_query extends CI_Model
 		
 		public function getitemsbatchinfo(){
 			$query = $this->db->query("SELECT *  FROM `updated_transaction_Details` WHERE 1 order by Tr_No");
+			$result = $query->result();return $result;}
+		
+		public function getitemssummary(){
+			$query = $this->db->query("SELECT Particulars, Stock FROM `equipement_inventory` WHERE Stock > 0 ORDER BY Stock DESC LIMIT 10");
+			$result = $query->result();return $result;}
+		
+		public function getitemssummaryannual(){
+			$query = $this->db->query("SELECT SUM(issued) as sum_issued ,YEAR(date_received) as date_received FROM item_issued GROUP by  YEAR(date_received) order by YEAR(date_received) desc");
+			$result = $query->result();return $result;}
+		public function getbatchsummaryannual(){
+			$query = $this->db->query("SELECT SUM(Added_S) as sum_batch ,YEAR(Tr_Date) as date_delivered FROM updated_transaction JOIN updated_transaction_details ON updated_transaction.Tr_No = updated_transaction_details.Tr_No GROUP by YEAR(Tr_Date) ORDER by YEAR(Tr_Date) DESC");
 			$result = $query->result();return $result;}
 		
 		public function getInventoryReportInfo(){

@@ -85,6 +85,7 @@ class ppeims extends CI_Controller {
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			if ($action =="add-ui") {$data['message']= $message;}else{$data['message'] = "";}
 			
+			$data['getPendingInventoryReport'] = $this->Model_query->getPendingInventoryReport();
 			$data['getEquipment'] = $this->Model_query->getEquipmentName();
 			$data['getLastInventoryReport'] = $this->Model_query->getLastInventoryReport();
 			$data['getInventoryReportInfo'] = $this->Model_query->getInventoryReportInfo();
@@ -140,7 +141,7 @@ class ppeims extends CI_Controller {
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			
-				$data['getEquipment'] = $this->Model_query->getEquipmentName();
+				$data['getitemssummary'] = $this->Model_query->getitemssummary();
 			
 			$this->load->view('statistics',$data);
 		}
@@ -151,7 +152,8 @@ class ppeims extends CI_Controller {
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			
-				$data['getEquipment'] = $this->Model_query->getEquipmentName();
+				$data['getitemssummaryannual'] = $this->Model_query->getitemssummaryannual();
+				$data['getbatchsummaryannual'] = $this->Model_query->getbatchsummaryannual();
 			
 			$this->load->view('statistics2',$data);
 		}
@@ -329,6 +331,26 @@ class ppeims extends CI_Controller {
 			$data['getIssuanceDistinctItemInfo'] = $this->Model_query->getIssuanceDistinctItemInfo($LastSId);
 		
 			$this->load->view('view-issuance-item',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
+		public function Print_view_issuance(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
+			$id = $this->uri->segment(3);
+			$id1 = $this->uri->segment(4);
+			
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
+			
+			
+			$LastSId = $id;
+			$LastSId1 = $id1;
+			$data['LastSId'] = $LastSId;
+			$data['LastSId1'] = $LastSId1;
+			$data['getIssuanceDistinctItem'] = $this->Model_query->getIssuanceDistinctItem($LastSId);
+			$data['getIssuanceDistinctItemInfo'] = $this->Model_query->getIssuanceDistinctItemInfo($LastSId);
+		
+			$this->load->view('print-view-issuance-item',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
 			
@@ -526,6 +548,17 @@ class ppeims extends CI_Controller {
 				 echo $Cur_date;
 				$this->Model_query->CompleteBatchItem($Cur_date,$id);
 				$message="An equipment batch has been completed."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/batch_equipment');
+			}else{redirect('ppeims/InvalidURL');}}
+	
+	public function CancelBatchItem(){
+	if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
+				$id = $this->uri->segment(3);
+				
+				 $Cur_date =  date('Y-m-d',time());
+				 echo $Cur_date;
+				$this->Model_query->CompleteBatchItem($Cur_date,$id);
+				$message="An Adjustment has been Cancelled  ..."; $this->session->set_flashdata('action','add-ui');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/batch_equipment');
 			}else{redirect('ppeims/InvalidURL');}}
 		
@@ -813,7 +846,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
-				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => "pcs","Remarks" => $this->input->post('Remarks'));
+				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('unit'),"Remarks" => $this->input->post('Remarks'));
 				$this->Model_query->addEquipment($newRow);
 				$message="$Particulars has been added."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
