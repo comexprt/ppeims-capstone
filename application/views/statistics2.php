@@ -83,7 +83,7 @@ var chart = AmCharts.makeChart("chartdiv", {
 
 var chart1 = AmCharts.makeChart("chartdiv1", {
 	"type": "serial",
-     "theme": "light",
+    "theme": "light",
 	"categoryField": "year",
 	"rotate": true,
 	"startDuration": 1,
@@ -165,43 +165,42 @@ var chart1 = AmCharts.makeChart("chartdiv1", {
 		
 		<div class="content">
 			<div class="container-fluid">
-			
 				<section class="section">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="row-header">
-								<h1 class="page-title">Graphs & Statistics</h1>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="col-md-3">
-								<a  href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie" class="btn btn-default">Summary</a>
-							</div>
-							
-							<div class="col-md-3">
-								<a  href="<?php echo base_url();?>ppeims/Graphs_Statistics_line" class="btn btn-primary">Performance</a>
-							
+								<h1 class="page-title">Graphs &amp; Statistics</h1>
 							</div>
 						</div>
 					</div>
-					
 					<div class="row">
-							<h3> Summary of Batch Annually</h3>
-							<center>
-								<div class="panel-body">
-									<div id="chartdiv1"></div>	
-								</div>
-							</center>
+						<div class="col-md-12 margin-bottom-20">
+							<a  href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie" class="btn btn-default">Summary</a>
+							<a  href="<?php echo base_url();?>ppeims/Graphs_Statistics_line" class="btn btn-primary">Performance</a>
+						</div>
 					</div>
 					<div class="row">
-							<h3> Summary of Issuance Annually</h3>
-							<center>
-								<div class="panel-body">
-									<div id="chartdiv"></div>	
-								</div>
-							</center>
+						<div class="col-md-12">
+							<ul class="nav nav-tabs nav-justified" role="tablist">
+								<li role="presentation" class="active"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">Batch</a></li>
+								<li role="presentation"><a href="#issuance" aria-controls="issuance" role="tab" data-toggle="tab">Issuance</a></li>
+							</ul>
+						</div>
 					</div>
-					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="tab-content">
+								<div id="batch" role="tabpanel" class="tab-pane active">
+									<h3>Summary of Batch Annually</h3>
+									<div id="chartdiv1"></div>
+								</div>
+								<div id="issuance" role="tabpanel" class="tab-pane">
+									<h3>Summary of Issuance Annually</h3>
+									<div id="chartdiv"></div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>

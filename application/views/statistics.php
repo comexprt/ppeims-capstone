@@ -105,7 +105,6 @@ function handleRollOver(e){
 		
 		<div class="content">
 			<div class="container-fluid">
-			
 				<section class="section">
 					<div class="row">
 						<div class="col-md-12">
@@ -113,23 +112,17 @@ function handleRollOver(e){
 								<h1 class="page-title">Graphs &amp; Statistics</h1>
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="col-md-3">
-								<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie" class="btn btn-primary">Summary</a>
-							</div>
-							
-							<div class="col-md-3">
-								<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_line" class="btn btn-default">Performance</a>
-							
-							</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie" class="btn btn-primary">Summary</a>
+							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_line" class="btn btn-default">Performance</a>
 						</div>
 					</div>
-					
 					<div class="row">
-							<div id="chartdiv"></div>	
-							</div>
-
-				
+						<div class="col-md-12">
+							<div id="chartdiv"></div>
+						</div>
 					</div>
 				</section>
 			</div>
@@ -141,5 +134,4 @@ function handleRollOver(e){
 	<script src="<?php echo base_url();?>js/jquery-3.1.1.min.js"></script>
 	<script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
 	<script src="<?php echo base_url();?>js/Chart.bundle.min.js"></script>
-	
 </html>
