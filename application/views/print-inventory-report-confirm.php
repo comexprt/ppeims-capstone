@@ -111,13 +111,14 @@
 							</div>
 							<div class="col-md-4 text-right">
 								<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
+								<a href="#" data-toggle="modal" data-target="#addDelegates"  class="btn btn-default"><i class="fa fa-cog" aria-hidden="true"  class="btn btn-info"> Settings</i></a>
 							</div>
 						</div>
 					</div>
 					<div class="table-responsive">
 									<table class="table table-bordered">
 										<thead>
-											<tr>
+											<tr>	
 												<th class="col-md-1">No.</th>
 												<th>Particulars</th>
 												<th>In Stock</th>
@@ -152,22 +153,67 @@
 				</div>
 			</div>
 		</div>
-		<div class="print-preview-footer text-center">
-			<div class="print-preview-footer-left">
-				<p>Prepared by:</p>
-				<div class="print-preview-footer-name">
-					<p>RS LEMENCE</p>
-					<p>Safety Officer, Agus 6/7 HEPC</p>
+		<div class="print-preview-footer text-center" style="text-transform:uppercase;">
+				<?php foreach ($getdelegates as $row){ ?>
+					<div class="print-preview-footer-left">
+						<p>Prepared by:</p>
+						<div class="print-preview-footer-name">
+							<p><?=$row->pname;?></p>
+							<p><?=$row->pby;?></p>
+						</div>
+					</div>
+					<div class="print-preview-footer-right">
+						<p>Noted by:</p>
+						<div class="print-preview-footer-name">
+							<p><?=$row->nname;?></p>
+							<p><?=$row->nby;?></p>
+						</div>
+					</div>
+				<?php } ?>
 				</div>
+	</div>
+<div class="modal fade" id="addDelegates" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Settings</h4>
 			</div>
-			<div class="print-preview-footer-right">
-				<p>Noted by:</p>
-				<div class="print-preview-footer-name">
-					<p>MB JABAY</p>
-					<p>OIC PTS, Agus 6/7 HEPC</p>
-				</div>
+			<div class="modal-body col-lg-12"  style="text-transform:uppercase;">
+			
+		
+				<div class="form-group">
+				<?=form_open("ppeims/update_delegates/".$id);?>
+				<?php foreach ($getdelegates as $row){ ?>
+					<div class="col-lg-6">
+						<label>Prepared by:</label>
+						<div>
+							<input class="form-control" type="text" name="pname" placeholder="Name" value="<?=$row->pname;?>" required>
+							<input class="form-control" type="text" name="pby" placeholder="Position" value="<?=$row->pby;?>" required>
+							
+						</div>
+					</div>
+					<div class="col-lg-6">
+						<label>Noted by:</label>
+						<div>
+							<input	class="form-control" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
+							<input  class="form-control" type="text" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
+						
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+			</div>
+				
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<?php
+					echo form_submit("loginSubmit","Save Changes"," class='btn btn-primary'");
+					echo form_close();
+				?>
 			</div>
 		</div>
 	</div>
+</div>
 <?php 
 include 'include/footer.php'; ?>
