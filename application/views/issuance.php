@@ -10,7 +10,7 @@ include 'include/sidebar.php';
 				<ul class="navbar-breadcrumbs list-inline">
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
-					<li>Issuance</li>
+					<li>Equipment Issuance</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">

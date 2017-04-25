@@ -241,6 +241,7 @@ class ppeims extends CI_Controller {
 	public function update_issuance(){
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
 			$id = $this->uri->segment(3);
+			$id1 = $this->uri->segment(4);
 			
 			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
 			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
@@ -262,7 +263,9 @@ class ppeims extends CI_Controller {
 				if($result){ $Id_array = array(); foreach($result as $row){$Id_array = array( 'isno' => $row->isno);}}else{$Id_array = array();$Id_array = array( 'isno' =>0);}
 				$LastSId = $Id_array ['isno'];
 			// echo $LastSId;
+				$LastSId1 = $id1;
 			$data['LastSId'] = $LastSId;
+			$data['LastSId1'] = $LastSId1;
 			$data['getIssuedOnPersonnel'] = $this->Model_query->getIssuedOnPersonnel($LastSId);
 			$data['getLastIssuanceData'] = $this->Model_query->getLastIssuanceData($LastSId);
 			$data['getUpdatedStock'] = $this->Model_query->getUpdatedStock();

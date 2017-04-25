@@ -91,83 +91,78 @@
 </head>
 
 <div class="container">
-		<div class="print-preview-header-top text-center">
-			<img src="<?php echo base_url(); ?>images/logo.png">
-			<p><small>NATIONAL POWER CORPORATION</small></p>
-			<p>AGUS 6/7 HYDROELECTRIC PLANT COMPLEX</p>
-			<p><small>MINDANAO GENERATION</small></p>
-		</div>
-		<div class="print-preview-header-bottom text-center">
-			<h4>PERSONAL PROTECTIVE EQUIPMENT INVENTORY</h4>
-			<p>As of March 20, 2017</p>
-		</div>
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-md-8">
-								<h4>Report Preview</h4>
-							</div>
-							<div class="col-md-4 text-right">
-								<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
-							</div>
+	<div class="print-preview-header-top text-center">
+		<img src="<?php echo base_url(); ?>images/logo.png">
+		<p><small>NATIONAL POWER CORPORATION</small></p>
+		<p>AGUS 6/7 HYDROELECTRIC PLANT COMPLEX</p>
+		<p><small>MINDANAO GENERATION</small></p>
+	</div>
+	<div class="print-preview-header-bottom text-center">
+		<h4>PERSONAL PROTECTIVE EQUIPMENT INVENTORY</h4>
+		<p>As of March 20, 2017</p>
+	</div>
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-8">
+							<h4>Report Preview</h4>
+						</div>
+						<div class="col-md-4 text-right">
+							<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
 						</div>
 					</div>
-					<div class="table-responsive">
-									<table class="table table-bordered">
-										<thead>
-											<tr>
-												<th class="col-md-1">No.</th>
-												<th>Particulars</th>
-												<th>In Stock</th>
-												<th class="col-md-4">Remarks</th>
-											</tr>
-										</thead>
-										<tbody>
-										<?php 
-										$i=1;
-										foreach ($getInventoryReport as $row){
-										?>
-										
-												<tr>
-												<th class="col-md-1" scope="row"><?= $i++;?></th>
-												<td><?= $row->Particular;?></td>
-												<td><?= $row->In_Stock;?></td>
-												<td><?= $row->Remarks;?></td>
-											
-											</tr>
-										<?php }?>
-										</tbody>
-									</table>
-								</div>
-					<div class="panel-footer">
-						<div class="row">
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th class="col-md-1">No.</th>
+								<th>Particulars</th>
+								<th>In Stock</th>
+								<th class="col-md-4">Remarks</th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php 
+						$i=1;
+						foreach ($getInventoryReport as $row){
+						?>
+						
+								<tr>
+								<th class="col-md-1" scope="row"><?= $i++;?></th>
+								<td><?= $row->Particular;?></td>
+								<td><?= $row->In_Stock;?></td>
+								<td><?= $row->Remarks;?></td>
 							
-							<div class="col-md-12 text-right">
-								<a href="<?php echo base_url();?>ppeims/Inventory_Report" class="btn btn-primary">Done</a>
-							</div>
-						</div>
-					</div>
+							</tr>
+						<?php }?>
+						</tbody>
+					</table>
 				</div>
-			</div>
-		</div>
-		<div class="print-preview-footer text-center">
-			<div class="print-preview-footer-left">
-				<p>Prepared by:</p>
-				<div class="print-preview-footer-name">
-					<p>RS LEMENCE</p>
-					<p>Safety Officer, Agus 6/7 HEPC</p>
-				</div>
-			</div>
-			<div class="print-preview-footer-right">
-				<p>Noted by:</p>
-				<div class="print-preview-footer-name">
-					<p>MB JABAY</p>
-					<p>OIC PTS, Agus 6/7 HEPC</p>
+				<div class="panel-footer text-right">
+					<a href="<?php echo base_url();?>ppeims/Inventory_Report" class="btn btn-primary">Done</a>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="print-preview-footer text-center">
+		<div class="print-preview-footer-left">
+			<p>Prepared by:</p>
+			<div class="print-preview-footer-name">
+				<p>RS LEMENCE</p>
+				<p>Safety Officer, Agus 6/7 HEPC</p>
+			</div>
+		</div>
+		<div class="print-preview-footer-right">
+			<p>Noted by:</p>
+			<div class="print-preview-footer-name">
+				<p>MB JABAY</p>
+				<p>OIC PTS, Agus 6/7 HEPC</p>
+			</div>
+		</div>
+	</div>
+</div>
 <?php 
 include 'include/footer.php'; ?>

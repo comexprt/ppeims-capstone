@@ -1,134 +1,190 @@
-<?php 
-include 'include/header.php';
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Document</title>
+	
+	<link rel="stylesheet" href="<?php echo base_url();?>css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>css/style.css">
+
+	<style>
+		body {
+			background-color: #e1e1e1;
+			padding-top: 50px;
+		}
+		.print-preview-header-top,
+		.print-preview-footer {
+			display: none;
+		}
+		.print-preview-header-bottom {
+			margin-bottom: 20px;
+		}
+		.print-preview-header-bottom h4 {
+			font-size: 22px;
+			font-family: 'source_sans_probold';
+		}
+		@media print {
+			@page {
+				margin: 0;
+			}
+			body {
+				font-family: sans-serif;
+				padding-top: 0;
+				margin: 40px 20px;
+			}
+			.panel-heading,
+			.panel-footer {
+				display: none;
+			}
+			.container {
+				width: 100%;
+			}
+			.print-preview-header-top {
+				position: relative;
+				display: block;
+				width: 100%;
+				margin-bottom: 20px;
+				padding-top: 10px;
+			}
+			.print-preview-header-top img {
+				display: block;
+				width: 64px;
+				height: auto;
+				position: absolute;
+				top: 0;
+				left: 12%;
+			}
+			.print-preview-header-top p {
+				margin-bottom: 3px;
+				font-size: 16px;
+				line-height: 16px;
+			}
+			.print-preview-header-bottom h4 {
+				font-size: 18px;
+				margin-bottom: 5px;
+			}
+			.print-preview-footer {
+				width: 100%;
+				display: block;
+			}
+			.print-preview-footer-left,
+			.print-preview-footer-right {
+				width: 50%;
+				float: left;
+			}
+
+			.print-preview-footer-left p,
+			.print-preview-footer-right p {
+				margin-bottom: 30px;
+			}
+
+			.print-preview-footer-name p:first-child {
+				margin-bottom: 0;
+				font-weight: 700;
+				text-transform: uppercase;
+			}
+		}
+	</style>
+</head>
 
 
-<div class="main">
-		<nav class="navbar navbar--blue navbar-static-top">
-			<div class="container-fluid">
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					<div class="navbar-left">
-						<ul class="navbar-breadcrumbs list-inline">
-							<li><a href="index.html">Dashboard</a></li>
-							<li>/</li>
-							<li><a href="<?php echo base_url();?>ppeims/issuance/">Issuance</a></li>
-							<li>/</li>
-							<li>
-								<?php
-											if ($LastSId < 10){
-											echo "00".$LastSId;
-										}
-										elseif ($LastSId < 100 && $LastSId >= 10){
-											echo "0".$LastSId;
-										}else {echo $LastSId; }
-										?>
-							</li>
-						</ul>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lemence <spa class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Log Out</a></li>
-							</ul>
-						</li>
-					</ul>
+<div class="container">
+	<div class="content">
+		<div class="container-fluid">
+			<section class="section">
+				<div class="print-preview-header-top text-center">
+					<img src="<?php echo base_url(); ?>images/logo.png">
+					<p><small>NATIONAL POWER CORPORATION</small></p>
+					<p>AGUS 6/7 HYDROELECTRIC PLANT COMPLEX</p>
+					<p><small>MINDANAO GENERATION</small></p>
 				</div>
-			</div>
-		</nav>
-		<div class="content">
-			<div class="container-fluid">
-				<section class="section">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row-header">
+				<div class="print-preview-header-bottom text-center">
+					<h4>
+						<?php if($LastSId < 10): ?>
+							PERSONAL PROTECTIVE EQUIPMENT ISSUANCE <?php echo '00' . $LastSId; ?>
+						<?php elseif($LastSId < 100 && $LastSId >= 10): ?>
+							Issuance <?php echo '0' . $LastSId; ?>
+						<?php else: ?>
+							PERSONAL PROTECTIVE EQUIPMENT ISSUANCE <?php echo $LastSId; ?>
+						<?php endif; ?>
+					</h4>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">
 								<div class="row">
 									<div class="col-md-8">
-										<h1 class="page-title">Issuance
-										<?php
-											if ($LastSId < 10){
-											echo "00".$LastSId;
-										}
-										elseif ($LastSId < 100 && $LastSId >= 10){
-											echo "0".$LastSId;
-										}else {echo $LastSId; }
-										?>
-										
-										</h1>
+										<h4>Issuance Form Preview</h4>
 									</div>
-									<div class="col-md-4">
-										<div class="text-right">
-										<?php if ($LastSId1 == 3){ ?>
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-success"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
-										<?php }elseif ($LastSId1 == 2){ ?>
-											<a href="<?php echo base_url();?>ppeims/update_issuance/<?=$LastSId;?>" class="btn btn-warning"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> Resume</a>
-										<?php }else{ ?>
-											
-										<?php } ?>
-										</div>
+									<div class="col-md-4 text-right">
+										<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print</a>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel-group panel-group-issuance" id="accordion" role="tablist" aria-multiselectable="true">
-							<?php foreach ($getIssuanceDistinctItem as $row){ ?>
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" id="headingOne">
-										<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$row->EI_No;?>" aria-expanded="true" aria-controls="collapseOne">
-											<span><?=$row->particulars;?></span>
-											<span><i class="glyphicon glyphicon-menu-down" aria-hidden="true"></i></span>
-										</a>
-									</div>
-									<div id="collapse<?=$row->EI_No;?>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-										<div class="table-responsive">
-											<table class="table table-bordered">
-												<thead>
-													<tr>
-														<th>No.</th>
-														<th>Personnel</th>
-														<th>Work Center</th>
-														<th>Issued</th>
-														<th>Received</th>
-													</tr>
-												</thead>
-												<tbody>
-												<?php $i = 1; 
-												foreach ($getIssuanceDistinctItemInfo as $row1) { 
-												if ($row->EI_No != $row1->EI_No){}else{
-												?>
-													<tr>
-														<th scope="row"><?=$i++;?></th>
-														<td><?php
+							<div class="table-responsive">
+								<table class="table table-bordered">
+									<thead>
+										<th>No.</th>
+										<th>Personnel</th>
+										<th>Work Center</th>
+										<th>Issued</th>
+										<th>Received</th>
+									</thead>
+									<tbody>
+									<?php foreach($getIssuanceDistinctItem as $row): ?>
+										<tr>
+											<th class="text-center" colspan="5">Issued <?php echo $row->particulars; ?></th>
+										</tr>
+										<?php 
+											$i = 1;
+											foreach($getIssuanceDistinctItemInfo as $row1): ?>
+											<?php if($row->EI_No == $row1->EI_No): ?>
+											<tr>
+												<th scope="row"><?php echo $i++; ?></th>
+												<td>
+													<?php
 														$PersonnelName=explode ("-",$row1->personnel_name);
-														 $Mname=$PersonnelName[2];
-														 echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0]."."; 														
-														 ?></td>
-														<td><?=$row1->work_center;?></td>
-														<td><?=$row1->issued;?></td>
-														<td><?=$row1->date_received;?></td>
-													</tr>
-												<?php }} ?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-							<?php } ?>
+														$Mname=$PersonnelName[2];
+														echo $PersonnelName[0].", ".$PersonnelName[1].". ".$Mname[0]."."; 
+													?>
+												</td>
+												<td><?php echo $row1->work_center; ?></td>
+												<td><?php echo $row1->issued; ?></td>
+												<td>
+													<?php if($row1->date_received != '0000-00-00'): ?>
+														<?php echo $row1->date_received; ?>
+													<?php endif; ?>
+												</td>
+											</tr>
+											<?php endif;
+											endforeach; ?>
+									<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+							<div class="panel-footer text-right">
+								<a href="<?php echo base_url(); ?>ppeims/issuance" class="btn btn-primary">Done</a>
 							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<a href="<?php echo base_url();?>ppeims/issuance/" role="button" class="btn btn-default">Back</a>
+				</div>
+				<div class="print-preview-footer">
+					<div class="print-preview-footer-left">
+						<p>Prepared by:</p>
+						<div class="print-preview-footer-name">
+							<p>RS LEMENCE</p>
+							<p>Safety Officer, Agus 6/7 HEPC</p>
 						</div>
 					</div>
-				</section>
-			</div>
+				</div>
+			</section>
 		</div>
 	</div>
+</div>
 	
 <?php 
 include 'include/footer.php';

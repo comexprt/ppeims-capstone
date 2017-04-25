@@ -10,9 +10,9 @@ include 'include/sidebar.php';
 				<ul class="navbar-breadcrumbs list-inline">
 					<li><a href="index.html">Dashboard</a></li>
 					<li>/</li>
-					<li><a href="<?php echo base_url(); ?>/issuance">Issuance</a></li>
+					<li><a href="<?php echo base_url(); ?>ppeims/issuance">Equipment Issuance</a></li>
 					<li>/</li>
-					<li>Add Issuance</li>
+					<li>Issuance</li>
 				</ul>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
@@ -64,7 +64,7 @@ include 'include/sidebar.php';
 									<button type="button" data-toggle="modal" data-target="#addPersonnelModal" class="btn btn-primary">Add Personnel</button>
 								</div>
 								<div class="col-md-6 text-right">
-									<button type="button" class="btn btn-info" onclick="window.print();"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Form</button>
+									<a href="<?php echo base_url(); ?>ppeims/Print_view_issuance/<?php echo $LastSId; ?>/<?php echo $LastSId1; ?>" class="btn btn-primary">Print Preview</a>
 								</div>
 							</div>
 						</div>
