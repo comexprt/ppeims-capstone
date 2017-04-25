@@ -32,23 +32,27 @@ include 'include/sidebar.php';
 <div class="content">
 	<div class="container-fluid">
 		<section class="section">
-			<div class="row">
-			<div class="col-md-12">
-			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'issued') !== false || strpos($message, 'removed') !== false){
-			?>
-					<!-- Alert for success -->
-					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<strong>Success!</strong> <?php echo $message;?>
-					</div><?php }else{?>
-					<div class="alert alert-danger alert-dismissable" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<strong>Success!</strong> <?php echo $message;?>
-					</div>
-			<?php }} else{}?>
-				</div>
-			</div>
+			<!-- <div class="row"> -->
+			<!-- <div class="col-md-12"> -->
+			<?php // if($message){
+				  // if (strpos($message, 'added') !== false || strpos($message, 'issued') !== false || strpos($message, 'removed') !== false){
+					?>
+					
+					<!-- <div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert"> -->
+						<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+						<!-- <strong>Success!</strong> <?php echo $message;?> -->
+					<!-- </div> -->
+
+					<?php // }else{?>
+					
+					<!-- <div class="alert alert-danger alert-dismissable" role="alert"> -->
+						<!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+						<!-- <strong>Success!</strong> <?php echo $message;?> -->
+					<!-- </div> -->
+					
+					<?php // }} else{}?>
+				<!-- </div> -->
+			<!-- </div> -->
 			<div class="row">
 				<div class="col-md-12">
 				<?php
@@ -184,7 +188,6 @@ include 'include/sidebar.php';
 								<tr>
 									<th class="col-md-1">Select</th>
 									<th>Particulars</th>
-									<th class="col-md-1">Unit</th>
 									<th>In Stock</th>
 								</tr>
 							</thead>
@@ -202,7 +205,6 @@ include 'include/sidebar.php';
 									
 									</td>
 									<td><?= $row->Particulars; ?></td>
-									<td><?= $row->Unit; ?></td>
 									<td>
 										<?php if ($row->Stock == 0){?> <span class="label label-danger">Out Of Stock</span> <?php }else{echo $row->Stock." ".$row->Unit;}?>
 									</td>

@@ -34,7 +34,7 @@ include 'include/sidebar.php';
 					<div class="row">
 					<div class="col-md-12">
 					<?php if($message){
-						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'completed') !== false){
+						  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'completed') !== false || strpos($message, 'deleted') !== false){
 					?>
 							<!-- Alert for success -->
 							<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -100,7 +100,7 @@ include 'include/sidebar.php';
 								</div>
 							</div>
 						</div>
-						<div class="table-responsive">
+						<div class="table-responsive max-height-400">
 							<table class="table table-bordered">
 								<thead>
 									<tr>

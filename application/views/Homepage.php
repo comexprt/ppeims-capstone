@@ -96,7 +96,7 @@ foreach ($getitemexpiredcount as $row){
 										</div>
 									</div>
 								</div>
-								<div class="table-responsive max-height-500">
+								<div class="table-responsive max-height-400">
 									<table class="table table-bordered">
 										<thead>
 											<tr>
@@ -113,9 +113,16 @@ foreach ($getitemexpiredcount as $row){
 											<tr>
 												<th scope="row"><?=$i++;?></th>
 												<td><?=$row->Particulars;?></td>
-												<td><?=$row->Stock." ".$row->Unit;?></td>
+												<td>
+													<?php if($row->Stock > 0): ?>
+														<?=$row->Stock." ".$row->Unit;?>
+													<?php else: ?>
+														<span class="label label-danger">Out of Stock</span>
+													<?php endif; ?>
+												</td>
 											
-												<td><?php
+												<td>
+												<?php
 												foreach ($getallissueditems as $row1) {
 													if ($row->EI_No == $row1->EI_No){
 														echo $row1->sum_issued." ".$row->Unit;
@@ -161,7 +168,13 @@ foreach ($getitemexpiredcount as $row){
 									<tr>
 										<th scope="row"><?=$i++;?></th>
 										<td><?=$row->Particulars;?></td>
-										<td><?=$row->Stock." ".$row->Unit;?> </td>
+										<td>
+											<?php if($row->Stock > 0): ?>
+												<?=$row->Stock." ".$row->Unit;?>
+											<?php else: ?>
+												<span class="label label-danger">Out of Stock</span>
+											<?php endif; ?>
+										</td>
 										<td><?=$row->Re_Ordering_Pt." ".$row->Unit;?> </td>
 									</tr>
 								<?php } ?>
