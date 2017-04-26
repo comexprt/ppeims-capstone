@@ -86,22 +86,10 @@ include 'include/sidebar.php';
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-md-4">
-									<label for="search-batch" class="sr-only">Search Issuance</label>
-									<div class="input-group">
-										<input type="search" id="search-batch" class="form-control" placeholder="Search issuance...">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i> <span class="sr-only">Search</span></button>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="table-responsive max-height-400">
-							<table class="table table-bordered">
+					<div class="panel panel-default" style="padding:1%;">
+								
+								<div class="dataTable_wrapper">
+									<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
 								<thead>
 									<tr>
 										<th>No.</th>

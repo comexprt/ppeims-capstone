@@ -63,41 +63,26 @@ include 'include/sidebar.php';
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-md-4">
-									<label for="search-item" class="sr-only">Search Item</label>
-									<div class="input-group">
-										<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="button">
-												<i class="glyphicon glyphicon-search"></i>
-												<span class="sr-only">Search</span>
-											</button>
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="table-responsive max-height-400">
-							<table class="table table-bordered">
-								<thead>
-									<tr>
-										<th class="col-md-1">No.</th>
-										<th>Particulars</th>
-										<th>Unit</th>
-										<th>Description</th>
-										<th class="col-md-1">Edit</th>
-										<th class="col-md-1">Delete</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php
+						
+								<div class="dataTable_wrapper">
+									<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
+										<thead>
+											<tr>
+												<th class="col-md-1"><center>No.</center></th>
+												<th>Particulars</th>
+												<th>Unit</th>
+												<th>Description</th>
+												<th class="col-md-1">Edit</th>
+												<th class="col-md-1">Delete</th>
+											</tr>
+										</thead>
+										
+										<tbody>
+											<?php
 									$i=1;
 									foreach ($getEquipment as $row) : ?>
 									<tr>
-										<th class="col-md-1" scope="row"><?=$i++;?></th>
+										<th class="col-md-1" scope="row"><center><?=$i++;?><center></th>
 										<td><?=$row->Particulars;?></td>
 										<td><?=$row->Unit;?></td>
 										<td><?=$row->Description;?></td>
@@ -115,10 +100,12 @@ include 'include/sidebar.php';
 										</td>
 									</tr>
 									<?php endforeach; ?>
-								</tbody>
-							</table>
-						</div>
-					</div>
+									</tbody>
+									</table> 
+									 
+								</div>
+							
+                           
 				</div>
 			</div>
 		</section>
