@@ -12,7 +12,7 @@ include 'include/sidebar.php';
 					<li>/</li>
 					<li><a href="<?php echo base_url(); ?>ppeims/batch_equipment">Batch</a></li>
 					<li>/</li>
-					<li>Add Batch</li>
+					<li>Batch</li>
 				</ul>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
@@ -55,7 +55,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-header">
-						<h1 class="page-title">Add Batch</h1>
+						<h1 class="page-title">Batch</h1>
 					</div>
 				</div>
 			</div>
