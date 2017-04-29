@@ -10,7 +10,7 @@ include 'include/sidebar.php';
 				<ul class="navbar-breadcrumbs list-inline">
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
-					<li>Equipment</li>
+					<li>PPE</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -50,11 +50,11 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-8">
-								<h1 class="page-title">Equipment</h1>
+								<h1 class="page-title">PPE</h1>
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Equipment</button>
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add PPE</button>
 								</div>
 							</div>
 						</div>

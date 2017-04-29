@@ -118,7 +118,7 @@ include 'include/sidebar.php';
 					<input type="hidden" value="add-group" name="access">
 					<input type="hidden" value="<?php echo $row->G_No;?>" name="G_No">
 					<label for="ename">Work Center Name*</label>
-					<input type="text" class="form-control" value="<?php echo $row->GroupName;?>" name="GroupName">
+					<input type="text" class="form-control" value="<?php echo $row->GroupName;?>" name="GroupName" required>
 				</div>
 				<div class="form-group">
 					<div class="form-group">
@@ -184,7 +184,7 @@ include 'include/sidebar.php';
 				<div class="form-group">
 					<input type="hidden" value="add-group" name="access">
 					<label for="ename">Work Center Name*</label>
-					<input type="text" class="form-control" name="GroupName">
+					<input type="text" class="form-control" name="GroupName" required>
 				</div>
 				<div class="form-group">
 					<div class="form-group">

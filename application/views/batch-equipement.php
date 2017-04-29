@@ -50,7 +50,7 @@ include 'include/sidebar.php';
 					</div>
 						<div class="row">
 							<div class="col-md-8">
-								<h1 class="page-title">Equipment Batch</h1>
+								<h1 class="page-title">PPE Batch</h1>
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
