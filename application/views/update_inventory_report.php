@@ -78,7 +78,7 @@ include 'include/sidebar.php';
 												<th>Particulars</th>
 												<th>In Stock</th>
 												<th>Remarks</th>
-												<th>Add</th>
+												<th>Add/Edit</th>
 											</tr>
 										</thead>
 										<tbody>

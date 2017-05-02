@@ -70,7 +70,7 @@ include 'include/sidebar.php';
 				<div class="col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<button type="button" data-toggle="modal" data-target="#addEquipmentModal" class="btn btn-primary">Add Equipment</button>
+							<button type="button" data-toggle="modal" data-target="#addEquipmentModal" class="btn btn-primary">Add PPE</button>
 						</div>
 						<div class="table-responsive">
 							<table class="table table-bordered">

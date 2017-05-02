@@ -12,7 +12,7 @@ include 'include/sidebar.php';
 					<li>/</li>
 					<li><a href="<?php echo base_url(); ?>ppeims/batch_equipment">Batch</a></li>
 					<li>/</li>
-					<li>Batch</li>
+					<li>Batch Details</li>
 				</ul>
 			</div>
 			<ul class="nav navbar-nav navbar-right">
@@ -55,7 +55,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row-header">
-						<h1 class="page-title">Batch</h1>
+						<h1 class="page-title">Batch Details</h1>
 					</div>
 				</div>
 			</div>
@@ -66,7 +66,7 @@ include 'include/sidebar.php';
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-md-6">
-									<button type="button" data-toggle="modal" data-target="#addPersonnelModal" class="btn btn-primary">Add Equipment</button>
+									<button type="button" data-toggle="modal" data-target="#addPersonnelModal" class="btn btn-primary">Add PPE</button>
 								</div>
 								
 							</div>
@@ -81,7 +81,7 @@ include 'include/sidebar.php';
 										<th>Added</th>
 										<th>Threshold</th>
 										<th>Expiry</th>
-										<th class="col-md-1">Add</th>
+										<th class="col-md-1">Add/Edit</th>
 										<th class="col-md-1">Remove</th>
 									</tr>
 								</thead>
