@@ -792,7 +792,7 @@ class ppeims extends CI_Controller {
 					$message="$LnameLname, $Fname $Mname[0]. has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				}else{
 					
-					$message="$LnameLname, $Fname $Mname[0]. already exist ..."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+					$message="$LnameLname, $Fname $Mname[0]. already exist."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				}
 				
 				$this->session->set_flashdata('GroupName',"All");
@@ -814,7 +814,7 @@ class ppeims extends CI_Controller {
 					$message="$Lname, $Fname $Mname[0]. has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 				}else{
 					
-					$message="Personel named: $Lname, $Fname $Mname[0]. already exist ..."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+					$message="Personel named: $Lname, $Fname $Mname[0]. already exist."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
 					
 				}
 				
@@ -857,7 +857,7 @@ class ppeims extends CI_Controller {
 					$this->Model_query->addGroupName($newRow);
 					$message="$GroupName has been added."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				}else{
-					$message="$GroupName already exist ..."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+					$message="$GroupName already exist."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				}
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
@@ -872,7 +872,7 @@ class ppeims extends CI_Controller {
 					$this->Model_query->updateGroupName($G_No,$newRow);
 				$message="$GroupName has been updated."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				}else{
-					$message="Work Center Named: $GroupName already exist ..."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+					$message="$GroupName already exist."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				}
 				
 				redirect('ppeims/personnel_group');
@@ -913,7 +913,7 @@ class ppeims extends CI_Controller {
 				$this->Model_query->addEquipment($newRow);
 				$message="$Particulars has been added."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				}else{
-				$message="$Particulars is already exist ..."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars already exist."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				}
 				
 				redirect('ppeims/equipment');
@@ -930,7 +930,7 @@ class ppeims extends CI_Controller {
 				$this->Model_query->updateEquipment($EI_No,$newRow);
 				$message="$Particulars has been updated."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				}else{
-				$message="Particulars name set on $Particulars already exist ..."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars already exist."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				}
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}

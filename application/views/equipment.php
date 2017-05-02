@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false){
+				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') !== false){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -40,7 +40,7 @@ include 'include/sidebar.php';
 					</div><?php }else{?>
 					<div class="alert alert-danger alert-dismissable alert-auto-dismiss" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<strong>Success!</strong> <?=$message;?>
+						<strong>Error!</strong> <?=$message;?>
 					</div>
 			<?php }} else{}?>
 				</div>
