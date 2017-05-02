@@ -187,13 +187,22 @@
 				<?php foreach ($getdelegates as $row){ ?>
 					<div class="col-md-6">
 						<label>Prepared by:</label>
-						<input class="form-control margin-bottom-20" type="text" name="pname" placeholder="Name" value="<?=$row->pname;?>" required>
-						<input class="form-control" type="text" name="pby" placeholder="Position" value="<?=$row->pby;?>" required>
+						<br></br>
+						<center>
+						<p style="margin-top:-20px;"><code style="font-size:15px;font-weight:bold;color:#000000;text-decoration:underline;background-color:#FFFFFF;"><?=$row->pname;?></code><br>NAME</p>
+						
+						<p style="margin-top:5px;"><code style="font-size:15px;font-weight:bold;color:#000000;text-decoration:underline;background-color:#FFFFFF;"><?=$row->pby;?> </code><br>POSITION</p>
+						
+						</center>
 					</div>
 					<div class="col-md-6">
 						<label>Noted by:</label>
+						<center>
 						<input	class="form-control margin-bottom-20" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
+						<p style="margin-top:-20px;">Name</p>
 						<input  class="form-control" type="text" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
+						<p>Position</p>
+						</center>
 					</div>
 				<?php } ?>
 				</div>

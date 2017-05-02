@@ -166,9 +166,11 @@ include 'include/sidebar.php';
 			</div>
 			<div class="modal-body">
 				<p>Select the personnel you want to add in this issuance.</p>
-				<div class="panel panel-default">
-					<div class="table-responsive max-height-300">
-						<table class="table table-bordered">
+							<form action="<?php echo base_url();?>ppeims/addPersonnelIssued" method="POST">
+								<input type="hidden" value="add-ui" name="access">
+								<input type="hidden" value="<?= $LastSId; ?>" name="LastSId">
+				<div class="dataTable_wrapper">
+									<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
 							<thead>
 								<tr>
 									<th class="col-md-1">Select</th>
@@ -177,9 +179,6 @@ include 'include/sidebar.php';
 								</tr>
 							</thead>
 							<tbody>
-							<?php echo form_open("ppeims/addPersonnelIssued"); ?>
-								<input type="hidden" value="add-ui" name="access">
-								<input type="hidden" value="<?= $LastSId; ?>" name="LastSId">
 							<?php 
 							foreach ($getPersonnelName as $row){ ?>
 							
@@ -200,19 +199,12 @@ include 'include/sidebar.php';
 							</tbody>
 						</table>
 					</div>
-				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<?php 
-					$data = [
-						'class' => "btn btn-primary pull-right",
-						'title' => 'Add Personnel',
-						'type' => 'submit'
-					];
-					echo form_button($data, 'Add');
-					echo form_close();
-				?>
+			
+					<input type="submit" class="btn btn-primary pull-right" value="Add">
+			</form>
 			</div>
 		</div>
 	</div>

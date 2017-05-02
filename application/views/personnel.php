@@ -320,6 +320,9 @@ include 'include/sidebar.php';
 										<td><?=$row1->date_received;?></td>
 										<td><?=$row1->particulars;?></td>
 										<td><?=$row1->issued." ".$row1->unit;?></td>
+										<td>
+											<a type="button" class="btn btn-default btn-xs" href="<?php echo base_url();?>ppeims/view_issuance/<?= $row1->isno; ?>/<?= $row1->status; ?>"><i class="glyphicon glyphicon-share-alt" aria-hidden="true"></i> <span class="sr-only">View</span></a>
+										</td>
 									</tr>
 								<?php } endforeach; ?>
 								</tbody>

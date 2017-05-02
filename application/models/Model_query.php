@@ -22,7 +22,23 @@ class Model_query extends CI_Model
 					return false;
 				}
 		}
+		//duplication
+		public function duplicate_on_equipement($data){ 
+		$query = $this->db->query("SELECT * FROM `equipement_inventory` WHERE lower(Particulars) = lower('".$data."')");
+		$result = $query->result();
+		return $result;}
+		
+		public function duplicate_on_workcenter($data){ 
+		$query = $this->db->query("SELECT * FROM `group` WHERE lower(GroupName) = lower('".$data."')");
+		$result = $query->result();
+		return $result;}
+		public function duplicate_on_personnel($data){ 
+		$query = $this->db->query("SELECT * FROM `personnel` WHERE lower(PersonnelName) = lower('".$data."')");
+		$result = $query->result();
+		return $result;}
+		
 		public function getEquipmentList(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=1 ");$result = $query->result();return $result;}
+		
 		public function getEquipmentListDraft(){ $query = $this->db->query("SELECT * FROM `updated_transaction` WHERE Tr_No != 1 AND Status=2 ");$result = $query->result();return $result;}
 		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
 		
@@ -286,6 +302,9 @@ class Model_query extends CI_Model
 		
 		public function getPendingCount(){
 			$query = $this->db->query("SELECT count(*) as countpending FROM `issuance` WHERE status = 2");
+			$result = $query->result();return $result;}
+		public function getBatchCountForAddingBatch(){
+			$query = $this->db->query("SELECT COUNT(*) as count_batch FROM `updated_transaction` WHERE Status = 3 OR Status = 2");
 			$result = $query->result();return $result;}
 		
 		public function getPendingCountb(){

@@ -54,9 +54,9 @@ include 'include/sidebar.php';
 							</div>
 							<div class="col-md-4">
 								<div class="text-right">
-								<?php foreach ($getlast_issuance as $lt): ?>
+								<?php foreach ($getBatchCountForAddingBatch as $lt): ?>
 
-									<?php if ($lt->Status != 3): ?>
+									<?php if ($lt->count_batch == 0): ?>
 										
 									<?php echo form_open("ppeims/addBatch1"); ?>
 										
@@ -142,7 +142,7 @@ include 'include/sidebar.php';
 										if ($countpending >= 1){ ?>
 										<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php }else { ?>
-										<a href="<?php echo base_url();?>ppeims/adjust_batch/<?=$row->Tr_No;?>" data-toggle="tooltip" data-placement="left" title="Adjust Batch" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="<?php echo base_url();?>ppeims/adjust_batch/<?=$row->Tr_No;?>" data-toggle="tooltip" data-placement="left"  class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php } ?>
 										</td>
 										

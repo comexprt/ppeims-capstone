@@ -141,7 +141,7 @@ include 'include/sidebar.php';
 										if ($countpending >= 1){ ?>
 										<a href="#" class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php }else { ?>
-										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->isno;?>" data-toggle="tooltip" data-placement="left" title="Adjust Issuance" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
+										<a href="<?php echo base_url();?>ppeims/adjust_issuance/<?=$row->isno;?>" data-toggle="tooltip" data-placement="left" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-wrench" aria-hidden="true"></i> <span class="sr-only">Adjust</span></a>
 										<?php } ?>
 										</td>
 										

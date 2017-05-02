@@ -231,6 +231,7 @@ class ppeims extends CI_Controller {
 			
 			$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";			
+			$data['getBatchCountForAddingBatch'] = $this->Model_query->getBatchCountForAddingBatch();			
 			$data['getPendingCount'] = $this->Model_query->getPendingCountb();			
 			$data['getitemsbatchinfo'] = $this->Model_query->getitemsbatchinfo();			
 			$data['getlast_issuance'] = $this->Model_query->getlast_batch();
@@ -772,8 +773,17 @@ class ppeims extends CI_Controller {
 				$PersonnelName = "$Lname-$Fname-$Mname";
 					
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
-				$this->Model_query->addPersonnelName($newRow);
-				$message="$Lname, $Fname $Mname[0]. has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				
+				$check_duplication = $this->Model_query->duplicate_on_personnel($PersonnelName);
+				if (count($check_duplication)==0){
+					$this->Model_query->addPersonnelName($newRow);
+					$message="$LnameLname, $Fname $Mname[0]. has been added."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				}else{
+					
+					$message="$LnameLname, $Fname $Mname[0]. already exist ..."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				}
+				
+				$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -785,8 +795,18 @@ class ppeims extends CI_Controller {
 				$Lname = $this->input->post('Lname');
 				$PersonnelName = "$Lname-$Fname-$Mname";$P_No = $this->input->post('P_No');
 				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
-				$this->Model_query->updatePersonnelName($P_No,$newRow);
-				$message="$Lname, $Fname $Mname[0]. has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				$check_duplication = $this->Model_query->duplicate_on_personnel($PersonnelName);
+				if (count($check_duplication)==0){
+					
+					$this->Model_query->updatePersonnelName($P_No,$newRow);
+					$message="$Lname, $Fname $Mname[0]. has been updated."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+				}else{
+					
+					$message="Personel named: $Lname, $Fname $Mname[0]. already exist ..."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");
+					
+				}
+				
+				$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -819,8 +839,14 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
-				$this->Model_query->addGroupName($newRow);
-				$message="$GroupName has been added."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				
+				$check_duplication = $this->Model_query->duplicate_on_workcenter($GroupName);
+				if (count($check_duplication)==0){
+					$this->Model_query->addGroupName($newRow);
+					$message="$GroupName has been added."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				}else{
+					$message="$GroupName already exist ..."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				}
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -829,8 +855,14 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
-				$this->Model_query->updateGroupName($G_No,$newRow);
+				$check_duplication = $this->Model_query->duplicate_on_workcenter($GroupName);
+				if (count($check_duplication)==0){
+					$this->Model_query->updateGroupName($G_No,$newRow);
 				$message="$GroupName has been updated."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				}else{
+					$message="Work Center Named: $GroupName already exist ..."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				}
+				
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -862,8 +894,16 @@ class ppeims extends CI_Controller {
 				$Particulars = $this->input->post('Particulars');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
 				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('unit'),"Remarks" => $this->input->post('Remarks'));
+				
+				
+				$check_duplication = $this->Model_query->duplicate_on_equipement($Particulars);
+				if (count($check_duplication)==0){
 				$this->Model_query->addEquipment($newRow);
 				$message="$Particulars has been added."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				}else{
+				$message="$Particulars is already exist ..."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				}
+				
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -873,8 +913,13 @@ class ppeims extends CI_Controller {
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
 				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('Unit'),"Remarks" => $this->input->post('Remarks'));
+				$check_duplication = $this->Model_query->duplicate_on_equipement($Particulars);
+				if (count($check_duplication)==0){
 				$this->Model_query->updateEquipment($EI_No,$newRow);
 				$message="$Particulars has been updated."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				}else{
+				$message="Particulars name set on $Particulars already exist ..."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				}
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
