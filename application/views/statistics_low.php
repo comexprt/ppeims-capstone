@@ -117,7 +117,7 @@ function handleRollOver(e){
 						<div class="col-md-12">
 							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie" class="btn btn-primary">Summary</a>
 							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_line" class="btn btn-default">Performance</a>
-							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie_low" class="pull-right btn btn-default">Reverse</a>
+							<a href="<?php echo base_url();?>ppeims/Graphs_Statistics_Pie_low" class="pull-right btn btn-primary">Reverse</a>
 						</div>
 					</div>
 					<div class="row">

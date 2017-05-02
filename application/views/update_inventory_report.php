@@ -56,22 +56,9 @@ include 'include/sidebar.php';
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<div class="row">
-										<div class="col-md-4">
-											<label for="search-item" class="sr-only">Search particulars...</label>
-											<div class="input-group">
-												<input type="search" id="search-item" class="form-control" placeholder="Search particulars...">
-												<span class="input-group-btn">
-													<button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">Submit</span></button>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="table-responsive max-height-350">
-									<table class="table table-bordered">
+							
+								<div class="dataTable_wrapper">
+									<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
 										<thead>
 											<tr>
 												<th>No.</th>
@@ -127,7 +114,6 @@ include 'include/sidebar.php';
 						</div>
 					</div>
 				</section>
-			</div>
 		</div>
 	</div>
 	

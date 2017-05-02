@@ -147,11 +147,23 @@ class ppeims extends CI_Controller {
 		}
 		else{redirect('ppeims/InvalidURL');}}
 	
+	public function Graphs_Statistics_Pie_low(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
+		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			
+				$data['getitemssummary'] = $this->Model_query->getitemssummaryreverse();
+			
+			$this->load->view('statistics_low',$data);
+		}
+		else{redirect('ppeims/InvalidURL');}}
+	
 	public function Graphs_Statistics_line(){
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 		$session_data = $this->session->userdata('logged_so');$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
 			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
 			
+				$data['getannual'] = $this->Model_query->getannual();
 				$data['getitemssummaryannual'] = $this->Model_query->getitemssummaryannual();
 				$data['getbatchsummaryannual'] = $this->Model_query->getbatchsummaryannual();
 			

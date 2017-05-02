@@ -7,6 +7,14 @@ include 'include/sidebar.php';
 <script src="<?php echo base_url();?>graph_js/export.min.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>graph_js/export.css" type="text/css" media="all" />
 <script src="<?php echo base_url();?>graph_js/light.js"></script>
+<?php
+$date = array();
+foreach($getannual as $row) {
+array_push($date,$row->date);
+}
+rsort($date);
+?>
+
 <style>
 #chartdiv {
 	width		: 100%;
@@ -44,13 +52,13 @@ var chart = AmCharts.makeChart("chartdiv", {
 			"valueField": "Issued"
 		},
 		{
-			"balloonText": "Expenses:[[value]]",
+			"balloonText": "Batch:[[value]]",
 			"fillAlphas": 0.8,
 			"id": "AmGraph-2",
 			"lineAlpha": 0.2,
-			"title": "Expenses",
+			"title": "Batch",
 			"type": "column",
-			"valueField": "expenses"
+			"valueField": "Batch"
 		}
 	],
 	"guides": [],
@@ -66,12 +74,19 @@ var chart = AmCharts.makeChart("chartdiv", {
 	"titles": [],
 	"dataProvider": [
 		
-		<?php foreach($getitemssummaryannual as $row){ ?>
+		<?php 
+		rsort($getannual);
+		foreach($getannual as $row){ ?>
 		{
-			"year": <?=$row->date_received;?>,
-			
-			"Issued": <?=$row->sum_issued;?>,
+			"year": <?=$row->date;?>,
+			<?php foreach($getbatchsummaryannual as $row2){ if ($row->date == $row2->date_delivered){ ?>
+			"Batch":<?=$row2->sum_batch;?>,
+			<?php } else{}} ?>
 		
+			<?php foreach($getitemssummaryannual as $row1){ if ($row->date == $row1->date_received){ ?>
+			"Issued":<?=$row1->sum_issued;?>,
+			<?php } else{}} ?>
+			
 			
 		},
 	<?php } ?>
@@ -103,13 +118,13 @@ var chart1 = AmCharts.makeChart("chartdiv1", {
 			"valueField": "Issued"
 		},
 		{
-			"balloonText": "Expenses:[[value]]",
+			"balloonText": "Batch:[[value]]",
 			"fillAlphas": 0.8,
 			"id": "AmGraph-2",
 			"lineAlpha": 0.2,
-			"title": "Expenses",
+			"title": "Batch",
 			"type": "column",
-			"valueField": "expenses"
+			"valueField": "Batch"
 		}
 	],
 	"guides": [],
@@ -181,24 +196,9 @@ var chart1 = AmCharts.makeChart("chartdiv1", {
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<ul class="nav nav-tabs nav-justified" role="tablist">
-								<li role="presentation" class="active"><a href="#batch" aria-controls="batch" role="tab" data-toggle="tab">Batch</a></li>
-								<li role="presentation"><a href="#issuance" aria-controls="issuance" role="tab" data-toggle="tab">Issuance</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="tab-content">
-								<div id="batch" role="tabpanel" class="tab-pane active">
-									<h3>Summary of Batch Annually</h3>
-									<div id="chartdiv1"></div>
-								</div>
-								<div id="issuance" role="tabpanel" class="tab-pane">
-									<h3>Summary of Issuance Annually</h3>
-									<div id="chartdiv"></div>
-								</div>
-							</div>
+							<h3>Summary of Batch & Issuance Annually</h3>
+							<div id="chartdiv"></div>
+						
 						</div>
 					</div>
 				</section>

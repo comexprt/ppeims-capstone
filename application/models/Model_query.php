@@ -327,11 +327,20 @@ class Model_query extends CI_Model
 			$query = $this->db->query("SELECT Particulars, Stock FROM `equipement_inventory` WHERE Stock > 0 ORDER BY Stock DESC LIMIT 10");
 			$result = $query->result();return $result;}
 		
+		public function getitemssummaryreverse(){
+			$query = $this->db->query("SELECT Particulars, Stock FROM `equipement_inventory` WHERE Stock <= Re_Ordering_Pt ORDER BY Stock DESC LIMIT 10");
+			$result = $query->result();return $result;}
+		
 		public function getitemssummaryannual(){
 			$query = $this->db->query("SELECT SUM(issued) as sum_issued ,YEAR(date_received) as date_received FROM item_issued GROUP by  YEAR(date_received) order by YEAR(date_received) desc");
 			$result = $query->result();return $result;}
+		
 		public function getbatchsummaryannual(){
 			$query = $this->db->query("SELECT SUM(Added_S) as sum_batch ,YEAR(Tr_Date) as date_delivered FROM updated_transaction JOIN updated_transaction_details ON updated_transaction.Tr_No = updated_transaction_details.Tr_No GROUP by YEAR(Tr_Date) ORDER by YEAR(Tr_Date) DESC");
+			$result = $query->result();return $result;}
+		
+		public function getannual(){
+			$query = $this->db->query("SELECT YEAR(date_received) as date FROM item_issued UNION SELECT YEAR(Tr_Date) as date FROM updated_transaction WHERE YEAR(Tr_Date) NOT IN ('2000','0') ORDER BY YEAR(date) desc");
 			$result = $query->result();return $result;}
 		
 		public function getInventoryReportInfo(){
