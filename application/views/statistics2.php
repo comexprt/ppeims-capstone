@@ -196,7 +196,7 @@ var chart1 = AmCharts.makeChart("chartdiv1", {
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<h3>Summary of Batch & Issuance Annually</h3>
+							<h3>Summary of Batch &amp; Issuance Annually</h3>
 							<div id="chartdiv"></div>
 						
 						</div>
