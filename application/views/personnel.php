@@ -86,8 +86,8 @@ include 'include/sidebar.php';
 										<td>
 										<?php 
 											$PersonnelName=explode ("-",$row->PersonnelName);
-											$Mname=$PersonnelName[2];
-											echo $PersonnelName[0].", ".$PersonnelName[1]." ".$Mname[0].". ";
+											// $Mname=$PersonnelName[2];
+											echo $PersonnelName[0].", ".$PersonnelName[1]." ".$PersonnelName[2];
 										
 										?>
 										</td>
@@ -300,6 +300,7 @@ include 'include/sidebar.php';
 										<th>Date Received</th>
 										<th>Particular</th>
 										<th>Issued</th>
+										<th>View Issuance</th>
 									</tr>
 								</thead>
 								<tbody>

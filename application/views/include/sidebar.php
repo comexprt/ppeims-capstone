@@ -12,7 +12,7 @@
 	<div class="sidebar-nav">
 		<ul>
 			<li><a href="<?php echo base_url();?>">Dashboard</a></li>
-			<li><a href="<?php echo base_url();?>ppeims/equipment">Equipment</a></li>
+			<li><a href="<?php echo base_url();?>ppeims/equipment">PPE</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/personnel_group">Work Center</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/personnel">Personnel</a></li>
 			<li><a href="<?php echo base_url();?>ppeims/batch_equipment">Equipment Batch</a></li>
