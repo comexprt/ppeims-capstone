@@ -55,11 +55,10 @@ include 'include/sidebar.php';
 							
 							<div class="col-md-12">
 								<div class="pull-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add PPE</button>
 								</div>
 								
 								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/equipment">Back</a>
+									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/equipment">Back</a>
 								</div>
 							</div>
 						</div>
