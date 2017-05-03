@@ -11,6 +11,7 @@ include 'include/sidebar.php';
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
 					<li>Personnel</li>
+					<li>Archieved</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -31,7 +32,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false || strpos($message, 'Restored') !== false){
+				  if (strpos($message, 'added') !== false || strpos($message, 'Filter') !== false || strpos($message, 'updated') !== false){
 			?>
 					<!-- Alert for success -->
 					<div id="success-alert" class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -50,15 +51,15 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-12">
-								<h1 class="page-title">Personnel</h1>
+								<h1 class="page-title">Personnel Archieved</h1>
 							</div>
 							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Personnel</button>
-								</div>
+								
 								
 								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/personnel_archived">Archieved</a>
+									<div class="pull-left">
+									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/personnel">Back</a>
+								</div>
 								</div>
 							</div>
 						</div>
@@ -76,9 +77,7 @@ include 'include/sidebar.php';
 										<th class="col-md-1">No.</th>
 										<th>Personnel</th>
 										<th>Work Center</th>
-										<th class="col-md-1">Issued</th>
-										<th class="col-md-1">Edit</th>
-										<th class="col-md-1">Delete</th>
+										<th class="col-md-1">Restore</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -96,14 +95,9 @@ include 'include/sidebar.php';
 										?>
 										</td>
 										<td><?=$row->GroupName;?></td>
+										
 										<td class="col-md-1">
-													<a href="#" class="btn btn-info btn-xs" role="button" data-toggle="modal" data-target="#<?=$row->P_No;?>viewModal"><i class="glyphicon glyphicon-search" aria-hidden="true"></i> <span class="sr-only">View</span></a>
-										</td>
-										<td class="col-md-1">
-											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></button>
-										</td>
-										<td class="col-md-1">
-											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></button>
+											<button type="button" data-toggle="modal" data-target="#<?=$row->P_No;?>restore" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i> <span class="sr-only">Restore</span></button>
 										</td>
 									</tr>
 									<?php endforeach; ?>
@@ -187,20 +181,20 @@ include 'include/sidebar.php';
 
 <!-- Modal delete-->
 <?php foreach ($getPersonnelName as $row) : ?>
-<div class="modal fade" id="<?=$row->P_No;?>delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="<?=$row->P_No;?>restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Delete Personnel</h4>
+				<h4 class="modal-title" id="myModalLabel">Restore Personnel</h4>
 			</div>
-			<?=form_open("ppeims/delete_personnel");?>
+			<?=form_open("ppeims/restore_personnel");?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" value="<?=$row->P_No;?>" name="P_No">
 					<input type="hidden" value="add-personnel" name="access">
 					<input type="hidden" class="form-control" value="<?=$row->PersonnelName;?>" name="PersonnelName">
-					<p>Are you sure to delete <strong style="text-transform:capitalize;">
+					<p>Are you sure to Restore <strong style="text-transform:capitalize;">
 					<?php 
 					$PersonnelName=explode ("-",$row->PersonnelName);
 											$Mname=$PersonnelName[2];
@@ -212,7 +206,7 @@ include 'include/sidebar.php';
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
-					echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
+					echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
 					echo form_close();
 				?>
 			</div>

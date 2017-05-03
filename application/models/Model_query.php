@@ -43,15 +43,25 @@ class Model_query extends CI_Model
 		public function getEquipmentListDraftCount(){ $query = $this->db->query("SELECT COUNT(*) AS draftcount FROM `updated_transaction` WHERE Tr_No != 1 AND Status = 2");$result = $query->result();return $result;}
 		
 		public function getAdmin(){ $query = $this->db->query("SELECT * FROM `administrator` Where A_No = 1");$result = $query->result();return $result;}
-		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where 1 ORDER BY GroupName");$result = $query->result();return $result;}
-		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
+		public function getGroupName(){ $query = $this->db->query("SELECT * FROM `group` Where bin = 0 ORDER BY GroupName");$result = $query->result();return $result;}
+
+		public function getGroupNameAllA(){ $query = $this->db->query("SELECT * FROM `group` Where bin = 1 ORDER BY GroupName");$result = $query->result();return $result;}
+		
+		public function getGroupNameA(){ $query = $this->db->query("SELECT * FROM `group` Where personnel.bin = 1 ORDER BY GroupName");$result = $query->result();return $result;}
+		public function getEquipment(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where bin = 0 ORDER BY Particulars");$result = $query->result();return $result;}
+		
+		public function getEquipmentA(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where bin = 1 ORDER BY Particulars");$result = $query->result();return $result;}
 		public function getEquipmentName(){ $query = $this->db->query("SELECT * FROM `equipement_inventory` Where 1 ORDER BY Particulars");$result = $query->result();return $result;}
 		
 		public function getInventoryReport($data){ $query = $this->db->query("SELECT * FROM `inventory_report_details` Where irid = '".$data."' ORDER BY Particular");$result = $query->result();return $result;}
 		
-		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE 1 ORDER BY PersonnelName");$result = $query->result();return $result;}
+		public function getPersonnelName(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE personnel.bin = 0 ORDER BY PersonnelName");$result = $query->result();return $result;}
 		
-		public function getSpecificPersonnelName($data){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE GroupName = '".$data."' ORDER BY PersonnelName");$result = $query->result();return $result;}
+		public function getPersonnelNameA(){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE personnel.bin = 1 ORDER BY PersonnelName");$result = $query->result();return $result;}
+		
+		public function getSpecificPersonnelName($data){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE GroupName = '".$data."' AND personnel.bin = 0 ORDER BY PersonnelName");$result = $query->result();return $result;}
+		
+		public function getSpecificPersonnelNameA($data){ $query = $this->db->query("SELECT * FROM `personnel` JOIN	`group` ON personnel.G_No = group.G_No WHERE GroupName = '".$data."' AND personnel.bin = 1 ORDER BY PersonnelName");$result = $query->result();return $result;}
 		
 		public function getLastTransaction(){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` JOIN	`updated_transaction_Details` ON updated_transaction.Tr_No = updated_transaction_Details.Tr_No ORDER BY updated_transaction.Tr_No DESC LIMIT 1");
@@ -220,16 +230,38 @@ class Model_query extends CI_Model
 		public function getupdated_transaction($data){
 			$query = $this->db->query("SELECT * FROM `updated_transaction` WHERE updated_transaction.Tr_No='".$data."'");
 			$result = $query->result();return $result;}
+			
+		public function deletePersonnelName($data){
+			$query = $this->db->query("Update `personnel` set bin = 1 WHERE P_No ='".$data."'");
+		}
+		
+		public function RestorePersonnelName($data){
+			$query = $this->db->query("update `personnel` set bin = 0 WHERE P_No ='".$data."'");
+		}
+		public function deleteGroupName($data){
+			$query = $this->db->query("update `group` set bin = 1 WHERE G_No ='".$data."'");
+		}
+		
+		public function restoreGroupName($data){
+			$query = $this->db->query("Update `group` set bin = 0 WHERE G_No =".$data."");
+		}
+		
+		public function deleteEquipment($data){
+			$query = $this->db->query("update `equipement_inventory` set bin = 1 WHERE EI_No ='".$data."'");
+		}
+		
+		public function restoreEquipment($data){
+			$query = $this->db->query("Update `equipement_inventory` set bin = 0 WHERE EI_No =".$data."");
+		}
 		
 		public function addPersonnelName($data){$this->db->insert("Personnel",$data);}
 		public function updatePersonnelName($data1,$data2){$this->db->where('P_No', $data1);$this->db->update('Personnel', $data2);}
 		public function updatedelegates($data1,$data2){$this->db->where('id', $data1);$this->db->update('delegates', $data2);}
-		public function deletePersonnelName($data){$this->db->where('P_No', $data);$this->db->delete('Personnel');}
+		
 		
 		public function addGroupName($data){$this->db->insert("Group",$data);}
 		public function updateGroupName($data1,$data2){$this->db->where('G_No', $data1);$this->db->update('Group', $data2);}
-		public function deleteGroupName($data){$this->db->where('G_No', $data);$this->db->delete('Group');}
-		
+	
 		public function deleteIssuancePersonnel($data){$this->db->where('pino', $data);$this->db->delete('personnel_issued');}
 		public function deleteIssuancePersonnelItem($data){$this->db->where('iino',$data);$this->db->delete('item_issued');}
 		
@@ -239,7 +271,6 @@ class Model_query extends CI_Model
 		
 		public function addEquipment($data){$this->db->insert("equipement_inventory",$data);}
 		public function updateEquipment($data1,$data2){$this->db->where('EI_No', $data1);$this->db->update('equipement_inventory', $data2);}
-		public function deleteEquipment($data){$this->db->where('EI_No', $data);$this->db->delete('equipement_inventory');}
 		
 		public function updateUI($data1,$data2){$this->db->where('Tr_No', $data1);$this->db->update('updated_transaction', $data2);}
 		public function deleteUI($data){$this->db->where('Tr_No', $data);$this->db->delete('updated_transaction');}

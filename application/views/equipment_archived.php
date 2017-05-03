@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') || strpos($message, 'Restored')){
+				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') !== false || strpos($message, 'Restored') !== false){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -59,7 +59,7 @@ include 'include/sidebar.php';
 								</div>
 								
 								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/equipment_archieved">Archieved</a>
+									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/equipment">Back</a>
 								</div>
 							</div>
 						</div>
@@ -77,8 +77,7 @@ include 'include/sidebar.php';
 												<th>Particulars</th>
 												<th>Unit</th>
 												<th>Description</th>
-												<th class="col-md-1">Edit</th>
-												<th class="col-md-1">Delete</th>
+												<th class="col-md-1">restore</th>
 											</tr>
 										</thead>
 										
@@ -91,16 +90,11 @@ include 'include/sidebar.php';
 										<td><?=$row->Particulars;?></td>
 										<td><?=$row->Unit;?></td>
 										<td><?=$row->Description;?></td>
+										
 										<td class="col-md-1">
-											<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>update" class="btn btn-success btn-xs">
-												<i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
-												<span class="sr-only">Edit</span>
-											</a>
-										</td>
-										<td class="col-md-1">
-											<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>delete" class="btn btn-danger btn-xs">
-												<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-												<span class="sr-only">Delete</span>
+											<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>restore" class="btn btn-danger btn-xs">
+												<i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+												<span class="sr-only">Restore</span>
 											</a>
 										</td>
 									</tr>
@@ -180,20 +174,20 @@ include 'include/sidebar.php';
 <?php endforeach; ?>
 
 <?php foreach ($getEquipment as $row) : ?>
-	<div class="modal fade" id="<?=$row->EI_No;?>delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="<?=$row->EI_No;?>restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Delete Equipment</h4>
+				<h4 class="modal-title" id="myModalLabel">Restore Equipment</h4>
 			</div>
-			<?php echo form_open("ppeims/delete_equipment");?>
+			<?php echo form_open("ppeims/restore_equipment");?>
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" value="<?=$row->EI_No;?>" name="EI_No">
 					<input type="hidden" value="add-equipment" name="access">
 					<input type="hidden" class="form-control" value="<?=$row->Particulars;?>" name="Particulars">
-					<p>Are you sure to delete <strong><?=$row->Particulars;?></strong>?<p>
+					<p>Are you sure to Restore <strong><?=$row->Particulars;?></strong>?<p>
 
 				</div>
 
@@ -201,7 +195,7 @@ include 'include/sidebar.php';
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<?php
-					echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
+					echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
 					echo form_close();
 				?>
 			</div>

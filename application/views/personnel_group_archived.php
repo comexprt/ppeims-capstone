@@ -11,6 +11,7 @@ include 'include/sidebar.php';
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
 					<li>Work Center</li>
+					<li>Archieved</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -51,15 +52,12 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-12">
-								<h1 class="page-title">Work Center</h1>
+								<h1 class="page-title">Work Center Archieved</h1>
 							</div>
 							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Work Center</button>
-								</div>
 								
 								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/personnel_group_archived">Archieved</a>
+									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/personnel_group">Back</a>
 								</div>
 							</div>
 						</div>
@@ -77,8 +75,7 @@ include 'include/sidebar.php';
 										<th class="col-md-1">No.</th>
 										<th>Work Center</th>
 										<th>Description</th>
-										<th class="col-md-1">Edit</th>
-										<th class="col-md-1">Delete</th>
+										<th class="col-md-1">Restore</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -88,11 +85,9 @@ include 'include/sidebar.php';
 										<th scope="row"><?=$i++;?></th>
 										<td><?=$row->GroupName;?></td>
 										<td><?=$row->Description;?></td>
+									
 										<td>
-											<a data-toggle="modal" data-target="#<?php echo $row->G_No;?>update" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> <span class="sr-only">Edit</span></a>
-										</td>
-										<td>
-											<a data-toggle="modal" data-target="#<?php echo $row->G_No;?>delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> <span class="sr-only">Delete</span></a>
+											<a data-toggle="modal" data-target="#<?php echo $row->G_No;?>restore" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-refresh" aria-hidden="true"></i> <span class="sr-only">Restore</span></a>
 										</td>
 									</tr>
 									<?php endforeach; ?>
@@ -146,27 +141,27 @@ include 'include/sidebar.php';
 
 <!-- Modal delete-->
  <?php foreach ($getGroupName as $row){ ?>
-<div class="modal fade" id="<?php echo $row->G_No;?>delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="<?php echo $row->G_No;?>restore" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Delete Work Center</h4>
+				<h4 class="modal-title" id="myModalLabel">Restore Work Center</h4>
 			</div>
-			<?php echo form_open("ppeims/delete_personnel_group");?>	
+			<?php echo form_open("ppeims/restore_personnel_group");?>	
 			<div class="modal-body">
 				<div class="form-group">
 					<input type="hidden" value="<?php echo $row->G_No;?>" name="G_No">
 					<input type="hidden" value="add-group" name="access">
 					<input type="hidden" class="form-control" value="<?php echo $row->GroupName;?>" name="GroupName">
-					<p>Are you sure you want to delete <strong><?php echo $row->GroupName;?></strong>?</p>
+					<p>Are you sure you want to restore <strong><?php echo $row->GroupName;?></strong>?</p>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php //registration button
 							
-								echo form_submit("loginSubmit","Delete"," class='btn btn-danger'");
+								echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
 								echo form_close();
 						?>
 				</div>

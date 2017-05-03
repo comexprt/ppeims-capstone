@@ -764,6 +764,25 @@ class ppeims extends CI_Controller {
 			$this->load->view('personnel',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
+		
+		//Personnel-Group Function
+	public function personnel_archived(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');	
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$GroupName = $this->session->flashdata('GroupName');$this->session->keep_flashdata('GroupName');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";		
+			if ($action =="add-pn") {$data['message']= $message;
+				if($GroupName != "All"){ 
+					$data['getPersonnelName'] = $this->Model_query->getSpecificPersonnelNameA($GroupName);
+				}else{$data['getPersonnelName'] = $this->Model_query->getPersonnelNameA();}
+			}else{$data['message'] = "";$data['getPersonnelName'] = $this->Model_query->getPersonnelNameA();	}
+			
+			$data['getissueonpersonnel'] = $this->Model_query->getissueonpersonnel();			
+			$data['getGroupName'] = $this->Model_query->getGroupName();			
+			$this->load->view('personnel_archieved',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
 	public function filter_work_center(){
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			$GroupName = $this->uri->segment(3);
@@ -784,7 +803,7 @@ class ppeims extends CI_Controller {
 				$Lname = $this->input->post('Lname');
 				$PersonnelName = "$Lname-$Fname-$Mname";
 					
-				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
+				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'), "bin" => 0);
 				
 				$check_duplication = $this->Model_query->duplicate_on_personnel($PersonnelName);
 				if (count($check_duplication)==0){
@@ -806,7 +825,7 @@ class ppeims extends CI_Controller {
 				$Mname = $this->input->post('Mname');
 				$Lname = $this->input->post('Lname');
 				$PersonnelName = "$Lname-$Fname-$Mname";$P_No = $this->input->post('P_No');
-				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'));
+				$newRow=array( "PersonnelName" => $PersonnelName,"G_No" => $this->input->post('G_No'), "bin" => 0);
 				$check_duplication = $this->Model_query->duplicate_on_personnel($PersonnelName);
 				if (count($check_duplication)==0){
 					
@@ -827,10 +846,24 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-personnel"){
 				$P_No = $this->input->post('P_No');
 				$this->Model_query->deletePersonnelName($P_No);
+				
 				$PersonnelName=explode ("-",$this->input->post('PersonnelName'));
 				 $Mname=$PersonnelName[1];
 				 
-				$message="$Lname, $Fname $Mname[0]. has been deleted."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				$message="$Lname, $Fname $Mname[0]. has been deleted ."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				redirect('ppeims/personnel');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+			
+		public function restore_personnel(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
+			if ($this->input->post('access') == "add-personnel"){
+				$P_No = $this->input->post('P_No');
+				$this->Model_query->RestorePersonnelName($P_No);
+				
+				$PersonnelName=explode ("-",$this->input->post('PersonnelName'));
+				 $Mname=$PersonnelName[1];
+				 
+				$message="$Lname, $Fname $Mname[0]. has been Restored ."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel Function End --
@@ -846,11 +879,21 @@ class ppeims extends CI_Controller {
 			$this->load->view('personnel-group',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 		
+		public function personnel_group_archived(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
+			if ($action=="add-gn") {$data['message']= $message;}else{$data['message'] = "";}
+			$data['getGroupName'] = $this->Model_query->getGroupNameAllA();
+			$this->load->view('personnel_group_archived',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+		
 	public function new_personnel_group(){
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');
-				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
+				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'),"bin" => 0);
 				
 				$check_duplication = $this->Model_query->duplicate_on_workcenter($GroupName);
 				if (count($check_duplication)==0){
@@ -866,7 +909,7 @@ class ppeims extends CI_Controller {
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
-				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'));
+				$newRow=array( "GroupName" => $GroupName,"Description" => $this->input->post('Description'),"bin" => 0);
 				$check_duplication = $this->Model_query->duplicate_on_workcenter($GroupName);
 				if (count($check_duplication)==0){
 					$this->Model_query->updateGroupName($G_No,$newRow);
@@ -886,6 +929,15 @@ class ppeims extends CI_Controller {
 				$message="$GroupName has been deleted."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+			
+			public function restore_personnel_group(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
+			if ($this->input->post('access') == "add-group"){
+				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
+				$this->Model_query->restoreGroupName($G_No);
+				$message="$GroupName has been Restored."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/personnel_group');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	//Personnel-Group Function End --		
 	
 	//Equipment Function
@@ -900,12 +952,23 @@ class ppeims extends CI_Controller {
 			$this->load->view('equipment',$data);
 		}else{redirect('ppeims/InvalidURL');}}
 	
+	public function equipment_archieved(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];$session_data = $this->session->userdata('logged_so');
+			$action = $this->session->flashdata('action');$this->session->keep_flashdata('action');$message = $this->session->flashdata('message');$this->session->keep_flashdata('message');
+			$Fname = $session_data['Fname'];$Lname = $session_data['Lname'];$Position = $session_data['Position'];
+			$data['Fname'] = "$Fname";$data['Lname'] = "$Lname";$data['Position'] = "$Position";
+			if ($action=="add-e") {$data['message']= $message;}else{$data['message'] = "";}
+			$data['getEquipment'] = $this->Model_query->getEquipmentA();
+			
+			$this->load->view('equipment_archived',$data);
+		}else{redirect('ppeims/InvalidURL');}}
+	
 	public function new_equipment(){
 		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
-				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('unit'),"Remarks" => $this->input->post('Remarks'));
+				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('unit'),"Remarks" => $this->input->post('Remarks'),"bin" => 0);
 				
 				
 				$check_duplication = $this->Model_query->duplicate_on_equipement($Particulars);
@@ -924,7 +987,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$newRow=array( "Particulars" => $Particulars,"Description" => $this->input->post('Description'),"Stock" => $this->input->post('Stock'),
-				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('Unit'),"Remarks" => $this->input->post('Remarks'));
+				"Re_Ordering_Pt" => $this->input->post('Re_Ordering_Pt'),"Issued" => $this->input->post('Issued'),"Unit" => $this->input->post('Unit'),"Remarks" => $this->input->post('Remarks'),"bin" => 0);
 				$check_duplication = $this->Model_query->duplicate_on_equipement($Particulars);
 				if (count($check_duplication)==0){
 				$this->Model_query->updateEquipment($EI_No,$newRow);
@@ -941,6 +1004,16 @@ class ppeims extends CI_Controller {
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$this->Model_query->deleteEquipment($EI_No);
 				$message="$Particulars has been deleted."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				redirect('ppeims/equipment');
+			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
+			
+			
+	public function restore_equipment(){
+		if($this->session->userdata('logged_so')){ $result2 = $this->Model_query->getimage();if($result2){ $Id_array2 = array();foreach($result2 as $row) {$Id_array2 = array( 'image' => $row->image_name);}}else{}$data['u_image'] = $Id_array2 ['image'];
+			if ($this->input->post('access') == "add-equipment"){
+				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
+				$this->Model_query->restoreEquipment($EI_No);
+				$message="$Particulars has been Restored."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 	
