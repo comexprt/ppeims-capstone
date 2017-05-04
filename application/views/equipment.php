@@ -31,7 +31,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') || strpos($message, 'Restored')){
+				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') || strpos($message, 'moved') || strpos($message, 'Restored')){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -49,18 +49,13 @@ include 'include/sidebar.php';
 				<div class="col-md-12">
 					<div class="row-header">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<h1 class="page-title">PPE</h1>
 							</div>
 							
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add PPE</button>
-								</div>
-								
-								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/equipment_archieved">Archieved</a>
-								</div>
+							<div class="col-md-6 text-right">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add PPE</button>
+								<a type="button" class="btn btn-info" href="<?php echo base_url();?>ppeims/equipment_archieved">Archived PPE</a>
 							</div>
 						</div>
 					</div>

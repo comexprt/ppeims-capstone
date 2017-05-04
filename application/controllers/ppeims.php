@@ -848,9 +848,9 @@ class ppeims extends CI_Controller {
 				$this->Model_query->deletePersonnelName($P_No);
 				
 				$PersonnelName=explode ("-",$this->input->post('PersonnelName'));
-				 $Mname=$PersonnelName[1];
+				 // $Mname=$PersonnelName[1];
 				 
-				$message="$Lname, $Fname $Mname[0]. has been deleted ."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
+				$message="$PersonnelName[0], $PersonnelName[1] $PersonnelName[2]. has been moved to archive."; $this->session->set_flashdata('action','add-pn');$this->session->set_flashdata('message',"$message");$this->session->set_flashdata('GroupName',"All");
 				redirect('ppeims/personnel');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -926,7 +926,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-group"){
 				$GroupName = $this->input->post('GroupName');$G_No = $this->input->post('G_No');
 				$this->Model_query->deleteGroupName($G_No);
-				$message="$GroupName has been deleted."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
+				$message="$GroupName has been moved to archive."; $this->session->set_flashdata('action','add-gn');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/personnel_group');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			
@@ -1003,7 +1003,7 @@ class ppeims extends CI_Controller {
 			if ($this->input->post('access') == "add-equipment"){
 				$Particulars = $this->input->post('Particulars');$EI_No = $this->input->post('EI_No');
 				$this->Model_query->deleteEquipment($EI_No);
-				$message="$Particulars has been deleted."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
+				$message="$Particulars has been moved to archive."; $this->session->set_flashdata('action','add-e');$this->session->set_flashdata('message',"$message");
 				redirect('ppeims/equipment');
 			}else{redirect('ppeims/InvalidURL');}}else{redirect('ppeims/InvalidURL');}}
 			

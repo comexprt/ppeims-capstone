@@ -32,7 +32,7 @@ include 'include/sidebar.php';
 			<div class="row">
 				<div class="col-md-12">
 			<?php if($message){
-				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') !== false || strpos($message, 'Restored') !== false){
+				  if (strpos($message, 'added') !== false || strpos($message, 'updated') !== false || strpos($message, 'deleted') !== false || strpos($message, 'moved') !== false || strpos($message, 'Restored') !== false){
 			?>
 					<!-- Alert for success -->
 					<div class="alert alert-success alert-dismissable alert-auto-dismiss" role="alert">
@@ -50,17 +50,12 @@ include 'include/sidebar.php';
 				<div class="col-md-12">
 					<div class="row-header">
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-md-6">
 								<h1 class="page-title">Work Center</h1>
 							</div>
-							<div class="col-md-12">
-								<div class="pull-right">
-									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Work Center</button>
-								</div>
-								
-								<div class="pull-left">
-									<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/personnel_group_archived">Archieved</a>
-								</div>
+							<div class="col-md-6 text-right">
+								<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Work Center</button>
+								<a type="button" class="btn btn-info" href="<?php echo base_url();?>ppeims/personnel_group_archived">Archived Work Center</a>
 							</div>
 						</div>
 					</div>

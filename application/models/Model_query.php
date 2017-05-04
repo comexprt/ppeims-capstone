@@ -320,7 +320,7 @@ class Model_query extends CI_Model
 			$result = $query->result();return $result;}
 		
 		public function getallitems(){
-			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 ORDER BY Particulars");
+			$query = $this->db->query("SELECT * FROM `equipement_inventory` where 1 AND bin = 0 ORDER BY Particulars");
 			$result = $query->result();return $result;}
 		
 		public function getallissueditems(){

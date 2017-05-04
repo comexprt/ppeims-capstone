@@ -112,7 +112,7 @@
 							</div>
 							<div class="col-md-4 text-right">
 								<a href="#" role="button" class="btn btn-info printBtn"><i class="glyphicon glyphicon-print" aria-hidden="true"></i> Print Report</a>
-								<a href="#" data-toggle="modal" data-target="#addDelegates"  class="btn btn-primary"><i class="fa fa-cog" aria-hidden="true"  class="btn btn-info"></i> Settings</a>
+								<a href="#" data-toggle="modal" data-target="#addDelegates"  class="btn btn-primary">Noted By</a>
 							</div>
 						</div>
 					</div>
@@ -160,8 +160,8 @@
 				<div class="print-preview-footer-left">
 					<p>Prepared by:</p>
 					<div class="print-preview-footer-name">
-						<p><?=$row->pname;?></p>
-						<p><?=$row->pby;?></p>
+						<p>RS LEMENCE</p>
+						<p>Safety Officer, Agus 6/7 HEPC</p>
 					</div>
 				</div>
 				<div class="print-preview-footer-right">
@@ -175,37 +175,24 @@
 			</div>
 	</div>
 <div class="modal fade" id="addDelegates" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-sm" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Settings</h4>
+				<h4 class="modal-title" id="myModalLabel">Noted By</h4>
 			</div>
 			<div class="modal-body">
-				<div class="row">
-				<?=form_open("ppeims/update_delegates/".$id);?>
-				<?php foreach ($getdelegates as $row){ ?>
-					<div class="col-md-6">
-						<label>Prepared by:</label>
-						<br></br>
-						<center>
-						<p style="margin-top:-20px;"><code style="font-size:15px;font-weight:bold;color:#000000;text-decoration:underline;background-color:#FFFFFF;"><?=$row->pname;?></code><br>NAME</p>
-						
-						<p style="margin-top:5px;"><code style="font-size:15px;font-weight:bold;color:#000000;text-decoration:underline;background-color:#FFFFFF;"><?=$row->pby;?> </code><br>POSITION</p>
-						
-						</center>
+				<?php echo form_open("ppeims/update_delegates/".$id); ?>
+				<?php foreach ($getdelegates as $row): ?>
+					<div class="form-group">
+						<label for="nname">Name</label>
+						<input	class="form-control margin-bottom-20" id="nname" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
 					</div>
-					<div class="col-md-6">
-						<label>Noted by:</label>
-						<center>
-						<input	class="form-control margin-bottom-20" type="text" name="nname" placeholder="Name" value="<?=$row->nname;?>" required>
-						<p style="margin-top:-20px;">Name</p>
-						<input  class="form-control" type="text" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
-						<p>Position</p>
-						</center>
+					<div class="form-group">
+						<label for="nby">Position</label>
+						<input  class="form-control" type="text" id="nby" name="nby" placeholder="Position" value="<?=$row->nby;?>" required>
 					</div>
-				<?php } ?>
-				</div>
+				<?php endforeach; ?>
 			</div>
 				
 			<div class="modal-footer">

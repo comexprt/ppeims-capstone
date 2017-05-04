@@ -52,13 +52,7 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-12">
-								<h1 class="page-title">Work Center Archieved</h1>
-							</div>
-							<div class="col-md-12">
-								
-								<div class="pull-left">
-									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/personnel_group">Back</a>
-								</div>
+								<h1 class="page-title">Archived Work Center</h1>
 							</div>
 						</div>
 					</div>
@@ -96,6 +90,11 @@ include 'include/sidebar.php';
 							</table>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/personnel_group">Back</a>
 				</div>
 			</div>
 		</section>
@@ -161,7 +160,7 @@ include 'include/sidebar.php';
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php //registration button
 							
-								echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
+								echo form_submit("loginSubmit","Restore"," class='btn btn-danger'");
 								echo form_close();
 						?>
 				</div>

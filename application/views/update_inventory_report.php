@@ -54,7 +54,7 @@ include 'include/sidebar.php';
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row margin-bottom-20">
 						<div class="col-md-12">
 							
 								<div class="dataTable_wrapper">
@@ -105,7 +105,6 @@ include 'include/sidebar.php';
 										</div>
 									</div>
 								</div>
-							</div>
 						</div>
 					</div>
 					<div class="row">

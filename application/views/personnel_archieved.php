@@ -11,7 +11,8 @@ include 'include/sidebar.php';
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
 					<li>Personnel</li>
-					<li>Archieved</li>
+					<li>/</li>
+					<li>Archived Personnel</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -51,16 +52,7 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-12">
-								<h1 class="page-title">Personnel Archieved</h1>
-							</div>
-							<div class="col-md-12">
-								
-								
-								<div class="pull-left">
-									<div class="pull-left">
-									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/personnel">Back</a>
-								</div>
-								</div>
+								<h1 class="page-title">Archived Personnel</h1>
 							</div>
 						</div>
 					</div>
@@ -105,6 +97,11 @@ include 'include/sidebar.php';
 							</table>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/personnel">Back</a>
 				</div>
 			</div>
 		</section>
@@ -206,7 +203,7 @@ include 'include/sidebar.php';
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 				<?php
-					echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
+					echo form_submit("loginSubmit","Restore"," class='btn btn-danger'");
 					echo form_close();
 				?>
 			</div>

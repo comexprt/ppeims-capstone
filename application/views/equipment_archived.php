@@ -10,7 +10,7 @@ include 'include/sidebar.php';
 				<ul class="navbar-breadcrumbs list-inline">
 					<li><a href="<?php echo base_url();?>ppeims">Dashboard</a></li>
 					<li>/</li>
-					<li>PPE</li>
+					<li>Archived PPE</li>
 				</ul>
 			</div>
 	   	 	<ul class="nav navbar-nav navbar-right">
@@ -50,16 +50,7 @@ include 'include/sidebar.php';
 					<div class="row-header">
 						<div class="row">
 							<div class="col-md-12">
-								<h1 class="page-title">PPE</h1>
-							</div>
-							
-							<div class="col-md-12">
-								<div class="pull-right">
-								</div>
-								
-								<div class="pull-left">
-									<a type="button" class="btn btn-primary" href="<?php echo base_url();?>ppeims/equipment">Back</a>
-								</div>
+								<h1 class="page-title">Archived PPE</h1>
 							</div>
 						</div>
 					</div>
@@ -67,43 +58,44 @@ include 'include/sidebar.php';
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-						
-								<div class="dataTable_wrapper">
-									<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
-										<thead>
-											<tr>
-												<th class="col-md-1"><center>No.</center></th>
-												<th>Particulars</th>
-												<th>Unit</th>
-												<th>Description</th>
-												<th class="col-md-1">restore</th>
-											</tr>
-										</thead>
-										
-										<tbody>
-											<?php
-									$i=1;
-									foreach ($getEquipment as $row) : ?>
-									<tr>
-										<th class="col-md-1" scope="row"><center><?=$i++;?><center></th>
-										<td><?=$row->Particulars;?></td>
-										<td><?=$row->Unit;?></td>
-										<td><?=$row->Description;?></td>
-										
-										<td class="col-md-1">
-											<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>restore" class="btn btn-danger btn-xs">
-												<i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
-												<span class="sr-only">Restore</span>
-											</a>
-										</td>
-									</tr>
-									<?php endforeach; ?>
-									</tbody>
-									</table> 
-									 
-								</div>
+					<div class="dataTable_wrapper">
+						<table class="table table-striped table-advance table-bordered table-hover" id="dataTables-example">
+							<thead>
+								<tr>
+									<th class="col-md-1"><center>No.</center></th>
+									<th>Particulars</th>
+									<th>Unit</th>
+									<th>Description</th>
+									<th class="col-md-1">Restore</th>
+								</tr>
+							</thead>
 							
-                           
+							<tbody>
+								<?php
+						$i=1;
+						foreach ($getEquipment as $row) : ?>
+						<tr>
+							<th class="col-md-1" scope="row"><center><?=$i++;?><center></th>
+							<td><?=$row->Particulars;?></td>
+							<td><?=$row->Unit;?></td>
+							<td><?=$row->Description;?></td>
+							
+							<td class="col-md-1">
+								<a role="button" data-toggle="modal" data-target="#<?=$row->EI_No;?>restore" class="btn btn-danger btn-xs">
+									<i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+									<span class="sr-only">Restore</span>
+								</a>
+							</td>
+						</tr>
+						<?php endforeach; ?>
+						</tbody>
+						</table>  
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<a type="button" class="btn btn-default" href="<?php echo base_url();?>ppeims/equipment">Back</a>
 				</div>
 			</div>
 		</section>
@@ -194,7 +186,7 @@ include 'include/sidebar.php';
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<?php
-					echo form_submit("loginSubmit","Restore"," class='btn btn-success'");
+					echo form_submit("loginSubmit","Restore"," class='btn btn-danger'");
 					echo form_close();
 				?>
 			</div>
